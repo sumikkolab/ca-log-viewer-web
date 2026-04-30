@@ -63,11 +63,11 @@
       <p class="answer">CA Log Viewer は <strong>UPN 平文を DB に永続保存しない PII 保護方針</strong> を採用しています。アプリを再起動した場合、過去取得分のサインインログ表示で UPN 列が「(未取得)」となることがあります。</p>
       <p>解消手順:</p>
       <ol>
-        <li>アプリを継続起動中であれば、メモリ内キャッシュ + DPAPI 短期暗号化キャッシュ (TTL 7 日) で UPN は復元されます。</li>
-        <li>長期間 (7 日以上) 放置して再起動した場合は、設定タブ → 「旧データの全削除」 → 取得ボタンで再取得すれば UPN 解決率 100% に戻ります。</li>
+        <li>アプリを継続起動中であれば、UPN は表示用キャッシュから復元されます。</li>
+        <li>長期間放置して再起動した場合は、設定タブ → 「旧データの全削除」 → 取得ボタンで再取得すれば UPN 解決率 100% に戻ります。</li>
         <li>開発者モード (設定タブ → 開発者向け) を有効化すると、UPN 取得診断 (PII なし、件数のみ) で解決率を確認できます。</li>
       </ol>
-      <div class="info-box">本アプリの PII 保護方針として、UPN 平文を DB に保存せず、Windows DPAPI による短期暗号化キャッシュ経由で表示します。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</div>
+      <div class="info-box">本アプリの PII 保護方針として、UPN 平文を DB に保存しません。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</div>
     </div>
 
     <div class="qa">
@@ -132,11 +132,11 @@
       <p class="answer">CA Log Viewer follows a <strong>PII policy that does not persist plain UPNs in the database</strong>. After an app restart, previously fetched logs may show "(not fetched)" in the UPN column.</p>
       <p>How to resolve:</p>
       <ol>
-        <li>While the app stays running, UPNs are restored from in-memory cache + the DPAPI short-term encrypted cache (TTL 7 days).</li>
+        <li>While the app stays running, UPNs are restored from the display cache.</li>
         <li>If you've been away for 7+ days and restart, go to Settings → "Delete all legacy data" → press "Fetch" again to bring the UPN resolution rate back to 100%.</li>
         <li>Enable developer mode (Settings → Developer options) to see UPN resolution diagnostics (no PII, counts only).</li>
       </ol>
-      <div class="info-box">As the app's PII protection policy, plain UPNs are not stored in the database; display goes through a short-term cache encrypted with Windows DPAPI. See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</div>
+      <div class="info-box">As the app's PII protection policy, plain UPNs are not stored in the database. See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</div>
     </div>
 
     <div class="qa">

@@ -43,7 +43,7 @@
     <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <h1>サポート / Support</h1>
+  <h1><span class="section-ja visible">サポート</span><span class="section-en">Support</span></h1>
   <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
 </header>
 
@@ -97,7 +97,7 @@
 
     <div class="case">
       <h3>3. UPN が空欄 / 「未取得」になる</h3>
-      <p>UPN は Windows DPAPI で暗号化された短期キャッシュ (最大 7 日) 経由で表示されます。次の対処をお試しください。</p>
+      <p>UPN は短期キャッシュから表示されます。次の対処をお試しください。</p>
       <ul>
         <li>調査タブから対象行を再選択し、UPN の再取得を試す (キャッシュ失効の場合に再フェッチします)。</li>
         <li>取得タブで対象期間を再取得する (Microsoft Graph から最新の UPN 解決を実行します)。</li>
@@ -177,7 +177,7 @@
 
     <div class="case">
       <h3>3. UPN is empty / shown as "not resolved"</h3>
-      <p>UPNs are displayed via a short-term cache encrypted with Windows DPAPI (up to 7 days). Try the following.</p>
+      <p>UPNs are displayed via a short-term cache. Try the following.</p>
       <ul>
         <li>Re-select the target row in the Investigate tab to retry UPN resolution (re-fetched if the cache expired).</li>
         <li>Re-fetch the target range from the Fetch tab (resolves the latest UPNs from Microsoft Graph).</li>

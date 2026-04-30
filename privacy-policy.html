@@ -41,7 +41,7 @@
     <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <h1>プライバシーポリシー / Privacy Policy</h1>
+  <h1><span class="section-ja visible">プライバシーポリシー</span><span class="section-en">Privacy Policy</span></h1>
   <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
 </header>
 
@@ -58,7 +58,7 @@
       <li><strong>ローカル処理のみ</strong>: 本アプリは利用者の Windows 端末上で動作し、Microsoft Graph 以外のいかなる外部サーバーにも情報を送信しません。</li>
       <li><strong>当方サーバーは存在しません</strong>: 本アプリの利用に関して、当方が運営するサーバーへ情報が送られることはありません。</li>
       <li><strong>テレメトリ・解析ツール非搭載</strong>: 利用統計の収集や、第三者の解析サービスへの送信は行いません。</li>
-      <li><strong>UPN (User Principal Name) の平文を DB に保存しません</strong>: 表示時のみ Windows DPAPI で暗号化された短期キャッシュ (有効期間は最大 7 日) を経由し、再起動・キャッシュ失効後は再取得します。</li>
+      <li><strong>UPN (User Principal Name) の平文を DB に保存しません</strong>: 表示時のみローカル暗号化された短期キャッシュを経由し、再起動・キャッシュ失効後は再取得します。</li>
     </ul>
 
     <h2>2. 取得する情報と取得経路</h2>
@@ -73,7 +73,7 @@
     <h2>3. 情報の保存場所と保存期間</h2>
     <ul>
       <li>取得したログ・ポリシー定義は、利用者の Windows ユーザープロファイル配下のローカル SQLite データベースに保存されます。</li>
-      <li>UPN の表示用キャッシュは、Windows DPAPI で暗号化されローカルに保存されます。最大 7 日で自動失効します。</li>
+      <li>UPN の表示用キャッシュは、ローカル暗号化されて保存され、一定期間経過後に自動失効します。</li>
       <li>利用者は本アプリの設定操作によって、取得済みのログ・キャッシュをいつでも削除できます。</li>
       <li>本アプリのアンインストールに伴って、当該ローカルデータも削除されます。</li>
     </ul>
@@ -121,7 +121,7 @@
       <li><strong>Local-only processing</strong>: The App runs on the user's Windows device and does not transmit information to any external server other than Microsoft Graph.</li>
       <li><strong>No server operated by us</strong>: We do not operate any server that receives information related to use of the App.</li>
       <li><strong>No telemetry or analytics</strong>: The App does not collect usage statistics nor send data to any third-party analytics service.</li>
-      <li><strong>UPNs (User Principal Names) are not stored in plain text in the database</strong>: Display goes through a short-term cache encrypted with Windows DPAPI (valid up to 7 days). After expiration the UPN is re-fetched.</li>
+      <li><strong>UPNs (User Principal Names) are not stored in plain text in the database</strong>: Display goes through a locally-encrypted short-term cache. After expiration the UPN is re-fetched.</li>
     </ul>
 
     <h2>2. Information collected and access path</h2>
@@ -136,7 +136,7 @@
     <h2>3. Storage location and retention</h2>
     <ul>
       <li>Fetched logs and policy definitions are stored in a local SQLite database under the user's Windows profile.</li>
-      <li>The display cache for UPN is stored locally encrypted with Windows DPAPI and expires automatically within 7 days at most.</li>
+      <li>The display cache for UPN is stored locally encrypted and expires automatically after a set period.</li>
       <li>Users can delete fetched logs and caches at any time via the App's settings.</li>
       <li>Local data is removed when the App is uninstalled.</li>
     </ul>

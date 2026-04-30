@@ -47,7 +47,7 @@
     <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <h1>リリースノート / Release Notes</h1>
+  <h1><span class="section-ja visible">リリースノート</span><span class="section-en">Release Notes</span></h1>
   <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
 </header>
 
@@ -99,10 +99,10 @@
     </div>
 
     <div class="release">
-      <h3>UPN 短期暗号化キャッシュ / 詳細パネル / 統一フィルタ</h3>
+      <h3>個人情報保護方針の運用補強 / 詳細パネル / 統一フィルタ</h3>
       <div class="meta">2026-04-22</div>
       <ul>
-        <li>UPN を Windows DPAPI で短期暗号化キャッシュ (最大 7 日)、UPN 平文の DB 保存を回避</li>
+        <li>UPN 平文の DB 保存を回避し、表示用キャッシュ経由で個人情報保護方針を補強</li>
         <li>詳細スライドインパネル (7 ブロック + 結論を 6 段階優先順位で自動分類)</li>
         <li>統一フィルタ (期間 / ユーザー / CA 状態 / 判定 / デバイス / 特殊条件、複数選択 OR)</li>
       </ul>
@@ -196,10 +196,10 @@
     </div>
 
     <div class="release">
-      <h3>Short-term encrypted UPN cache / Detail pane / Unified filter</h3>
+      <h3>PII protection reinforcement / Detail pane / Unified filter</h3>
       <div class="meta">2026-04-22</div>
       <ul>
-        <li>UPNs cached short-term encrypted with Windows DPAPI (up to 7 days), avoiding plain UPN storage in the DB</li>
+        <li>Reinforced the PII protection policy by avoiding plain UPN storage in the DB and using a display cache instead</li>
         <li>Slide-in detail pane (7 sections + automatic conclusion in 6-tier priority)</li>
         <li>Unified filter (range / user / CA status / judgment / device / special, multi-select OR)</li>
       </ul>

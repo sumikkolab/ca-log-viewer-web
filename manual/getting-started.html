@@ -52,7 +52,7 @@
     <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <h1>はじめに / Getting Started</h1>
+  <h1><span class="section-ja visible">はじめに</span><span class="section-en">Getting Started</span></h1>
   <p><a href="index.html">← <span class="section-ja visible">マニュアル目次に戻る</span><span class="section-en">Back to Manual Index</span></a></p>
 </header>
 
@@ -113,7 +113,6 @@
         <li>リダイレクト URI: <code>パブリック クライアント / ネイティブ</code> を選択し <code>http://localhost</code> を登録</li>
         <li>登録後の「アプリケーション (クライアント) ID」と「ディレクトリ (テナント) ID」を控える</li>
       </ol>
-      <div class="screenshot">[スクリーンショット: Entra アプリ登録画面]</div>
     </div>
 
     <div class="step-box">
@@ -141,7 +140,6 @@
         <li>「取得開始」ボタン → ブラウザで MSAL 認証 (初回のみ同意)</li>
         <li>取得完了後、サインインログ件数 / CA ポリシー件数 / 取得時刻が表示されます</li>
       </ol>
-      <div class="screenshot">[スクリーンショット: 取得タブ — 期間選択 + 取得開始ボタン]</div>
       <div class="note">大規模テナントでは数千件取得まで数分かかります。進捗バーで確認できます。</div>
     </div>
 
@@ -296,7 +294,6 @@
         <li>Redirect URI: choose <code>Public client / native</code> and register <code>http://localhost</code></li>
         <li>Note the "Application (client) ID" and "Directory (tenant) ID"</li>
       </ol>
-      <div class="screenshot">[Screenshot: Entra app registration]</div>
     </div>
 
     <div class="step-box">
@@ -324,7 +321,6 @@
         <li>Click "Start fetch" → MSAL authentication opens in the browser (consent only on first run)</li>
         <li>After fetch, sign-in count / CA policy count / fetch time are displayed</li>
       </ol>
-      <div class="screenshot">[Screenshot: Fetch tab — range selector + Start button]</div>
       <div class="note">Large tenants may take several minutes to fetch thousands of records. A progress bar is shown.</div>
     </div>
 
