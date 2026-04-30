@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サポート | CA Log Viewer — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer のサポート情報。問い合わせ先 / よくある質問 / トラブルシューティング / GitHub Issues などを案内します。">
+<meta name="description" content="CA Log Viewer のサポート情報。問い合わせ先 / 報告に含めていただきたい情報 / 主なトラブルシューティング (Microsoft Graph 認証 / 権限不足 / UPN 取得不可) を案内します。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/support.html">
 <meta property="og:title" content="サポート | CA Log Viewer — SumikkoLab">
 <meta property="og:description" content="CA Log Viewer のサポート情報。問い合わせ先 / よくある質問 / トラブルシューティング。">
@@ -22,12 +22,16 @@
   .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
   .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
   .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
-  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
-  ul { padding-left: 24px; margin: 8px 0 16px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 12px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  h3 { font-size: 1.0rem; margin: 16px 0 6px; color: #4338ca; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ul, ol { padding-left: 24px; margin: 8px 0 14px; }
   li { font-size: 0.95rem; margin-bottom: 6px; }
+  code { background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-size: 0.88rem; color: #312e81; }
   .section-ja, .section-en { display: none; }
   .section-ja.visible, .section-en.visible { display: block; }
-  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  .case { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px; margin: 12px 0; }
+  .note { background: #ecfeff; border-left: 4px solid #0891b2; padding: 10px 14px; margin: 10px 0; border-radius: 4px; font-size: 0.9rem; color: #155e75; }
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
   footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
 </style>
@@ -46,39 +50,163 @@
 <main class="container">
 
   <div class="section-ja visible">
-    <div class="placeholder">本ページは雛形です。Phase 19 Step 3 で正式な内容を記載します。</div>
 
     <h2>連絡先</h2>
     <ul>
-      <li>メール: support@sumikkolab.com</li>
-      <li>GitHub Issues: (Phase 19 Step 5 で公開リポジトリ確定後にリンク追加)</li>
+      <li>メール: <a href="mailto:support@sumikkolab.com">support@sumikkolab.com</a></li>
     </ul>
+    <p>営業日 (日本時間 平日) におおむね 2 営業日以内を目安に確認します。内容によってはお時間をいただく場合があります。</p>
 
-    <h2>よくある質問</h2>
+    <h2>お問い合わせ前にご確認ください</h2>
+    <ol>
+      <li><a href="manual/faq.html">FAQ</a> に該当する質問がないかご確認ください。</li>
+      <li><a href="manual/getting-started.html">はじめに</a> の手順 (Entra アプリ登録 / Microsoft Graph 権限付与) を一通り確認してください。</li>
+      <li>下記「主なトラブルシューティング」に該当する事象がないかご確認ください。</li>
+    </ol>
+
+    <h2>お問い合わせ時に含めていただきたい情報</h2>
     <ul>
-      <li><a href="manual/">マニュアル</a> 内の FAQ セクションをご参照ください (Phase 19 Step 2 で追加予定)</li>
+      <li>本アプリのバージョン (設定タブで確認可能)</li>
+      <li>OS バージョン (Windows 10 / 11、ビルド番号)</li>
+      <li>事象の発生手順 (再現手順)</li>
+      <li>画面表示のエラーメッセージまたはエラーコード</li>
+      <li>個人情報 (UPN / IP / 利用者氏名) の貼り付けは不要です。再現に必要な範囲を超えて含めないでください。</li>
     </ul>
 
-    <h2>トラブルシューティング</h2>
-    <p>(Phase 19 Step 3 で記述: UPN 取得不可 / Graph 権限エラー / MSAL 認証問題 等)</p>
+    <h2>主なトラブルシューティング</h2>
+
+    <div class="case">
+      <h3>1. Microsoft Graph 認証画面が出ない / 失敗する</h3>
+      <p>本アプリは委任認証 (利用者本人としてのアクセス) を使用します。次の点をご確認ください。</p>
+      <ul>
+        <li>設定タブの「ClientId」「TenantId」が正しく入力されているか。</li>
+        <li>Entra アプリ登録のリダイレクト URI に <code>http://localhost</code> がパブリック クライアントとして登録されているか。</li>
+        <li>ブラウザでサインイン用のポップアップがブロックされていないか。</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>2. 「権限不足」「Forbidden」 エラーが出る</h3>
+      <p>必要な Microsoft Graph 権限が利用者に付与されていない可能性があります。</p>
+      <ul>
+        <li>必要なスコープ: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>。</li>
+        <li>「API のアクセス許可」画面で 3 つすべてが追加され、グローバル管理者により管理者の同意が付与されているかご確認ください。</li>
+        <li>委任認証では、サインインしているユーザーにも当該スコープを付与できる役割 (Global Reader / Security Reader 等) が必要です。</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>3. UPN が空欄 / 「未取得」になる</h3>
+      <p>UPN は Windows DPAPI で暗号化された短期キャッシュ (最大 7 日) 経由で表示されます。次の対処をお試しください。</p>
+      <ul>
+        <li>調査タブから対象行を再選択し、UPN の再取得を試す (キャッシュ失効の場合に再フェッチします)。</li>
+        <li>取得タブで対象期間を再取得する (Microsoft Graph から最新の UPN 解決を実行します)。</li>
+        <li>同時に「権限不足」エラーが出ている場合は、上記 2 の手順をご確認ください。</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>4. ポリシー未適用 (Not applied) のサインインが多い</h3>
+      <p>これは多くの場合、不具合ではなく仕様どおりの動作です。詳細は <a href="manual/faq.html">FAQ</a> の「ポリシー未適用 (Not applied) のサインインが多く見えます」をご参照ください。</p>
+    </div>
+
+    <div class="case">
+      <h3>5. アプリが起動しない / 起動直後に終了する</h3>
+      <ul>
+        <li>Windows のバージョンが 10 (build 19041 以降) または 11 であることをご確認ください。</li>
+        <li>Microsoft Store から再インストール、または GitHub Releases から最新版を取得してください。</li>
+        <li>事象が継続する場合は、上記「お問い合わせ時に含めていただきたい情報」を添えて連絡先までご連絡ください。</li>
+      </ul>
+    </div>
+
+    <h2>不具合・改善の報告</h2>
+    <p>不具合の報告および改善のご要望は、メールにてお知らせください。再現手順とエラーメッセージを併せていただけると、調査がスムーズです。</p>
+
+    <h2>セキュリティに関する報告</h2>
+    <p>セキュリティ上の懸念がある事象を発見された場合は、公開の連絡経路ではなく、メール (<a href="mailto:support@sumikkolab.com">support@sumikkolab.com</a>) にてご連絡ください。件名に「Security」を含めていただけると優先的に確認します。詳細を公開する前に、当方からの返信をお待ちください。</p>
+
+    <div class="note">本アプリの利用規約および個人情報の取り扱いについては、<a href="terms-of-use.html">利用規約</a> および <a href="privacy-policy.html">プライバシーポリシー</a> をご参照ください。</div>
+
   </div>
 
   <div class="section-en">
-    <div class="placeholder">This page is a scaffold. Official content will be added in Phase 19 Step 3.</div>
 
     <h2>Contact</h2>
     <ul>
-      <li>Email: support@sumikkolab.com</li>
-      <li>GitHub Issues: (link will be added after public repository is confirmed in Phase 19 Step 5)</li>
+      <li>Email: <a href="mailto:support@sumikkolab.com">support@sumikkolab.com</a></li>
     </ul>
+    <p>On business days (weekdays in Japan time), we aim to acknowledge inquiries within roughly 2 business days. Depending on the content, additional time may be required.</p>
 
-    <h2>FAQ</h2>
+    <h2>Before contacting us</h2>
+    <ol>
+      <li>Please check whether your question is covered in the <a href="manual/faq.html">FAQ</a>.</li>
+      <li>Please review the steps in <a href="manual/getting-started.html">Getting Started</a> (Entra app registration / Microsoft Graph permission grant).</li>
+      <li>Please review the "Common troubleshooting" section below for matching symptoms.</li>
+    </ol>
+
+    <h2>Information to include in your inquiry</h2>
     <ul>
-      <li>See the FAQ section in the <a href="manual/">Manual</a> (planned for Phase 19 Step 2)</li>
+      <li>App version (visible in the Settings tab)</li>
+      <li>OS version (Windows 10 / 11, build number)</li>
+      <li>Steps to reproduce the issue</li>
+      <li>Error messages or codes shown on screen</li>
+      <li>You do not need to include personal information (UPN / IP / user name). Please do not include data beyond what is needed to reproduce the issue.</li>
     </ul>
 
-    <h2>Troubleshooting</h2>
-    <p>(Will be added in Phase 19 Step 3: UPN resolution issues / Graph permission errors / MSAL auth problems, etc.)</p>
+    <h2>Common troubleshooting</h2>
+
+    <div class="case">
+      <h3>1. Microsoft Graph sign-in does not appear / fails</h3>
+      <p>The App uses delegated authentication (access as the signed-in user). Please verify the following.</p>
+      <ul>
+        <li>"ClientId" and "TenantId" are entered correctly in the Settings tab.</li>
+        <li>The Entra app registration has <code>http://localhost</code> registered as a public client redirect URI.</li>
+        <li>Sign-in popups are not blocked by the browser.</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>2. "Insufficient permissions" or "Forbidden" error</h3>
+      <p>The signed-in user may lack the required Microsoft Graph permissions.</p>
+      <ul>
+        <li>Required scopes: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>.</li>
+        <li>Confirm in the "API permissions" screen that all three are added and that admin consent has been granted by a Global Administrator.</li>
+        <li>With delegated authentication, the signed-in user also needs a role (Global Reader / Security Reader, etc.) that allows these scopes.</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>3. UPN is empty / shown as "not resolved"</h3>
+      <p>UPNs are displayed via a short-term cache encrypted with Windows DPAPI (up to 7 days). Try the following.</p>
+      <ul>
+        <li>Re-select the target row in the Investigate tab to retry UPN resolution (re-fetched if the cache expired).</li>
+        <li>Re-fetch the target range from the Fetch tab (resolves the latest UPNs from Microsoft Graph).</li>
+        <li>If you also see an "Insufficient permissions" error, please follow step 2 above.</li>
+      </ul>
+    </div>
+
+    <div class="case">
+      <h3>4. Many sign-ins show as "Not applied"</h3>
+      <p>This is often by design and not a defect. See the <a href="manual/faq.html">FAQ</a> entry "Many sign-ins look 'Not applied'" for details.</p>
+    </div>
+
+    <div class="case">
+      <h3>5. The App does not start / exits immediately</h3>
+      <ul>
+        <li>Confirm Windows is version 10 (build 19041 or later) or 11.</li>
+        <li>Reinstall from Microsoft Store, or fetch the latest version from GitHub Releases.</li>
+        <li>If the issue persists, please contact us with the items listed in "Information to include in your inquiry" above.</li>
+      </ul>
+    </div>
+
+    <h2>Bug reports / improvement requests</h2>
+    <p>Please send bug reports and improvement requests by email. Including reproduction steps and error messages helps the investigation.</p>
+
+    <h2>Security reports</h2>
+    <p>If you discover a security concern, please contact us by email (<a href="mailto:support@sumikkolab.com">support@sumikkolab.com</a>) rather than via public channels. Including "Security" in the subject helps us prioritize. Please wait for our response before disclosing details publicly.</p>
+
+    <div class="note">For terms of use and personal information handling, see <a href="terms-of-use.html">Terms of Use</a> and <a href="privacy-policy.html">Privacy Policy</a>.</div>
+
   </div>
 
 </main>

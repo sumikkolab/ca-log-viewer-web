@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>プライバシーポリシー | CA Log Viewer — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer のプライバシーポリシー。Microsoft Graph 経由で取得したサインインログをローカル端末で処理し、UPN 平文を DB に保存しない方針 (Phase 10 + Phase 13 DPAPI キャッシュ確定)。">
+<meta name="description" content="CA Log Viewer のプライバシーポリシー。Microsoft Graph 経由で取得したサインインログをローカル端末で処理し、UPN 平文を DB に保存しない方針および外部送信を行わない方針を定めます。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/privacy-policy.html">
 <meta property="og:title" content="プライバシーポリシー | CA Log Viewer — SumikkoLab">
 <meta property="og:description" content="CA Log Viewer のプライバシーポリシー。ローカル処理のみ、UPN 平文を DB 非保存、外部送信なし。">
@@ -23,11 +23,13 @@
   .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
   .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
   h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
-  ul { padding-left: 24px; margin: 8px 0 16px; }
-  li { font-size: 0.95rem; margin-bottom: 4px; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ul, ol { padding-left: 24px; margin: 8px 0 14px; }
+  li { font-size: 0.95rem; margin-bottom: 6px; }
+  code { background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-size: 0.88rem; color: #312e81; }
   .section-ja, .section-en { display: none; }
   .section-ja.visible, .section-en.visible { display: block; }
-  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  .meta-row { font-size: 0.82rem; color: #64748b; margin-top: 4px; }
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
   footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
 </style>
@@ -46,45 +48,129 @@
 <main class="container">
 
   <div class="section-ja visible">
-    <div class="placeholder">本ページは雛形です。Phase 19 Step 3 で正式な文書を起草します (Phase 18 確定方針 = DPAPI UPN キャッシュ / 例外境界 / Store ビルドからデモデータ除外 を反映)。</div>
 
-    <h2>取扱方針の概要</h2>
+    <p class="meta-row">最終更新: 2026-04-30 / 制定者: Sumikko Lab</p>
+
+    <p>Sumikko Lab (以下「当方」) は、Windows デスクトップアプリケーション「CA Log Viewer」(以下「本アプリ」) の利用に伴って取り扱う情報について、本プライバシーポリシー (以下「本ポリシー」) を定めます。</p>
+
+    <h2>1. 基本方針</h2>
     <ul>
-      <li>本アプリは Microsoft Graph API 経由でサインインログを取得し、<strong>ローカル端末上でのみ処理</strong>します。外部サーバーへの送信は行いません。</li>
-      <li>UPN (User Principal Name) の<strong>平文をデータベースに保存しません</strong> (Phase 10 PII 方針)。表示は短期暗号化キャッシュ (Windows DPAPI、TTL 7 日) 経由で行います (Phase 13 確定方針)。</li>
-      <li>取得したログは利用者の Windows ユーザープロファイル配下の SQLite DB に保存され、利用者の操作で全件削除可能です。</li>
-      <li>テスト用デモデータ (110 件 / 6 シナリオ) は <code>*.example</code> ドメイン + RFC 5737 IP のみを使用し、実テナント情報を含みません。Microsoft Store 配布版にはデモデータは含まれません。</li>
+      <li><strong>ローカル処理のみ</strong>: 本アプリは利用者の Windows 端末上で動作し、Microsoft Graph 以外のいかなる外部サーバーにも情報を送信しません。</li>
+      <li><strong>当方サーバーは存在しません</strong>: 本アプリの利用に関して、当方が運営するサーバーへ情報が送られることはありません。</li>
+      <li><strong>テレメトリ・解析ツール非搭載</strong>: 利用統計の収集や、第三者の解析サービスへの送信は行いません。</li>
+      <li><strong>UPN (User Principal Name) の平文を DB に保存しません</strong>: 表示時のみ Windows DPAPI で暗号化された短期キャッシュ (有効期間は最大 7 日) を経由し、再起動・キャッシュ失効後は再取得します。</li>
     </ul>
 
-    <h2>取得する情報</h2>
-    <p>(Phase 19 Step 3 で詳細記載: 取得スコープ <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code> 等)</p>
+    <h2>2. 取得する情報と取得経路</h2>
+    <p>本アプリは、利用者が許諾した Entra ID テナントから以下の情報を Microsoft Graph 経由で取得します。取得は委任認証 (利用者本人としてのアクセス) によって行います。</p>
+    <ul>
+      <li><strong>サインインログ</strong>: <code>AuditLog.Read.All</code> スコープ。日時 / IP アドレス / 場所 / クライアントアプリ / 認証要件 / 結果 / リスク情報 など。</li>
+      <li><strong>Conditional Access ポリシー定義</strong>: <code>Policy.Read.ConditionalAccess</code> スコープ。ポリシー名 / 条件 / 制御 / 状態など。</li>
+      <li><strong>ユーザー基本情報</strong>: <code>User.Read.All</code> スコープ。UPN / 表示名 / ユーザータイプなど。</li>
+    </ul>
+    <p>これらは利用者が意図して「取得」操作を行ったときにのみ取得されます。本アプリが自動的にバックグラウンドで通信することはありません。</p>
 
-    <h2>外部送信</h2>
-    <p>Microsoft Graph 以外の外部エンドポイントには接続しません。</p>
+    <h2>3. 情報の保存場所と保存期間</h2>
+    <ul>
+      <li>取得したログ・ポリシー定義は、利用者の Windows ユーザープロファイル配下のローカル SQLite データベースに保存されます。</li>
+      <li>UPN の表示用キャッシュは、Windows DPAPI で暗号化されローカルに保存されます。最大 7 日で自動失効します。</li>
+      <li>利用者は本アプリの設定操作によって、取得済みのログ・キャッシュをいつでも削除できます。</li>
+      <li>本アプリのアンインストールに伴って、当該ローカルデータも削除されます。</li>
+    </ul>
 
-    <h2>連絡先</h2>
-    <p><a href="support.html">サポート</a> ページをご参照ください。</p>
+    <h2>4. 認証情報の取り扱い</h2>
+    <ul>
+      <li>認証は MSAL (Microsoft Authentication Library) による委任認証のみを使用します。クライアントシークレットや証明書を用いるアプリケーション認証は使用しません。</li>
+      <li>アクセストークンは MSAL 既定のメモリ内キャッシュに保持され、永続化されません。</li>
+      <li>パスワードや MFA 用の二要素情報を本アプリが受け取ることはありません。これらは Microsoft の認証画面で利用者と Microsoft の間で完結します。</li>
+    </ul>
+
+    <h2>5. 第三者への提供</h2>
+    <p>本アプリは Microsoft Graph 以外の外部エンドポイントへ情報を送信しません。当方が利用者の情報を第三者に提供することもありません。</p>
+
+    <h2>6. デモモード</h2>
+    <ul>
+      <li>動作確認用のデモモードは、実テナントに接続せず、サンプルデータ (110 件 / 6 シナリオ) のみを使用します。</li>
+      <li>デモデータは <code>*.example</code> ドメインおよび RFC 5737 で定義されたドキュメンテーション用 IP アドレスのみで構成され、実在の利用者情報を含みません。</li>
+      <li>Microsoft Store 配布版にはデモモードは含まれません。</li>
+    </ul>
+
+    <h2>7. 利用者の権利</h2>
+    <ul>
+      <li>取得済みのデータの全件削除 (本アプリの設定から実行可能)。</li>
+      <li>同意状態のリセット (本アプリの設定から実行可能)。</li>
+      <li>本アプリのアンインストールによるローカルデータの完全削除。</li>
+    </ul>
+
+    <h2>8. お問い合わせ</h2>
+    <p>本ポリシーに関するお問い合わせは、<a href="support.html">サポート</a> ページに記載の連絡先までお願いします。</p>
+
+    <h2>9. 改定</h2>
+    <p>本ポリシーの内容は、必要に応じて変更されることがあります。重要な変更がある場合は本ページ上で告知します。</p>
+
   </div>
 
   <div class="section-en">
-    <div class="placeholder">This page is a scaffold. The official document will be drafted in Phase 19 Step 3 (reflecting Phase 18 confirmed policies: DPAPI UPN cache / exception boundary / demo data excluded from Store build).</div>
 
-    <h2>Summary of data handling</h2>
+    <p class="meta-row">Last updated: 2026-04-30 / Issued by: Sumikko Lab</p>
+
+    <p>Sumikko Lab ("we") sets out this Privacy Policy ("Policy") regarding information handled in connection with use of the Windows desktop application "CA Log Viewer" ("the App").</p>
+
+    <h2>1. Basic principles</h2>
     <ul>
-      <li>This app fetches sign-in logs via Microsoft Graph and processes them <strong>locally only</strong>. No external transmission.</li>
-      <li>Plain UPNs are <strong>not stored in the database</strong> (Phase 10 PII policy). Display is via a short-term encrypted cache (Windows DPAPI, TTL 7 days, Phase 13).</li>
-      <li>Fetched logs are stored in a SQLite DB under the user's Windows profile and can be fully deleted by the user.</li>
-      <li>Test demo data (110 records / 6 scenarios) uses only <code>*.example</code> domains + RFC 5737 IPs, contains no real tenant information, and is excluded from Microsoft Store builds.</li>
+      <li><strong>Local-only processing</strong>: The App runs on the user's Windows device and does not transmit information to any external server other than Microsoft Graph.</li>
+      <li><strong>No server operated by us</strong>: We do not operate any server that receives information related to use of the App.</li>
+      <li><strong>No telemetry or analytics</strong>: The App does not collect usage statistics nor send data to any third-party analytics service.</li>
+      <li><strong>UPNs (User Principal Names) are not stored in plain text in the database</strong>: Display goes through a short-term cache encrypted with Windows DPAPI (valid up to 7 days). After expiration the UPN is re-fetched.</li>
     </ul>
 
-    <h2>Information collected</h2>
-    <p>(Details in Phase 19 Step 3: scopes <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>, etc.)</p>
+    <h2>2. Information collected and access path</h2>
+    <p>The App fetches the following information via Microsoft Graph from the Entra ID tenant authorized by the user, using delegated authentication (access as the signed-in user).</p>
+    <ul>
+      <li><strong>Sign-in logs</strong>: <code>AuditLog.Read.All</code> scope. Time / IP address / location / client app / authentication requirements / result / risk info, etc.</li>
+      <li><strong>Conditional Access policy definitions</strong>: <code>Policy.Read.ConditionalAccess</code> scope. Policy name / conditions / controls / state, etc.</li>
+      <li><strong>Basic user information</strong>: <code>User.Read.All</code> scope. UPN / display name / user type, etc.</li>
+    </ul>
+    <p>Fetching occurs only when the user explicitly initiates a "Fetch" action. The App does not communicate in the background automatically.</p>
 
-    <h2>External transmission</h2>
-    <p>The app connects only to Microsoft Graph endpoints.</p>
+    <h2>3. Storage location and retention</h2>
+    <ul>
+      <li>Fetched logs and policy definitions are stored in a local SQLite database under the user's Windows profile.</li>
+      <li>The display cache for UPN is stored locally encrypted with Windows DPAPI and expires automatically within 7 days at most.</li>
+      <li>Users can delete fetched logs and caches at any time via the App's settings.</li>
+      <li>Local data is removed when the App is uninstalled.</li>
+    </ul>
 
-    <h2>Contact</h2>
-    <p>Please see the <a href="support.html">Support</a> page.</p>
+    <h2>4. Handling of authentication information</h2>
+    <ul>
+      <li>Authentication uses delegated authentication via MSAL (Microsoft Authentication Library) only. Application authentication using client secrets or certificates is not used.</li>
+      <li>Access tokens are kept in MSAL's default in-memory cache and are not persisted.</li>
+      <li>The App never receives passwords or MFA second factors. These are exchanged between the user and Microsoft on Microsoft's authentication pages.</li>
+    </ul>
+
+    <h2>5. Third-party disclosure</h2>
+    <p>The App does not transmit information to external endpoints other than Microsoft Graph. We do not disclose user information to any third party.</p>
+
+    <h2>6. Demo mode</h2>
+    <ul>
+      <li>The optional demo mode does not connect to a real tenant. It uses only sample data (110 records / 6 scenarios).</li>
+      <li>Demo data uses only <code>*.example</code> domains and IP addresses defined in RFC 5737 for documentation purposes; it contains no real user information.</li>
+      <li>Microsoft Store builds do not include demo mode.</li>
+    </ul>
+
+    <h2>7. User rights</h2>
+    <ul>
+      <li>Delete all fetched data (available from the App's settings).</li>
+      <li>Reset consent state (available from the App's settings).</li>
+      <li>Fully remove local data by uninstalling the App.</li>
+    </ul>
+
+    <h2>8. Contact</h2>
+    <p>For questions regarding this Policy, please use the contact listed on the <a href="support.html">Support</a> page.</p>
+
+    <h2>9. Revisions</h2>
+    <p>This Policy may be revised as necessary. Material changes will be announced on this page.</p>
+
   </div>
 
 </main>

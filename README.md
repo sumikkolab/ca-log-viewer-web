@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <!-- Microsoft Store badge will be added after Phase 19 Step 5 submission -->
+  <!-- Microsoft Store badge will be added after publication. -->
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%2010%2F11-blue" />
   <img alt=".NET 8" src="https://img.shields.io/badge/.NET-8.0-purple" />
   <img alt="License" src="https://img.shields.io/badge/license-Proprietary-lightgrey" />
@@ -22,7 +22,7 @@
 **CA Log Viewer** is a Windows desktop app that fetches Microsoft Entra ID sign-in logs via Microsoft Graph and helps administrators **read Conditional Access (CA) related entries** — CA evaluation result, applied policies, device compliance — through a focused UI and an HTML audit report.
 
 - **Local-only processing**: No external transmission beyond Microsoft Graph
-- **PII protection**: Plain UPN is not stored in the database (Phase 10 PII policy + Phase 13 DPAPI short-term cache, TTL 7 days)
+- **PII protection**: Plain UPN is not stored in the database; display goes through a short-term DPAPI-encrypted cache (TTL 7 days)
 - **HTML audit report with 3-axis aggregation**: by user / by app / by policy (top 20 + others)
 - **ja / en UI**: full bilingual support
 - **Demo mode**: 110 records / 6 scenarios with `*.example` domains and RFC 5737 IPs only (excluded from Microsoft Store builds)
@@ -35,7 +35,7 @@
 - 📋 Terms of Use: <https://ca-log-viewer.sumikkolab.com/terms-of-use.html>
 - 🛟 Support: <https://ca-log-viewer.sumikkolab.com/support.html>
 
-## Features (planned for Phase 19 Step 2 detail)
+## Features
 
 - Entra ID sign-in logs fetch via Microsoft Graph (delegated auth, `AuditLog.Read.All`)
 - Conditional Access evaluation result classification
@@ -46,7 +46,7 @@
 - HTML audit report with Aggregation (by user / by app / by policy, top 20 + others)
 - CSV export
 - Demo mode (no real tenant)
-- ja / en UI with full localization (Phase 16 — 18 confirmed)
+- ja / en UI with full localization
 
 ## Required Microsoft Graph permissions
 
@@ -56,9 +56,7 @@
 
 ## Status
 
-Phase 19 (production page + onboarding consent + Store submission) — **in progress**.
-
-For full development history, see the application source repository (private).
+Pre-release. Microsoft Store submission is in preparation.
 
 ## Contact
 

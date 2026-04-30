@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>利用規約 | CA Log Viewer — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer の利用規約。本ソフトウェアの利用条件・免責事項・知的財産権について規定します。Microsoft Store 配布版および GitHub Releases 版に共通です。">
+<meta name="description" content="CA Log Viewer の利用規約。本ソフトウェアの利用条件・免責事項・知的財産権・準拠法について規定します。Microsoft Store 配布版および GitHub Releases 版に共通です。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/terms-of-use.html">
 <meta property="og:title" content="利用規約 | CA Log Viewer — SumikkoLab">
-<meta property="og:description" content="CA Log Viewer の利用規約。利用条件・免責事項・知的財産権を規定します。">
+<meta property="og:description" content="CA Log Viewer の利用規約。利用条件・免責事項・知的財産権・準拠法を規定します。">
 <meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/terms-of-use.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
@@ -23,11 +23,12 @@
   .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
   .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
   h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
-  ol { padding-left: 24px; margin: 8px 0 16px; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ol, ul { padding-left: 24px; margin: 8px 0 14px; }
   li { font-size: 0.95rem; margin-bottom: 6px; }
   .section-ja, .section-en { display: none; }
   .section-ja.visible, .section-en.visible { display: block; }
-  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  .meta-row { font-size: 0.82rem; color: #64748b; margin-top: 4px; }
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
   footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
 </style>
@@ -46,41 +47,129 @@
 <main class="container">
 
   <div class="section-ja visible">
-    <div class="placeholder">本ページは雛形です。Phase 19 Step 3 で正式な文書を起草します。</div>
 
-    <h2>1. 適用</h2>
-    <p>(Phase 19 Step 3 で記述)</p>
+    <p class="meta-row">最終更新: 2026-04-30 / 制定者: Sumikko Lab</p>
 
-    <h2>2. 免責事項</h2>
-    <p>(Phase 19 Step 3 で記述)</p>
+    <p>本利用規約 (以下「本規約」) は、Sumikko Lab (以下「当方」) が提供する Windows デスクトップアプリケーション「CA Log Viewer」(以下「本ソフトウェア」) の利用条件を定めるものです。利用者は、本ソフトウェアを利用することによって本規約に同意したものとみなされます。</p>
 
-    <h2>3. 禁止事項</h2>
-    <p>(Phase 19 Step 3 で記述)</p>
+    <h2>1. 適用範囲</h2>
+    <p>本規約は、本ソフトウェアを利用するすべての個人・法人・組織 (以下「利用者」) と当方との間の関係に適用されます。Microsoft Store 配布版および GitHub Releases 版の双方に共通して適用されます。</p>
 
-    <h2>4. 知的財産権</h2>
-    <p>(Phase 19 Step 3 で記述)</p>
+    <h2>2. ライセンス</h2>
+    <ul>
+      <li>本ソフトウェアは商用ソフトウェア (Proprietary) であり、当方は利用者に対し、本規約に従って本ソフトウェアを使用する非独占的・譲渡不可・取消可能なライセンスを付与します。</li>
+      <li>利用者は、本ソフトウェアおよびその構成ファイルを、第三者へ再配布・販売・貸与・サブライセンスすることはできません。</li>
+      <li>本ソフトウェアの逆コンパイル、リバースエンジニアリング、改変、派生物の作成は、適用される法律により明示的に許可される範囲を除き、禁止します。</li>
+    </ul>
 
-    <h2>5. 準拠法・管轄</h2>
-    <p>(Phase 19 Step 3 で記述)</p>
+    <h2>3. 利用環境および前提</h2>
+    <ul>
+      <li>本ソフトウェアの動作は Windows 10 (build 19041 以降) または Windows 11 を前提とします。</li>
+      <li>実テナント接続には、利用者自身が Microsoft Entra ID テナントに対する適切なアクセス権限を有していることが前提です。本ソフトウェアの利用は、Microsoft の各種利用規約・ライセンス条件にも従う必要があります。</li>
+      <li>必要な Microsoft Graph 権限スコープは <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code> です。</li>
+    </ul>
+
+    <h2>4. 禁止事項</h2>
+    <p>利用者は、本ソフトウェアの利用にあたり以下の行為をしてはなりません。</p>
+    <ol>
+      <li>法令・公序良俗に違反する行為。</li>
+      <li>第三者の権利を侵害する行為、または侵害するおそれのある行為。</li>
+      <li>本ソフトウェアの正常な動作を妨げる行為、当方または第三者の信用・名誉を毀損する行為。</li>
+      <li>本ソフトウェアを利用して取得した他者の個人情報を、当該本人の同意なく目的外利用または第三者に開示する行為。</li>
+      <li>本ソフトウェアに関する逆コンパイル・リバースエンジニアリング (適用法令で明示的に許可される範囲を除く)。</li>
+    </ol>
+
+    <h2>5. 個人情報および取得データの取り扱い</h2>
+    <ul>
+      <li>本ソフトウェアが取得・処理する情報の取り扱いは、<a href="privacy-policy.html">プライバシーポリシー</a> に従います。</li>
+      <li>本ソフトウェアにより取得・出力されたサインインログ・HTML レポート・CSV には、利用者が所属する組織の個人情報が含まれる場合があります。利用者は、これらを取り扱う際、所属する組織の規程および適用される法令に従うものとします。</li>
+    </ul>
+
+    <h2>6. 免責事項</h2>
+    <ul>
+      <li>本ソフトウェアは「現状有姿 (AS IS)」で提供されます。商品性、特定目的への適合性、第三者の権利を侵害しないことについて、明示・黙示を問わず一切の保証を行いません。</li>
+      <li>当方は、本ソフトウェアの利用または利用不能から生じる、直接・間接・付随的・特別・派生的損害 (逸失利益・データ損失を含む) について、適用法令で許される最大限の範囲で責任を負わないものとします。</li>
+      <li>本ソフトウェアによる Conditional Access 評価結果の表示・分類は、利用者の意思決定を支援するための参考情報であり、Microsoft Entra の公式評価結果に代わるものではありません。最終的な判断は利用者の責任で行ってください。</li>
+    </ul>
+
+    <h2>7. 知的財産権</h2>
+    <p>本ソフトウェアおよび関連するすべての知的財産権 (著作権・商標権・特許権を含む) は、当方または当方にライセンスを許諾している権利者に帰属します。本規約は、これらの権利のいかなる移転も意味しません。</p>
+
+    <h2>8. サービスの変更・中止</h2>
+    <p>当方は、利用者への事前通知なく、本ソフトウェアの内容を変更し、または提供を中止することができます。これにより利用者に生じた損害について、当方は一切の責任を負わないものとします。</p>
+
+    <h2>9. 規約の変更</h2>
+    <p>当方は、必要に応じて本規約を変更することができます。重要な変更がある場合は本ページ上で告知します。変更後の規約は、本ページに掲載された時点から効力を生じます。</p>
+
+    <h2>10. 準拠法および管轄</h2>
+    <p>本規約は日本法に準拠して解釈されます。本規約または本ソフトウェアに関連して生じた紛争については、当方の本拠地を管轄する日本国の裁判所を、第一審の専属的合意管轄裁判所とします。</p>
+
+    <h2>11. お問い合わせ</h2>
+    <p>本規約に関するお問い合わせは、<a href="support.html">サポート</a> ページに記載の連絡先までお願いします。</p>
+
   </div>
 
   <div class="section-en">
-    <div class="placeholder">This page is a scaffold. The official document will be drafted in Phase 19 Step 3.</div>
+
+    <p class="meta-row">Last updated: 2026-04-30 / Issued by: Sumikko Lab</p>
+
+    <p>These Terms of Use ("Terms") govern use of the Windows desktop application "CA Log Viewer" ("the Software") provided by Sumikko Lab ("we"). By using the Software, the user is deemed to have agreed to these Terms.</p>
 
     <h2>1. Scope</h2>
-    <p>(Will be drafted in Phase 19 Step 3)</p>
+    <p>These Terms apply to the relationship between users (individuals, corporations, organizations) and us. They apply equally to both the Microsoft Store edition and GitHub Releases edition.</p>
 
-    <h2>2. Disclaimer</h2>
-    <p>(Will be drafted in Phase 19 Step 3)</p>
+    <h2>2. License</h2>
+    <ul>
+      <li>The Software is commercial (proprietary) software. We grant the user a non-exclusive, non-transferable, revocable license to use the Software in accordance with these Terms.</li>
+      <li>The user shall not redistribute, sell, lend, or sublicense the Software or its component files to any third party.</li>
+      <li>Decompilation, reverse engineering, modification, and creation of derivative works are prohibited, except to the extent expressly permitted by applicable law.</li>
+    </ul>
 
-    <h2>3. Prohibited actions</h2>
-    <p>(Will be drafted in Phase 19 Step 3)</p>
+    <h2>3. Operating environment and prerequisites</h2>
+    <ul>
+      <li>The Software is intended to run on Windows 10 (build 19041 or later) or Windows 11.</li>
+      <li>Connecting to a real tenant assumes the user has appropriate access privileges to the Microsoft Entra ID tenant. Use of the Software is also subject to Microsoft's terms and license conditions.</li>
+      <li>Required Microsoft Graph permission scopes are <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>.</li>
+    </ul>
 
-    <h2>4. Intellectual property</h2>
-    <p>(Will be drafted in Phase 19 Step 3)</p>
+    <h2>4. Prohibited actions</h2>
+    <p>The user shall not:</p>
+    <ol>
+      <li>act in violation of laws or public order and morals;</li>
+      <li>infringe or risk infringing the rights of third parties;</li>
+      <li>interfere with the proper operation of the Software, or harm our or any third party's reputation;</li>
+      <li>use information about other persons obtained via the Software for purposes outside the original intent, or disclose it to third parties, without consent of the data subject;</li>
+      <li>decompile or reverse engineer the Software (except to the extent expressly permitted by applicable law).</li>
+    </ol>
 
-    <h2>5. Governing law</h2>
-    <p>(Will be drafted in Phase 19 Step 3)</p>
+    <h2>5. Personal information and fetched data</h2>
+    <ul>
+      <li>Handling of information processed by the Software is governed by the <a href="privacy-policy.html">Privacy Policy</a>.</li>
+      <li>Sign-in logs, HTML reports, and CSV exports produced by the Software may contain personal information belonging to the user's organization. The user shall handle such information in accordance with their organization's policies and applicable laws.</li>
+    </ul>
+
+    <h2>6. Disclaimer</h2>
+    <ul>
+      <li>The Software is provided "AS IS". We make no warranties, express or implied, including merchantability, fitness for a particular purpose, or non-infringement of third-party rights.</li>
+      <li>To the maximum extent permitted by applicable law, we shall not be liable for any direct, indirect, incidental, special, or consequential damages (including lost profits or loss of data) arising from use or inability to use the Software.</li>
+      <li>Conditional Access evaluation results displayed or classified by the Software are reference information intended to support user decision-making and are not a substitute for the official evaluation result by Microsoft Entra. Final decisions remain the user's responsibility.</li>
+    </ul>
+
+    <h2>7. Intellectual property</h2>
+    <p>The Software and all related intellectual property rights (including copyrights, trademarks, and patents) belong to us or to right holders that have licensed them to us. These Terms do not transfer any of these rights.</p>
+
+    <h2>8. Changes and discontinuation</h2>
+    <p>We may change the contents of the Software or discontinue its provision without prior notice to the user. We shall not be liable for any damages incurred by the user as a result of such changes or discontinuation.</p>
+
+    <h2>9. Changes to these Terms</h2>
+    <p>We may revise these Terms as necessary. Material changes will be announced on this page. The revised Terms become effective from the time they are posted on this page.</p>
+
+    <h2>10. Governing law and jurisdiction</h2>
+    <p>These Terms shall be construed under the laws of Japan. Any disputes arising in connection with these Terms or the Software shall be subject to the exclusive jurisdiction of the Japanese court having jurisdiction over our principal place of business as the court of first instance.</p>
+
+    <h2>11. Contact</h2>
+    <p>For questions regarding these Terms, please use the contact listed on the <a href="support.html">Support</a> page.</p>
+
   </div>
 
 </main>
