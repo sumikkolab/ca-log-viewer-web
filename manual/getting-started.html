@@ -35,8 +35,16 @@
   .note { background: #ecfeff; border-left: 4px solid #0891b2; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #155e75; }
   .warn { background: #fef2f2; border-left: 4px solid #dc2626; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #7f1d1d; }
   .screenshot { background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 6px; padding: 20px; margin: 14px 0; text-align: center; color: #475569; font-size: 0.85rem; }
-  .screenshot img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #cbd5e1; border-radius: 4px; }
+  .screenshot img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #cbd5e1; border-radius: 4px; cursor: zoom-in; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .screenshot img:hover { transform: scale(1.02); box-shadow: 0 4px 16px rgba(99,102,241,0.3); }
   .screenshot figcaption { margin-top: 8px; font-size: 0.82rem; color: #64748b; }
+  /* Lightbox */
+  .lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 24px; cursor: zoom-out; }
+  .lightbox-overlay.visible { display: flex; }
+  .lightbox-overlay img { max-width: 95%; max-height: 95%; border: 2px solid #fff; border-radius: 4px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); cursor: zoom-out; }
+  .lightbox-overlay .lightbox-close { position: absolute; top: 16px; right: 24px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 24px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; line-height: 1; padding: 0; }
+  .lightbox-overlay .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+  .lightbox-overlay .lightbox-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #c7d2fe; font-size: 0.85rem; }
   .toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
   .toc ol { margin: 4px 0 0; }
   .toc a { color: #4338ca; text-decoration: none; }
@@ -442,6 +450,40 @@
     <a href="../support.html">Support</a>
   </div>
 </footer>
+
+<!-- Lightbox overlay -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-hidden="true">
+  <button type="button" class="lightbox-close" aria-label="閉じる / Close">×</button>
+  <img id="lightbox-image" src="" alt="">
+  <div class="lightbox-hint"><span class="section-ja visible">クリックまたは ESC で閉じる</span><span class="section-en">Click or press ESC to close</span></div>
+</div>
+
+<script>
+  (function setupLightbox() {
+    var overlay = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-image');
+    var closeBtn = overlay.querySelector('.lightbox-close');
+    function open(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      overlay.classList.add('visible');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('visible');
+      overlay.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+    overlay.addEventListener('click', close);
+    closeBtn.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    document.querySelectorAll('.screenshot img').forEach(function (img) {
+      img.addEventListener('click', function () { open(img.src, img.alt); });
+    });
+  })();
+</script>
 
 <script>
   function setLang(lang) {
