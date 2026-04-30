@@ -35,6 +35,8 @@
   .note { background: #ecfeff; border-left: 4px solid #0891b2; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #155e75; }
   .warn { background: #fef2f2; border-left: 4px solid #dc2626; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #7f1d1d; }
   .screenshot { background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 6px; padding: 20px; margin: 14px 0; text-align: center; color: #475569; font-size: 0.85rem; }
+  .screenshot img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #cbd5e1; border-radius: 4px; }
+  .screenshot figcaption { margin-top: 8px; font-size: 0.82rem; color: #64748b; }
   .toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
   .toc ol { margin: 4px 0 0; }
   .toc a { color: #4338ca; text-decoration: none; }
@@ -156,7 +158,10 @@
         <li><strong>デバイス</strong>: 準拠 / 非準拠 / Hybrid Joined / Unknown</li>
         <li><strong>特殊条件</strong>: リスクサインイン / レガシー認証 / ゲストユーザー など</li>
       </ul>
-      <div class="screenshot">[スクリーンショット: 統一フィルタ + サインイン一覧]</div>
+      <figure class="screenshot">
+        <img src="screenshots/jp/02-investigate.png" alt="調査タブ: 統一フィルタ + サインイン一覧">
+        <figcaption>調査タブ: 左の統一フィルタで絞り込み、中央のサインイン一覧でログを確認</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
@@ -172,7 +177,10 @@
         <li><strong>端末準拠状態</strong>: 端末 ID / OS / 準拠状態 / 管理状態</li>
       </ol>
       <p>最下部に「許可拒否理由 (Allow & Deny reasons)」をまとめて表示します。</p>
-      <div class="screenshot">[スクリーンショット: 詳細パネル — 7 ブロック]</div>
+      <figure class="screenshot">
+        <img src="screenshots/jp/03-detail-pane.png" alt="詳細スライドインパネル: 7 ブロック構成">
+        <figcaption>1 行を選択すると右側にスライドインパネルが開き、結論と 7 ブロックを表示</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
@@ -191,7 +199,10 @@
         <li>調査タブ上部「Export HTML」ボタン → 現在のフィルタ結果を HTML レポートとして出力</li>
         <li>保存先を選択 → 出力完了後にブラウザで自動的に開きます</li>
       </ol>
-      <div class="screenshot">[スクリーンショット: Export HTML ボタン]</div>
+      <figure class="screenshot">
+        <img src="screenshots/jp/05-html-report.png" alt="HTML 監査レポート: 判定サマリー + 観点別">
+        <figcaption>HTML 監査レポート: 判定サマリー (良い点 / 要確認点 / 次に確認すべきこと) + 観点別の代表ログ</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
@@ -330,7 +341,10 @@
         <li><strong>Device</strong>: Compliant / Non-compliant / Hybrid Joined / Unknown</li>
         <li><strong>Special</strong>: Risky sign-in / Legacy auth / Guest user, etc.</li>
       </ul>
-      <div class="screenshot">[Screenshot: unified filter + sign-in list]</div>
+      <figure class="screenshot">
+        <img src="screenshots/en/02-investigate.png" alt="Investigate tab: unified filter + sign-in list">
+        <figcaption>Investigate tab: filter on the left, sign-in list in the center</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
@@ -346,7 +360,10 @@
         <li><strong>Device compliance</strong>: device ID / OS / compliant state / managed state</li>
       </ol>
       <p>The pane footer shows "Allow &amp; Deny reasons" aggregated.</p>
-      <div class="screenshot">[Screenshot: detail pane — 7 sections]</div>
+      <figure class="screenshot">
+        <img src="screenshots/en/03-detail-pane.png" alt="Slide-in detail pane with 7 sections">
+        <figcaption>Selecting a row opens the slide-in detail pane with the conclusion and 7 sections</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
@@ -365,7 +382,10 @@
         <li>Click "Export HTML" at the top of the Investigate tab → exports the current filter result as an HTML report</li>
         <li>Choose a destination → opens automatically in the browser</li>
       </ol>
-      <div class="screenshot">[Screenshot: Export HTML button]</div>
+      <figure class="screenshot">
+        <img src="screenshots/en/05-html-report.png" alt="HTML audit report: assessment summary + aspect tables">
+        <figcaption>HTML audit report: assessment summary (Positive / Concerns / Next checks) and per-aspect tables</figcaption>
+      </figure>
     </div>
 
     <div class="step-box">
