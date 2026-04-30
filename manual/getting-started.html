@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>はじめに | CA Log Viewer マニュアル — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML 監査レポート出力 の手順を解説します。">
+<meta name="description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML 監査レポート出力 の手順を、画面と用語にあわせて解説します。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/manual/getting-started.html">
 <meta property="og:title" content="はじめに | CA Log Viewer マニュアル — SumikkoLab">
 <meta property="og:description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。">
@@ -21,15 +21,24 @@
   .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
   .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
   .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
-  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
-  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
-  h3 { font-size: 1rem; margin: 20px 0 8px; color: #4338ca; }
-  ol { padding-left: 24px; margin: 8px 0 16px; }
-  ol > li { font-size: 0.95rem; margin-bottom: 8px; }
+  .container { max-width: 820px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  h3 { font-size: 1.02rem; margin: 22px 0 8px; color: #4338ca; }
+  h4 { font-size: 0.95rem; margin: 14px 0 6px; color: #1e1b4b; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ol, ul { padding-left: 24px; margin: 8px 0 14px; }
+  ol > li, ul > li { font-size: 0.95rem; margin-bottom: 8px; }
+  code { background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-size: 0.88rem; color: #312e81; }
   .section-ja, .section-en { display: none; }
   .section-ja.visible, .section-en.visible { display: block; }
-  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
-  .step-box { background: #eef2ff; border-left: 4px solid #6366f1; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+  .step-box { background: #eef2ff; border-left: 4px solid #6366f1; padding: 14px 18px; margin: 18px 0; border-radius: 4px; }
+  .note { background: #ecfeff; border-left: 4px solid #0891b2; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #155e75; }
+  .warn { background: #fef2f2; border-left: 4px solid #dc2626; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #7f1d1d; }
+  .screenshot { background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 6px; padding: 20px; margin: 14px 0; text-align: center; color: #475569; font-size: 0.85rem; }
+  .toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
+  .toc ol { margin: 4px 0 0; }
+  .toc a { color: #4338ca; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
   footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
 </style>
@@ -48,87 +57,351 @@
 <main class="container">
 
   <div class="section-ja visible">
-    <div class="placeholder">本ページは雛形です。Phase 19 Step 2 で各 Step のスクリーンショット + 詳細手順を追加します。</div>
 
-    <h2>一本道: 初回起動 → 取得 → 分析 → レポート</h2>
+    <p>CA Log Viewer を <strong>初回起動 → 取得 → 分析 → レポート</strong> の 4 ステップで使い始めるためのガイドです。Microsoft Graph 経由で Entra ID のサインインログを取得し、Conditional Access 関連項目を読み解いて HTML 監査レポートとして出力するまでを通します。</p>
 
-    <div class="step-box">
-      <h3>Step 1. 初回起動</h3>
+    <div class="toc">
+      <strong>目次</strong>
       <ol>
-        <li>Microsoft Store からインストール (または GitHub Releases から MSIX ダウンロード)</li>
-        <li>初回起動時に利用規約・プライバシー方針への同意 (Phase 19 Step 4 で実装予定)</li>
-        <li>言語選択 (日本語 / English) — 設定タブから後で変更可能</li>
+        <li><a href="#ja-step1">Step 1. 初回起動と同意</a></li>
+        <li><a href="#ja-step2">Step 2. Entra アプリ登録 → サインインログ取得</a></li>
+        <li><a href="#ja-step3">Step 3. 調査タブで分析</a></li>
+        <li><a href="#ja-step4">Step 4. HTML 監査レポート出力</a></li>
+        <li><a href="#ja-tips">補足: デモモード / 言語切替 / CSV 出力</a></li>
       </ol>
     </div>
 
+    <h2 id="ja-step1">Step 1. 初回起動と同意</h2>
+
     <div class="step-box">
-      <h3>Step 2. 取得 (Microsoft Graph 経由)</h3>
+      <h3>1-1. インストール</h3>
       <ol>
-        <li>Entra アプリ登録 (Azure portal でアプリ作成、ClientId 取得)</li>
-        <li>必要な Graph 権限を同意: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code></li>
-        <li>アプリで「取得」ボタン → サインインログ + CA ポリシーを取得</li>
+        <li>Microsoft Store からインストール (推奨)、もしくは GitHub Releases から MSIX をダウンロードしてインストール</li>
+        <li>初回起動時は Windows 10 / 11 が必須。.NET 8 ランタイムは MSIX に同梱</li>
       </ol>
+      <div class="screenshot">[スクリーンショット: Microsoft Store の製品ページ]</div>
     </div>
 
     <div class="step-box">
-      <h3>Step 3. 分析 (調査タブ)</h3>
+      <h3>1-2. 利用規約・プライバシー方針への同意</h3>
       <ol>
-        <li>統一フィルタ (期間 / ユーザー / CA 状態 / 判定 / デバイス / 特殊) で絞り込み</li>
-        <li>一覧から行を選択 → 詳細パネルで 7 ブロックを確認 (結論 / サインイン概要 / ユーザー / アプリ / 条件付きアクセス / 適用ポリシー / 端末 / 許可拒否理由)</li>
-        <li>傾向タブで異常検知結果 / アプリ別集計を確認</li>
+        <li>初回起動時に同意画面が表示されます (Phase 19 Step 4 で実装)</li>
+        <li><a href="../terms-of-use.html">利用規約</a> と <a href="../privacy-policy.html">プライバシーポリシー</a> を読んで「同意する」をクリック</li>
+        <li>同意状態はローカルに保存され、次回以降は表示されません</li>
       </ol>
+      <div class="note">同意は再表示できます (設定タブ → 「同意状態をリセット」)。</div>
     </div>
 
     <div class="step-box">
-      <h3>Step 4. レポート (HTML 監査レポート出力)</h3>
+      <h3>1-3. 言語選択</h3>
+      <ol>
+        <li>初回起動時は OS の言語設定に従って 日本語 / English が自動選択されます</li>
+        <li>後から設定タブの「UI 言語」で切り替え可能 (即時反映)</li>
+        <li>サインインログのデモデータは選択言語にあわせて切り替わります</li>
+      </ol>
+    </div>
+
+    <h2 id="ja-step2">Step 2. Entra アプリ登録 → サインインログ取得</h2>
+
+    <div class="step-box">
+      <h3>2-1. Entra アプリ登録 (初回のみ)</h3>
+      <ol>
+        <li>Microsoft Entra 管理センター → 「アプリの登録」 → 「新規登録」</li>
+        <li>名前: 任意 (例: <code>CA Log Viewer</code>)、サポートされるアカウント: 「自分の組織のみ」</li>
+        <li>リダイレクト URI: <code>パブリック クライアント / ネイティブ</code> を選択し <code>http://localhost</code> を登録</li>
+        <li>登録後の「アプリケーション (クライアント) ID」と「ディレクトリ (テナント) ID」を控える</li>
+      </ol>
+      <div class="screenshot">[スクリーンショット: Entra アプリ登録画面]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>2-2. Microsoft Graph 権限の付与</h3>
+      <ol>
+        <li>登録したアプリ → 「API のアクセス許可」 → 「アクセス許可の追加」</li>
+        <li>Microsoft Graph → <strong>委任されたアクセス許可</strong> を選択</li>
+        <li>以下 3 つを追加:
+          <ul>
+            <li><code>AuditLog.Read.All</code> (サインインログ取得)</li>
+            <li><code>Policy.Read.ConditionalAccess</code> (CA ポリシー定義取得)</li>
+            <li><code>User.Read.All</code> (UPN / 表示名解決)</li>
+          </ul>
+        </li>
+        <li>「<テナント> に管理者の同意を与えます」をクリック (グローバル管理者権限が必要)</li>
+      </ol>
+      <div class="warn">委任認証のため、利用者にも上記スコープが付与されている必要があります。アプリケーション認証 (クライアントシークレット / 証明書) は使用しません。</div>
+    </div>
+
+    <div class="step-box">
+      <h3>2-3. アプリで取得</h3>
+      <ol>
+        <li>CA Log Viewer を起動 → 設定タブで「ClientId」「TenantId」を入力 → 保存</li>
+        <li>取得タブの「期間」を選択 (例: 直近 7 日間 / 24 時間 / カスタム)</li>
+        <li>「取得開始」ボタン → ブラウザで MSAL 認証 (初回のみ同意)</li>
+        <li>取得完了後、サインインログ件数 / CA ポリシー件数 / 取得時刻が表示されます</li>
+      </ol>
+      <div class="screenshot">[スクリーンショット: 取得タブ — 期間選択 + 取得開始ボタン]</div>
+      <div class="note">大規模テナントでは数千件取得まで数分かかります。進捗バーで確認できます。</div>
+    </div>
+
+    <h2 id="ja-step3">Step 3. 調査タブで分析</h2>
+
+    <div class="step-box">
+      <h3>3-1. 統一フィルタで絞り込み</h3>
+      <p>調査タブ上部の統一フィルタは複数選択 OR 対応です。</p>
+      <ul>
+        <li><strong>期間</strong>: 直近 24 時間 / 7 日 / 30 日 / カスタム範囲</li>
+        <li><strong>ユーザー</strong>: UPN / 表示名で絞り込み (部分一致)</li>
+        <li><strong>CA 状態</strong>: 成功 / 失敗 / Not applied / Report-only</li>
+        <li><strong>判定</strong>: Allow / Deny / Interrupted / Unknown</li>
+        <li><strong>デバイス</strong>: 準拠 / 非準拠 / Hybrid Joined / Unknown</li>
+        <li><strong>特殊条件</strong>: リスクサインイン / レガシー認証 / ゲストユーザー など</li>
+      </ul>
+      <div class="screenshot">[スクリーンショット: 統一フィルタ + サインイン一覧]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>3-2. 詳細パネルで 7 ブロック + 結論を確認</h3>
+      <p>一覧から行を選択すると右側に詳細スライドインパネルが開きます。</p>
+      <ol>
+        <li><strong>結論</strong>: 6 段階優先順位 (Block by policy / MFA required but skipped / Risk-based block / Compliant device required / Suspicious legacy auth / Allow) で自動判定</li>
+        <li><strong>サインイン概要</strong>: 日時 / IP / 場所 / クライアントアプリ / 認証要件</li>
+        <li><strong>ユーザー</strong>: UPN / 表示名 / リスクレベル / ユーザータイプ</li>
+        <li><strong>アプリ</strong>: アプリ名 / アプリ ID / リソース</li>
+        <li><strong>条件付きアクセス</strong>: CA 評価結果 / 評価対象ポリシー数 / 適用ポリシー数</li>
+        <li><strong>適用ポリシー一覧</strong>: ポリシー名 / 結果 / 必要なコントロール (MFA / 準拠端末 など)</li>
+        <li><strong>端末準拠状態</strong>: 端末 ID / OS / 準拠状態 / 管理状態</li>
+      </ol>
+      <p>最下部に「許可拒否理由 (Allow & Deny reasons)」をまとめて表示します。</p>
+      <div class="screenshot">[スクリーンショット: 詳細パネル — 7 ブロック]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>3-3. 傾向タブで異常検知 / 集計を確認</h3>
+      <ul>
+        <li>異常検知: 短時間多発失敗 / 地理的に離れた連続サインイン / レガシー認証急増 などのアラートを表示</li>
+        <li>アプリ別集計: アプリ単位のサインイン件数 / Allow / Deny 比率</li>
+      </ul>
+    </div>
+
+    <h2 id="ja-step4">Step 4. HTML 監査レポート出力</h2>
+
+    <div class="step-box">
+      <h3>4-1. レポート出力</h3>
       <ol>
         <li>調査タブ上部「Export HTML」ボタン → 現在のフィルタ結果を HTML レポートとして出力</li>
-        <li>ブラウザで自動オープン → Summary / Assessment / 集約表 (ユーザー別 / アプリ別 / ポリシー別) / 観点別 / Allow & Deny reasons を確認</li>
-        <li>外部共有時は UPN 含むため取り扱いに注意</li>
+        <li>保存先を選択 → 出力完了後にブラウザで自動的に開きます</li>
       </ol>
+      <div class="screenshot">[スクリーンショット: Export HTML ボタン]</div>
     </div>
+
+    <div class="step-box">
+      <h3>4-2. レポート内容</h3>
+      <ul>
+        <li><strong>Summary</strong>: 期間 / 総件数 / Allow / Deny 件数 / 主要 CA 状態の比率</li>
+        <li><strong>Assessment</strong>: 結論 6 段階の件数分布</li>
+        <li><strong>3 軸集約表</strong>: ユーザー別 / アプリ別 / ポリシー別 (それぞれ上位 20 + 「その他」集約)</li>
+        <li><strong>観点別表</strong>: CA 状態 / 判定 / デバイス / 特殊条件</li>
+        <li><strong>Allow & Deny reasons</strong>: 個別サインインの許可拒否理由を一覧化</li>
+      </ul>
+      <div class="warn">レポートには UPN / IP / アプリ名が含まれます。外部共有時は取り扱い (PII) に注意してください。</div>
+    </div>
+
+    <h2 id="ja-tips">補足: デモモード / 言語切替 / CSV 出力</h2>
+
+    <h3>デモモード</h3>
+    <ul>
+      <li>実テナントなしで操作感を試すための機能 (110 件 / 6 シナリオ)</li>
+      <li>UPN は <code>*.example</code> ドメイン、IP は RFC 5737 で固定</li>
+      <li>Microsoft Store 配布版には含まれません (GitHub Releases ビルドのみ)</li>
+    </ul>
+
+    <h3>言語切替</h3>
+    <ul>
+      <li>設定タブの「UI 言語」で 日本語 / English を切替</li>
+      <li>切替は即時反映 (再起動不要)</li>
+      <li>HTML 監査レポートも UI 言語に追従</li>
+    </ul>
+
+    <h3>CSV 出力</h3>
+    <ul>
+      <li>調査タブから現在のフィルタ結果を CSV としてエクスポート</li>
+      <li>UPN / IP / アプリ名を含むため、外部共有時は PII 取り扱いに注意</li>
+    </ul>
+
   </div>
 
   <div class="section-en">
-    <div class="placeholder">This page is a scaffold. Each step's screenshots and details will be added in Phase 19 Step 2.</div>
 
-    <h2>Linear flow: First launch → Fetch → Analyze → Report</h2>
+    <p>This guide walks through CA Log Viewer in four steps: <strong>first launch → fetch → analyze → report</strong>. You will fetch Entra ID sign-in logs via Microsoft Graph, read Conditional Access related entries, and export an HTML audit report.</p>
 
-    <div class="step-box">
-      <h3>Step 1. First launch</h3>
+    <div class="toc">
+      <strong>Contents</strong>
       <ol>
-        <li>Install from Microsoft Store (or download MSIX from GitHub Releases)</li>
-        <li>Accept Terms / Privacy on first launch (planned for Phase 19 Step 4)</li>
-        <li>Choose language (Japanese / English) — switchable later from Settings</li>
+        <li><a href="#en-step1">Step 1. First launch and consent</a></li>
+        <li><a href="#en-step2">Step 2. Register Entra app → fetch sign-in logs</a></li>
+        <li><a href="#en-step3">Step 3. Analyze in the Investigate tab</a></li>
+        <li><a href="#en-step4">Step 4. Export HTML audit report</a></li>
+        <li><a href="#en-tips">Notes: Demo mode / language switch / CSV export</a></li>
       </ol>
     </div>
 
+    <h2 id="en-step1">Step 1. First launch and consent</h2>
+
     <div class="step-box">
-      <h3>Step 2. Fetch (via Microsoft Graph)</h3>
+      <h3>1-1. Install</h3>
       <ol>
-        <li>Register an Entra app (Azure portal, retrieve ClientId)</li>
-        <li>Grant required Graph permissions: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code></li>
-        <li>Click "Fetch" in the app → retrieves sign-in logs + CA policies</li>
+        <li>Install from the Microsoft Store (recommended), or download the MSIX from GitHub Releases</li>
+        <li>Windows 10 / 11 required. The .NET 8 runtime is bundled in the MSIX</li>
       </ol>
+      <div class="screenshot">[Screenshot: Microsoft Store product page]</div>
     </div>
 
     <div class="step-box">
-      <h3>Step 3. Analyze (Investigate tab)</h3>
+      <h3>1-2. Accept Terms / Privacy</h3>
       <ol>
-        <li>Filter by unified filters (Time range / User / CA status / Judgment / Device / Special)</li>
-        <li>Select a row → review 7 blocks in the Detail Pane (Conclusion / Sign-in summary / User / App / Conditional Access / Applied policies / Device / Allow & Deny reasons)</li>
-        <li>Check anomaly detection / per-app aggregation in the Trends tab</li>
+        <li>The consent screen appears on first launch (planned for Phase 19 Step 4)</li>
+        <li>Read <a href="../terms-of-use.html">Terms of Use</a> and <a href="../privacy-policy.html">Privacy Policy</a>, then click "Accept"</li>
+        <li>The consent state is stored locally and is not shown on subsequent launches</li>
       </ol>
+      <div class="note">You can re-display consent (Settings tab → "Reset consent state").</div>
     </div>
 
     <div class="step-box">
-      <h3>Step 4. Report (Export HTML audit report)</h3>
+      <h3>1-3. Choose language</h3>
+      <ol>
+        <li>On first launch, Japanese / English is auto-selected based on the OS language</li>
+        <li>Switch later from Settings → "UI language" (applied immediately)</li>
+        <li>Demo data also follows the selected language</li>
+      </ol>
+    </div>
+
+    <h2 id="en-step2">Step 2. Register Entra app → fetch sign-in logs</h2>
+
+    <div class="step-box">
+      <h3>2-1. Register an Entra app (one-time)</h3>
+      <ol>
+        <li>Microsoft Entra admin center → "App registrations" → "New registration"</li>
+        <li>Name: any (e.g. <code>CA Log Viewer</code>); Supported account types: "My organization only"</li>
+        <li>Redirect URI: choose <code>Public client / native</code> and register <code>http://localhost</code></li>
+        <li>Note the "Application (client) ID" and "Directory (tenant) ID"</li>
+      </ol>
+      <div class="screenshot">[Screenshot: Entra app registration]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>2-2. Grant Microsoft Graph permissions</h3>
+      <ol>
+        <li>Registered app → "API permissions" → "Add a permission"</li>
+        <li>Microsoft Graph → choose <strong>Delegated permissions</strong></li>
+        <li>Add the following three:
+          <ul>
+            <li><code>AuditLog.Read.All</code> (read sign-in logs)</li>
+            <li><code>Policy.Read.ConditionalAccess</code> (read CA policy definitions)</li>
+            <li><code>User.Read.All</code> (resolve UPN / display name)</li>
+          </ul>
+        </li>
+        <li>Click "Grant admin consent for &lt;tenant&gt;" (Global Administrator required)</li>
+      </ol>
+      <div class="warn">Delegated authentication is used, so the running user must also have the scopes above. Application authentication (client secret / certificate) is not used.</div>
+    </div>
+
+    <div class="step-box">
+      <h3>2-3. Fetch from the app</h3>
+      <ol>
+        <li>Launch CA Log Viewer → Settings tab → enter "ClientId" and "TenantId" → save</li>
+        <li>Fetch tab → choose a time range (e.g. last 7 days / 24 hours / custom)</li>
+        <li>Click "Start fetch" → MSAL authentication opens in the browser (consent only on first run)</li>
+        <li>After fetch, sign-in count / CA policy count / fetch time are displayed</li>
+      </ol>
+      <div class="screenshot">[Screenshot: Fetch tab — range selector + Start button]</div>
+      <div class="note">Large tenants may take several minutes to fetch thousands of records. A progress bar is shown.</div>
+    </div>
+
+    <h2 id="en-step3">Step 3. Analyze in the Investigate tab</h2>
+
+    <div class="step-box">
+      <h3>3-1. Filter using the unified filter</h3>
+      <p>The unified filter at the top of the Investigate tab supports multi-select OR.</p>
+      <ul>
+        <li><strong>Range</strong>: last 24h / 7d / 30d / custom</li>
+        <li><strong>User</strong>: filter by UPN / display name (partial match)</li>
+        <li><strong>CA status</strong>: Success / Failure / Not applied / Report-only</li>
+        <li><strong>Judgment</strong>: Allow / Deny / Interrupted / Unknown</li>
+        <li><strong>Device</strong>: Compliant / Non-compliant / Hybrid Joined / Unknown</li>
+        <li><strong>Special</strong>: Risky sign-in / Legacy auth / Guest user, etc.</li>
+      </ul>
+      <div class="screenshot">[Screenshot: unified filter + sign-in list]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>3-2. Detail pane with 7 sections + conclusion</h3>
+      <p>Selecting a row opens a slide-in detail pane on the right.</p>
+      <ol>
+        <li><strong>Conclusion</strong>: auto-classified into 6-tier priority (Block by policy / MFA required but skipped / Risk-based block / Compliant device required / Suspicious legacy auth / Allow)</li>
+        <li><strong>Sign-in summary</strong>: time / IP / location / client app / auth requirement</li>
+        <li><strong>User</strong>: UPN / display name / risk level / user type</li>
+        <li><strong>App</strong>: app name / app ID / resource</li>
+        <li><strong>Conditional Access</strong>: CA evaluation result / evaluated policies / applied policies</li>
+        <li><strong>Applied policies</strong>: policy name / result / required controls (MFA / compliant device, etc.)</li>
+        <li><strong>Device compliance</strong>: device ID / OS / compliant state / managed state</li>
+      </ol>
+      <p>The pane footer shows "Allow &amp; Deny reasons" aggregated.</p>
+      <div class="screenshot">[Screenshot: detail pane — 7 sections]</div>
+    </div>
+
+    <div class="step-box">
+      <h3>3-3. Trends tab for anomaly detection / aggregation</h3>
+      <ul>
+        <li>Anomaly detection: short-burst failures / geographically distant consecutive sign-ins / legacy auth surges, etc.</li>
+        <li>Per-app aggregation: sign-in count / Allow vs. Deny ratio per app</li>
+      </ul>
+    </div>
+
+    <h2 id="en-step4">Step 4. Export HTML audit report</h2>
+
+    <div class="step-box">
+      <h3>4-1. Export</h3>
       <ol>
         <li>Click "Export HTML" at the top of the Investigate tab → exports the current filter result as an HTML report</li>
-        <li>Opens automatically in the browser → review Summary / Assessment / Aggregation (by user / app / policy) / aspect tables / Allow & Deny reasons</li>
-        <li>Be careful when sharing externally — the report includes UPNs</li>
+        <li>Choose a destination → opens automatically in the browser</li>
       </ol>
+      <div class="screenshot">[Screenshot: Export HTML button]</div>
     </div>
+
+    <div class="step-box">
+      <h3>4-2. Report contents</h3>
+      <ul>
+        <li><strong>Summary</strong>: range / total count / Allow / Deny counts / major CA status ratios</li>
+        <li><strong>Assessment</strong>: distribution of the 6-tier conclusion</li>
+        <li><strong>3-axis aggregation</strong>: by user / by app / by policy (top 20 + "Others")</li>
+        <li><strong>Aspect tables</strong>: CA status / judgment / device / special</li>
+        <li><strong>Allow &amp; Deny reasons</strong>: per-sign-in allow/deny reasons listed</li>
+      </ul>
+      <div class="warn">Reports include UPN / IP / app name. Be careful with PII when sharing externally.</div>
+    </div>
+
+    <h2 id="en-tips">Notes: Demo mode / language switch / CSV export</h2>
+
+    <h3>Demo mode</h3>
+    <ul>
+      <li>Try the app without a real tenant (110 records / 6 scenarios)</li>
+      <li>UPNs use <code>*.example</code> domains; IPs are fixed to RFC 5737</li>
+      <li>Excluded from Microsoft Store builds (GitHub Releases builds only)</li>
+    </ul>
+
+    <h3>Language switch</h3>
+    <ul>
+      <li>Settings tab → "UI language" → switch between Japanese / English</li>
+      <li>Applied immediately (no restart required)</li>
+      <li>The HTML audit report also follows the UI language</li>
+    </ul>
+
+    <h3>CSV export</h3>
+    <ul>
+      <li>Export the current filter result as CSV from the Investigate tab</li>
+      <li>Includes UPN / IP / app name — handle PII carefully when sharing</li>
+    </ul>
+
   </div>
 
 </main>
@@ -137,6 +410,9 @@
   <div class="section-ja visible">
     <a href="../">トップ</a> ·
     <a href="index.html">マニュアル目次</a> ·
+    <a href="faq.html">FAQ</a> ·
+    <a href="../download.html">ダウンロード</a> ·
+    <a href="../release-notes.html">リリースノート</a> ·
     <a href="../privacy-policy.html">プライバシーポリシー</a> ·
     <a href="../terms-of-use.html">利用規約</a> ·
     <a href="../support.html">サポート</a>
@@ -144,6 +420,9 @@
   <div class="section-en">
     <a href="../">Home</a> ·
     <a href="index.html">Manual Index</a> ·
+    <a href="faq.html">FAQ</a> ·
+    <a href="../download.html">Download</a> ·
+    <a href="../release-notes.html">Release Notes</a> ·
     <a href="../privacy-policy.html">Privacy Policy</a> ·
     <a href="../terms-of-use.html">Terms of Use</a> ·
     <a href="../support.html">Support</a>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | CA Log Viewer マニュアル — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer のよくある質問。UPN が空になる原因、ポリシー未適用が多く見える原因、Graph 権限がないと何が起きるかなどを解説します。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/manual/faq.html">
+<meta property="og:title" content="FAQ | CA Log Viewer マニュアル — SumikkoLab">
+<meta property="og:description" content="CA Log Viewer のよくある質問: UPN 空 / ポリシー未適用 / Graph 権限 ほか。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/manual/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  h3 { font-size: 1rem; margin: 20px 0 8px; color: #4338ca; }
+  p { font-size: 0.95rem; margin-bottom: 12px; }
+  ul, ol { padding-left: 24px; margin: 8px 0 16px; }
+  li { font-size: 0.92rem; margin-bottom: 4px; }
+  code { background: #eef2ff; color: #312e81; padding: 1px 6px; border-radius: 3px; font-size: 0.85em; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .qa { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px 22px; margin: 16px 0; }
+  .qa h3 { color: #312e81; margin-top: 0; font-size: 0.98rem; }
+  .qa h3::before { content: "Q. "; color: #4338ca; font-weight: 700; }
+  .qa .answer::before { content: "A. "; color: #4338ca; font-weight: 700; }
+  .qa .answer { display: block; margin-top: 4px; }
+  .info-box { background: #eef2ff; border-left: 4px solid #6366f1; padding: 12px 16px; margin: 12px 0; font-size: 0.9rem; border-radius: 4px; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>FAQ</h1>
+  <p><a href="index.html">← <span class="section-ja visible">マニュアル目次</span><span class="section-en">Manual Index</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+    <p>本ページは、CA Log Viewer の利用中に出やすい疑問をまとめたものです。マニュアルの <a href="getting-started.html">はじめに</a> も併せて参照してください。</p>
+
+    <h2>必須 3 件</h2>
+
+    <div class="qa">
+      <h3>UPN が空 / 未取得 になる場合があるのはなぜですか?</h3>
+      <p class="answer">CA Log Viewer は <strong>UPN 平文を DB に永続保存しない PII 保護方針</strong> を採用しています。アプリを再起動した場合、過去取得分のサインインログ表示で UPN 列が「(未取得)」となることがあります。</p>
+      <p>解消手順:</p>
+      <ol>
+        <li>アプリを継続起動中であれば、メモリ内キャッシュ + DPAPI 短期暗号化キャッシュ (TTL 7 日) で UPN は復元されます。</li>
+        <li>長期間 (7 日以上) 放置して再起動した場合は、設定タブ → 「旧データの全削除」 → 取得ボタンで再取得すれば UPN 解決率 100% に戻ります。</li>
+        <li>開発者モード (設定タブ → 開発者向け) を有効化すると、UPN 取得診断 (PII なし、件数のみ) で解決率を確認できます。</li>
+      </ol>
+      <div class="info-box">この方針は Phase 10 (PII 保護) と Phase 13 (DPAPI 短期暗号化キャッシュ) で確定したものです。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</div>
+    </div>
+
+    <div class="qa">
+      <h3>ポリシー未適用 (Not applied) のサインインが多く見えます。これは問題でしょうか?</h3>
+      <p class="answer">Conditional Access ポリシーが「未適用」と判定されるサインインには、複数の正常な原因があります:</p>
+      <ul>
+        <li><strong>対象範囲外</strong>: そのサインインの対象ユーザー / アプリがポリシーの割り当て範囲に含まれていない</li>
+        <li><strong>除外条件で除外</strong>: 除外ユーザー / 除外グループ / 除外場所等の条件にマッチして除外された</li>
+        <li><strong>レポートモード判定</strong>: ポリシーがレポートモードのため、結果に影響しない判定を行った (Report-only* 系の Result)</li>
+        <li><strong>条件未マッチ</strong>: ポリシーの条件 (場所 / 端末状態 / アプリ等) のいずれかが今回のサインインで非該当</li>
+      </ul>
+      <p>確認方法:</p>
+      <ol>
+        <li>調査タブで「未適用」(CA status: Not applied) で絞り込み、詳細パネルの「適用ポリシー」セクションで実際にどのポリシーが評価されたかを確認</li>
+        <li>HTML 監査レポートを出力すると、「ポリシーマッチなし」観点で代表ログ + 確認観点が表示されます</li>
+        <li>Phase 18 で追加された <strong>3 軸集約表 (ユーザー別 / アプリ別 / ポリシー別)</strong> で、未適用の偏りを俯瞰できます</li>
+      </ol>
+    </div>
+
+    <div class="qa">
+      <h3>Microsoft Graph 権限がないと何が起きますか?</h3>
+      <p class="answer">CA Log Viewer は以下の 3 つの委任権限を必要とします。不足するとサインインログが取れない・ポリシー名が空になる・ユーザー種別が解決できないなどの症状が出ます。</p>
+      <ul>
+        <li><code>AuditLog.Read.All</code> — サインインログ本体の取得 (必須、不足すると 401/403 エラーで取得失敗)</li>
+        <li><code>Policy.Read.ConditionalAccess</code> — CA ポリシー名の解決 (不足すると詳細パネルの「適用ポリシー」表でポリシー名が空 / 集約表の「ポリシー別」が機能しない)</li>
+        <li><code>User.Read.All</code> — ユーザー種別 (Member / Guest) の解決 (不足するとゲスト判定が「不明」になる)</li>
+      </ul>
+      <p>権限不足の確認方法:</p>
+      <ol>
+        <li>設定タブ → 「権限状況を確認」ボタンで現在のスコープを案内</li>
+        <li>取得後にエラーメッセージが出たら、Entra portal のアプリ登録 → API のアクセス許可 で、上記 3 スコープが「管理者の同意」状態かを確認</li>
+        <li>テナント管理者でない場合は、テナント管理者に同意 (admin consent) を依頼してください</li>
+      </ol>
+    </div>
+
+    <h2>その他のよくある質問</h2>
+
+    <div class="qa">
+      <h3>個人情報 (UPN・IP・場所等) は外部に送信されますか?</h3>
+      <p class="answer">いいえ。CA Log Viewer は <strong>Microsoft Graph 以外の外部エンドポイントには接続しません</strong>。取得したサインインログはローカル端末上の SQLite DB に保存され、利用者の操作で全件削除可能です。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</p>
+    </div>
+
+    <div class="qa">
+      <h3>デモモードはどんなときに使いますか?</h3>
+      <p class="answer">テナント未接続でも UI と HTML 監査レポートを試せる機能です。110 件 / 6 シナリオのテストデータが組み込まれており、すべて <code>*.example</code> ドメイン + RFC 5737 IP のみで実テナント情報を含みません。Microsoft Store 版にはデモモードは含まれません (一般エンドユーザー向けバイナリには配布されません)。</p>
+    </div>
+
+    <div class="qa">
+      <h3>言語切替後に UI が一部反映されない場合があります</h3>
+      <p class="answer">CA Log Viewer の言語切替は <strong>起動時固定方式</strong> です。設定タブで言語を変更したら、必ずアプリを再起動してください。再起動後はすべての画面 + HTML レポート + デモデータが選択言語で表示されます。</p>
+    </div>
+
+  </div>
+
+  <div class="section-en">
+    <p>This page lists frequently asked questions when using CA Log Viewer. Also see <a href="getting-started.html">Getting Started</a> in the manual.</p>
+
+    <h2>Top 3 questions</h2>
+
+    <div class="qa">
+      <h3>Why is the UPN sometimes empty / "(not fetched)"?</h3>
+      <p class="answer">CA Log Viewer follows a <strong>PII policy that does not persist plain UPNs in the database</strong>. After an app restart, previously fetched logs may show "(not fetched)" in the UPN column.</p>
+      <p>How to resolve:</p>
+      <ol>
+        <li>While the app stays running, UPNs are restored from in-memory cache + the DPAPI short-term encrypted cache (TTL 7 days).</li>
+        <li>If you've been away for 7+ days and restart, go to Settings → "Delete all legacy data" → press "Fetch" again to bring the UPN resolution rate back to 100%.</li>
+        <li>Enable developer mode (Settings → Developer options) to see UPN resolution diagnostics (no PII, counts only).</li>
+      </ol>
+      <div class="info-box">This policy was finalized in Phase 10 (PII protection) and Phase 13 (DPAPI short-term encrypted cache). See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</div>
+    </div>
+
+    <div class="qa">
+      <h3>Many sign-ins show "policy not applied". Is something wrong?</h3>
+      <p class="answer">"Not applied" can have several normal causes:</p>
+      <ul>
+        <li><strong>Out of scope</strong>: The user / app of that sign-in is not in the policy's assignment scope</li>
+        <li><strong>Excluded</strong>: Matched an exclusion (excluded users / groups / locations, etc.)</li>
+        <li><strong>Report-only judgment</strong>: The policy is in report-only mode and judged without affecting the outcome (Report-only* result)</li>
+        <li><strong>Conditions did not match</strong>: A policy condition (location / device state / app, etc.) did not match this sign-in</li>
+      </ul>
+      <p>How to investigate:</p>
+      <ol>
+        <li>Filter the Investigate tab by "Not applied" (CA status), and check which policies were actually evaluated in the Detail Pane → "Applied policies" section</li>
+        <li>Export the HTML audit report — the "No policy match" aspect shows sample logs + check points</li>
+        <li>The Phase 18 <strong>3-axis aggregation (by user / by app / by policy)</strong> reveals where the "not applied" distribution skews</li>
+      </ol>
+    </div>
+
+    <div class="qa">
+      <h3>What happens without Microsoft Graph permissions?</h3>
+      <p class="answer">CA Log Viewer requires three delegated permissions. Missing any of them leads to symptoms like fetch failures, empty policy names, or unresolved user types.</p>
+      <ul>
+        <li><code>AuditLog.Read.All</code> — fetch the sign-in logs themselves (required; without it the fetch fails with 401/403)</li>
+        <li><code>Policy.Read.ConditionalAccess</code> — resolve CA policy names (without it, the "Applied policies" table in the Detail Pane shows empty names; the "by policy" aggregation cannot work)</li>
+        <li><code>User.Read.All</code> — resolve user type (Member / Guest) (without it, guest judgment becomes "Unknown")</li>
+      </ul>
+      <p>How to check:</p>
+      <ol>
+        <li>Settings → "Check permissions" button shows guidance on current scopes</li>
+        <li>If errors appear after fetch, go to the Entra app registration → API permissions and verify the three scopes have admin consent</li>
+        <li>If you're not a tenant admin, ask a tenant admin to grant admin consent</li>
+      </ol>
+    </div>
+
+    <h2>Other questions</h2>
+
+    <div class="qa">
+      <h3>Is any personal data (UPN, IP, location, etc.) transmitted externally?</h3>
+      <p class="answer">No. CA Log Viewer <strong>connects only to Microsoft Graph</strong>. Fetched sign-in logs are stored in a local SQLite DB and can be fully deleted by the user. See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</p>
+    </div>
+
+    <div class="qa">
+      <h3>When would I use demo mode?</h3>
+      <p class="answer">Demo mode lets you try the UI and HTML audit report without connecting to a tenant. It bundles 110 sample records / 6 scenarios using only <code>*.example</code> domains and RFC 5737 IPs (no real tenant data). Demo mode is not included in the Microsoft Store build (excluded for end-user releases).</p>
+    </div>
+
+    <div class="qa">
+      <h3>The UI doesn't fully reflect language changes</h3>
+      <p class="answer">CA Log Viewer uses a <strong>startup-fixed language model</strong>. After changing the language in Settings, please restart the app. All screens, HTML reports, and demo data will then appear in the chosen language.</p>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="../">トップ</a> ·
+    <a href="index.html">マニュアル</a> ·
+    <a href="getting-started.html">はじめに</a> ·
+    <a href="../download.html">ダウンロード</a> ·
+    <a href="../release-notes.html">リリースノート</a> ·
+    <a href="../privacy-policy.html">プライバシーポリシー</a> ·
+    <a href="../terms-of-use.html">利用規約</a> ·
+    <a href="../support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="../">Home</a> ·
+    <a href="index.html">Manual</a> ·
+    <a href="getting-started.html">Getting Started</a> ·
+    <a href="../download.html">Download</a> ·
+    <a href="../release-notes.html">Release Notes</a> ·
+    <a href="../privacy-policy.html">Privacy Policy</a> ·
+    <a href="../terms-of-use.html">Terms of Use</a> ·
+    <a href="../support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>

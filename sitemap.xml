@@ -16,6 +16,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ca-log-viewer.sumikkolab.com/manual/faq.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ca-log-viewer.sumikkolab.com/download.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ca-log-viewer.sumikkolab.com/release-notes.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ca-log-viewer.sumikkolab.com/privacy-policy.html</loc>
     <lastmod>2026-04-30</lastmod>
     <priority>0.5</priority>

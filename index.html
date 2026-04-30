@@ -79,6 +79,7 @@
   .hero-buttons a { display: inline-block; margin: 6px 8px; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 600; }
   .hero-buttons .store-btn { background: #fff; color: #312e81; }
   .hero-buttons .manual-btn { background: transparent; color: #e0e7ff; border: 1px solid #a5b4fc; }
+  .hero-buttons .download-btn { background: #818cf8; color: #fff; }
 
   /* Lang toggle */
   .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
@@ -88,13 +89,49 @@
   /* Container */
   .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
   h2 { font-size: 1.25rem; margin: 36px 0 12px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  h3 { font-size: 1.05rem; margin: 18px 0 8px; color: #4338ca; }
+  p { font-size: 0.95rem; margin-bottom: 12px; }
+  ul, ol { padding-left: 24px; margin: 8px 0 16px; }
+  li { font-size: 0.92rem; margin-bottom: 4px; }
+  code { background: #eef2ff; color: #312e81; padding: 1px 6px; border-radius: 3px; font-size: 0.85em; }
 
   /* Sections (lang toggle) */
   .section-ja, .section-en { display: none; }
   .section-ja.visible, .section-en.visible { display: block; }
 
-  /* Placeholder note (for Step 1 雛形、Step 2 で削除) */
-  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  /* What it does (3 lines) */
+  .what-it-does { background: #eef2ff; border-radius: 8px; padding: 22px 24px; margin: 24px 0; }
+  .what-it-does ol { padding-left: 24px; margin: 8px 0 0; }
+  .what-it-does li { font-size: 0.95rem; margin-bottom: 8px; }
+
+  /* Personas (3 patterns) */
+  .personas { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0 24px; }
+  @media (max-width: 700px) { .personas { grid-template-columns: 1fr; } }
+  .persona-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+  .persona-card h3 { font-size: 0.95rem; margin: 0 0 6px; color: #312e81; }
+  .persona-card p { font-size: 0.85rem; margin: 0; color: #475569; }
+
+  /* Try-it-now */
+  .try-now { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0 28px; }
+  @media (max-width: 700px) { .try-now { grid-template-columns: 1fr; } }
+  .try-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; text-align: center; }
+  .try-card h3 { font-size: 0.95rem; margin: 0 0 6px; color: #312e81; }
+  .try-card p { font-size: 0.82rem; margin: 0 0 10px; color: #64748b; }
+  .try-card a { display: inline-block; padding: 8px 16px; background: #4338ca; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: 600; }
+  .try-card a.secondary { background: transparent; color: #4338ca; border: 1px solid #4338ca; }
+  .try-card .placeholder-link { display: inline-block; padding: 8px 16px; background: #e2e8f0; color: #94a3b8; border-radius: 4px; font-size: 0.82rem; }
+
+  /* Feature highlights */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 24px; }
+  @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+  .feature-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+  .feature-card h3 { font-size: 0.95rem; margin: 0 0 6px; color: #312e81; }
+  .feature-card p { font-size: 0.85rem; margin: 0; color: #475569; }
+
+  /* Privacy callout */
+  .privacy-note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin: 24px 0; }
+  .privacy-note h3 { color: #166534; margin: 0 0 6px; font-size: 0.95rem; }
+  .privacy-note p { color: #166534; font-size: 0.88rem; margin: 0; }
 
   /* Footer */
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
@@ -127,37 +164,205 @@
     <span class="badge">日本語 / English</span>
   </div>
   <div class="hero-buttons">
+    <a class="download-btn" href="download.html">⬇ <span class="section-ja visible">ダウンロード</span><span class="section-en">Download</span></a>
     <a class="manual-btn" href="manual/">📖 <span class="section-ja visible">マニュアル</span><span class="section-en">Manual</span></a>
-    <!-- Microsoft Store URL は Phase 19 Step 5 提出後に確定 -->
   </div>
 </header>
 
 <main class="container">
 
+  <!-- 何ができるか 3 行 -->
   <div class="section-ja visible">
-    <div class="placeholder">本ページは雛形です。Phase 19 Step 2 でコンテンツ (何ができるか 3 行 / どんな人向け 3 パターン / すぐ試す) を充実させます。</div>
-
     <h2>何ができるか</h2>
-    <p>(Phase 19 Step 2 で 3 行で要約)</p>
-
-    <h2>どんな人向けか</h2>
-    <p>(Phase 19 Step 2 で 3 パターンを記述)</p>
-
-    <h2>すぐ試す</h2>
-    <p>(Phase 19 Step 2 で Download / GitHub / Store の導線を記述)</p>
+    <div class="what-it-does">
+      <ol>
+        <li><strong>Microsoft Entra ID のサインインログから Conditional Access の評価結果を一覧で確認できる。</strong>失敗 / 未適用 / 非準拠許可 / レポートモード判定 / ゲストアクセスを観点別に絞り込めます。</li>
+        <li><strong>HTML 監査レポートとして出力できる。</strong>Summary・Assessment・3 軸集約表 (ユーザー別 / アプリ別 / ポリシー別) を 1 つの HTML にまとめ、上司・監査・運用担当への共有に使えます。</li>
+        <li><strong>ローカル端末のみで動作、外部送信なし。</strong>Microsoft Graph 以外には接続せず、UPN 平文を DB に保存しません (DPAPI 短期暗号化キャッシュ、TTL 7 日)。</li>
+      </ol>
+    </div>
+  </div>
+  <div class="section-en">
+    <h2>What it does</h2>
+    <div class="what-it-does">
+      <ol>
+        <li><strong>Lists Conditional Access evaluation results from Microsoft Entra ID sign-in logs.</strong> Filter by aspect: failures, not-applied, non-compliant allowed, report-only judgments, guest access, and more.</li>
+        <li><strong>Exports an HTML audit report.</strong> Summary, Assessment, and 3-axis aggregation (by user / by app / by policy) in one HTML file — ready to share with managers, auditors, and operations.</li>
+        <li><strong>Local-only operation, no external transmission.</strong> Connects only to Microsoft Graph. Plain UPNs are not stored in the database (DPAPI short-term encrypted cache, TTL 7 days).</li>
+      </ol>
+    </div>
   </div>
 
+  <!-- どんな人向けか 3 パターン -->
+  <div class="section-ja visible">
+    <h2>どんな人向けか</h2>
+    <div class="personas">
+      <div class="persona-card">
+        <h3>🛡️ Entra / M365 管理者</h3>
+        <p>Conditional Access ポリシーが意図通り効いているかを定期的に確認したい。失敗・未適用・非準拠許可をすばやく見つけたい。</p>
+      </div>
+      <div class="persona-card">
+        <h3>📋 監査・コンプライアンス担当</h3>
+        <p>監査・内部統制報告のために、サインインログから CA 評価結果を抽出して、HTML 監査レポートとして証跡を残したい。</p>
+      </div>
+      <div class="persona-card">
+        <h3>🔍 セキュリティ運用担当</h3>
+        <p>Entra portal の Sign-in Logs を毎日見るが、CA 関連だけを切り出した運用判断レポートを現場で作りたい。</p>
+      </div>
+    </div>
+  </div>
   <div class="section-en">
-    <div class="placeholder">This page is a scaffold. Content (what it does in 3 lines / 3 personas / try-it-now links) will be added in Phase 19 Step 2.</div>
-
-    <h2>What it does</h2>
-    <p>(Will be summarized in 3 lines in Phase 19 Step 2)</p>
-
     <h2>Who it's for</h2>
-    <p>(3 personas will be described in Phase 19 Step 2)</p>
+    <div class="personas">
+      <div class="persona-card">
+        <h3>🛡️ Entra / M365 administrators</h3>
+        <p>You want to regularly verify that Conditional Access policies are working as intended, and quickly spot failures, not-applied, or non-compliant allowed access.</p>
+      </div>
+      <div class="persona-card">
+        <h3>📋 Audit / compliance officers</h3>
+        <p>You need to extract CA evaluation results from sign-in logs for audits and internal-control reports, and keep evidence as an HTML audit report.</p>
+      </div>
+      <div class="persona-card">
+        <h3>🔍 Security operations</h3>
+        <p>You browse the Entra portal Sign-in Logs daily, and want a focused operational report covering only Conditional Access — built on the spot.</p>
+      </div>
+    </div>
+  </div>
 
+  <!-- すぐ試す 3 リンク -->
+  <div class="section-ja visible">
+    <h2>すぐ試す</h2>
+    <div class="try-now">
+      <div class="try-card">
+        <h3>🪟 Microsoft Store</h3>
+        <p>署名済 MSIX を Store からインストール</p>
+        <span class="placeholder-link">準備中 (Phase 19 後半)</span>
+      </div>
+      <div class="try-card">
+        <h3>💻 GitHub Releases</h3>
+        <p>MSIX を直接ダウンロード</p>
+        <span class="placeholder-link">準備中</span>
+      </div>
+      <div class="try-card">
+        <h3>📖 マニュアル</h3>
+        <p>初回起動 → 取得 → 分析 → レポートの一本道</p>
+        <a href="manual/getting-started.html">読む</a>
+      </div>
+    </div>
+  </div>
+  <div class="section-en">
     <h2>Try it now</h2>
-    <p>(Download / GitHub / Store links will be added in Phase 19 Step 2)</p>
+    <div class="try-now">
+      <div class="try-card">
+        <h3>🪟 Microsoft Store</h3>
+        <p>Install the signed MSIX from the Store</p>
+        <span class="placeholder-link">Coming soon (late Phase 19)</span>
+      </div>
+      <div class="try-card">
+        <h3>💻 GitHub Releases</h3>
+        <p>Download the MSIX directly</p>
+        <span class="placeholder-link">Coming soon</span>
+      </div>
+      <div class="try-card">
+        <h3>📖 Manual</h3>
+        <p>First launch → Fetch → Analyze → Report</p>
+        <a href="manual/getting-started.html">Read</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主な機能 -->
+  <div class="section-ja visible">
+    <h2>主な機能</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>統一フィルタ (複数選択 OR)</h3>
+        <p>期間 / UPN / ユーザー種別 / アプリ / ポリシー / CA 状態 (4 値) / 判定 / 端末準拠 / 特殊フィルタ。複数選択は OR 表記で可視化。</p>
+      </div>
+      <div class="feature-card">
+        <h3>詳細スライドインパネル</h3>
+        <p>サインイン詳細 / ユーザー / アプリ / 条件付きアクセス / 適用ポリシー / 端末状態 / 許可 拒否理由 の 7 ブロック + 結論。</p>
+      </div>
+      <div class="feature-card">
+        <h3>HTML 監査レポート</h3>
+        <p>Summary・Assessment・3 軸集約表 (ユーザー / アプリ / ポリシー、上位 20 + 他) ・観点別 4 セクション・許可 拒否理由・制約欄。</p>
+      </div>
+      <div class="feature-card">
+        <h3>異常検知</h3>
+        <p>件数急増・アプリ別偏りなどの「いつもと違う動き」を自動検知し、傾向タブから調査タブへ即座に遷移。</p>
+      </div>
+      <div class="feature-card">
+        <h3>デモモード</h3>
+        <p>110 件・6 シナリオのテストデータで起動。`*.example` ドメイン + RFC 5737 IP のみ、実テナント情報なし。</p>
+      </div>
+      <div class="feature-card">
+        <h3>日本語 / English UI</h3>
+        <p>UI / HTML レポート / 詳細パネル / 集約表 / フィルタすべて両言語対応。設定タブから切替 (再起動)。</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-en">
+    <h2>Key features</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Unified filter (multi-select OR)</h3>
+        <p>Range / UPN / user type / app / policy / CA status (4 values) / judgment / device compliance / special filters. Multi-select is shown as OR.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Detail slide-in pane</h3>
+        <p>7 blocks + conclusion: Sign-in summary / User / App / Conditional Access / Applied policies / Device / Allow & Deny reasons.</p>
+      </div>
+      <div class="feature-card">
+        <h3>HTML audit report</h3>
+        <p>Summary / Assessment / 3-axis aggregation (user / app / policy, top 20 + others) / 4 aspect sections / Allow &amp; Deny reasons / Constraints.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Anomaly detection</h3>
+        <p>Detects unusual activity such as count spikes or per-app skew, with one-click drill-down from Trends to Investigate.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Demo mode</h3>
+        <p>Starts with 110 sample records / 6 scenarios. Uses only <code>*.example</code> domains and RFC 5737 IPs — no real tenant information.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Japanese / English UI</h3>
+        <p>Full bilingual support across UI, HTML reports, detail pane, aggregations, and filters. Switch from Settings (restart required).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy callout -->
+  <div class="section-ja visible">
+    <div class="privacy-note">
+      <h3>🔒 プライバシー方針 (要約)</h3>
+      <p>Microsoft Graph 以外への外部送信なし。UPN 平文を DB に保存しません (Phase 10 PII 方針 + Phase 13 DPAPI 短期暗号化キャッシュ、TTL 7 日)。詳細は <a href="privacy-policy.html">プライバシーポリシー</a> をご覧ください。</p>
+    </div>
+  </div>
+  <div class="section-en">
+    <div class="privacy-note">
+      <h3>🔒 Privacy summary</h3>
+      <p>No external transmission beyond Microsoft Graph. Plain UPNs are not stored in the database (Phase 10 PII policy + Phase 13 DPAPI short-term encrypted cache, TTL 7 days). See the <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+    </div>
+  </div>
+
+  <!-- 必要な Graph 権限 -->
+  <div class="section-ja visible">
+    <h2>必要な Microsoft Graph 権限</h2>
+    <ul>
+      <li><code>AuditLog.Read.All</code> — サインインログ取得</li>
+      <li><code>Policy.Read.ConditionalAccess</code> — CA ポリシー取得</li>
+      <li><code>User.Read.All</code> — ユーザー種別 (Member / Guest) 解決</li>
+    </ul>
+    <p>委任認証 (Embedded WebView2 経由) で実行され、トークンは MSAL 既定のメモリ内キャッシュのみに保持されます。</p>
+  </div>
+  <div class="section-en">
+    <h2>Required Microsoft Graph permissions</h2>
+    <ul>
+      <li><code>AuditLog.Read.All</code> — fetch sign-in logs</li>
+      <li><code>Policy.Read.ConditionalAccess</code> — fetch CA policies</li>
+      <li><code>User.Read.All</code> — resolve user type (Member / Guest)</li>
+    </ul>
+    <p>Runs with delegated authentication (via embedded WebView2). Tokens are kept only in MSAL's default in-memory cache.</p>
   </div>
 
 </main>
@@ -165,6 +370,9 @@
 <footer>
   <div class="section-ja visible">
     <a href="manual/">マニュアル</a> ·
+    <a href="manual/faq.html">FAQ</a> ·
+    <a href="download.html">ダウンロード</a> ·
+    <a href="release-notes.html">リリースノート</a> ·
     <a href="privacy-policy.html">プライバシーポリシー</a> ·
     <a href="terms-of-use.html">利用規約</a> ·
     <a href="support.html">サポート</a>
@@ -172,6 +380,9 @@
   </div>
   <div class="section-en">
     <a href="manual/">Manual</a> ·
+    <a href="manual/faq.html">FAQ</a> ·
+    <a href="download.html">Download</a> ·
+    <a href="release-notes.html">Release Notes</a> ·
     <a href="privacy-policy.html">Privacy Policy</a> ·
     <a href="terms-of-use.html">Terms of Use</a> ·
     <a href="support.html">Support</a>
@@ -188,7 +399,6 @@
     document.documentElement.lang = lang;
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
-  // 永続化された言語設定を復元 (なければ ja)
   try {
     const saved = localStorage.getItem('lang');
     if (saved === 'en') setLang('en');
