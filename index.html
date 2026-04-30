@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CA Log Viewer | Conditional Access サインインログを現場で読めるアプリ — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer は Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML 監査レポートで可視化する Windows デスクトップアプリです。Free 提供、ローカル端末で動作、外部送信なし。">
+<meta name="description" content="CA Log Viewer は Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML レポートで可視化する Windows デスクトップアプリです。Free 提供、ローカル端末で動作、外部送信なし。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/">
 <meta property="og:title" content="CA Log Viewer | Conditional Access サインインログを現場で読めるアプリ — SumikkoLab">
 <meta property="og:description" content="Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を可視化する Windows デスクトップアプリ。">
@@ -40,7 +40,7 @@
       "applicationSubCategory": "Identity & Access Management",
       "operatingSystem": "Windows 10, Windows 11",
       "url": "https://ca-log-viewer.sumikkolab.com/",
-      "description": "A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and helps administrators read Conditional Access related entries — CA evaluation result, applied policies, device compliance, with HTML audit reports including 3-axis aggregation (by user / by app / by policy). Runs locally; no external transmission.",
+      "description": "A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and helps administrators read Conditional Access related entries — CA evaluation result, applied policies, device compliance, with HTML reports including 3-axis aggregation (by user / by app / by policy). Runs locally; no external transmission.",
       "inLanguage": ["ja", "en"],
       "featureList": [
         "Entra ID sign-in logs fetch via Microsoft Graph (delegated auth, AuditLog.Read.All)",
@@ -49,7 +49,7 @@
         "Device compliance status",
         "Unified filter (range / user / CA status / judgment / device / special, multi-select OR)",
         "Detail pane with 7 sections + conclusion",
-        "HTML audit report with Aggregation (by user / by app / by policy, top 20 + others)",
+        "HTML report with Aggregation (by user / by app / by policy, top 20 + others)",
         "CSV export",
         "Demo mode (110 records / 6 scenarios, no real tenant)",
         "ja / en UI"
@@ -149,7 +149,7 @@
   <h1>CA Log Viewer</h1>
   <div class="section-ja visible">
     <p class="tagline">Conditional Access のサインインログを現場で読める</p>
-    <p class="sub-tagline">Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML 監査レポートで可視化する Windows デスクトップアプリ。</p>
+    <p class="sub-tagline">Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML レポートで可視化する Windows デスクトップアプリ。</p>
     <span class="badge">Windows 10 / 11</span>
     <span class="badge">.NET 8</span>
     <span class="badge">Free</span>
@@ -157,14 +157,14 @@
   </div>
   <div class="section-en">
     <p class="tagline">Read Conditional Access sign-in logs in context</p>
-    <p class="sub-tagline">A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and visualizes Conditional Access related entries — CA evaluation result, applied policies, device compliance — on screen and in HTML audit reports.</p>
+    <p class="sub-tagline">A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and visualizes Conditional Access related entries — CA evaluation result, applied policies, device compliance — on screen and in HTML reports.</p>
     <span class="badge">Windows 10 / 11</span>
     <span class="badge">.NET 8</span>
     <span class="badge">Free</span>
     <span class="badge">日本語 / English</span>
   </div>
   <div class="hero-buttons">
-    <a class="download-btn" href="download.html">⬇ <span class="section-ja visible">ダウンロード</span><span class="section-en">Download</span></a>
+    <a class="store-btn" href="https://apps.microsoft.com/detail/9NWX79NBG136">▶ <span class="section-ja visible">Microsoft Store で入手</span><span class="section-en">Get it from Microsoft Store</span></a>
     <a class="manual-btn" href="manual/">📖 <span class="section-ja visible">マニュアル</span><span class="section-en">Manual</span></a>
   </div>
 </header>
@@ -177,7 +177,7 @@
     <div class="what-it-does">
       <ol>
         <li><strong>Microsoft Entra ID のサインインログから Conditional Access の評価結果を一覧で確認できる。</strong>失敗 / 未適用 / 非準拠許可 / レポートモード判定 / ゲストアクセスを観点別に絞り込めます。</li>
-        <li><strong>HTML 監査レポートとして出力できる。</strong>Summary・Assessment・3 軸集約表 (ユーザー別 / アプリ別 / ポリシー別) を 1 つの HTML にまとめ、上司・監査・運用担当への共有に使えます。</li>
+        <li><strong>HTML レポートとして出力できる。</strong>Summary・Assessment・3 軸集約表 (ユーザー別 / アプリ別 / ポリシー別) を 1 つの HTML にまとめ、上司・監査・運用担当への共有に使えます。</li>
         <li><strong>ローカル端末のみで動作、外部送信なし。</strong>Microsoft Graph 以外には接続せず、UPN 平文を DB に保存しません (DPAPI 短期暗号化キャッシュ、TTL 7 日)。</li>
       </ol>
     </div>
@@ -187,7 +187,7 @@
     <div class="what-it-does">
       <ol>
         <li><strong>Lists Conditional Access evaluation results from Microsoft Entra ID sign-in logs.</strong> Filter by aspect: failures, not-applied, non-compliant allowed, report-only judgments, guest access, and more.</li>
-        <li><strong>Exports an HTML audit report.</strong> Summary, Assessment, and 3-axis aggregation (by user / by app / by policy) in one HTML file — ready to share with managers, auditors, and operations.</li>
+        <li><strong>Exports an HTML report.</strong> Summary, Assessment, and 3-axis aggregation (by user / by app / by policy) in one HTML file — ready to share with managers, auditors, and operations.</li>
         <li><strong>Local-only operation, no external transmission.</strong> Connects only to Microsoft Graph. Plain UPNs are not stored in the database (DPAPI short-term encrypted cache, TTL 7 days).</li>
       </ol>
     </div>
@@ -203,7 +203,7 @@
       </div>
       <div class="persona-card">
         <h3>📋 監査・コンプライアンス担当</h3>
-        <p>監査・内部統制報告のために、サインインログから CA 評価結果を抽出して、HTML 監査レポートとして証跡を残したい。</p>
+        <p>監査・内部統制報告のために、サインインログから CA 評価結果を抽出して、HTML レポートとして証跡を残したい。</p>
       </div>
       <div class="persona-card">
         <h3>🔍 セキュリティ運用担当</h3>
@@ -220,7 +220,7 @@
       </div>
       <div class="persona-card">
         <h3>📋 Audit / compliance officers</h3>
-        <p>You need to extract CA evaluation results from sign-in logs for audits and internal-control reports, and keep evidence as an HTML audit report.</p>
+        <p>You need to extract CA evaluation results from sign-in logs for audits and internal-control reports, and keep evidence as an HTML report.</p>
       </div>
       <div class="persona-card">
         <h3>🔍 Security operations</h3>
@@ -239,11 +239,6 @@
         <span class="placeholder-link">近日公開予定</span>
       </div>
       <div class="try-card">
-        <h3>💻 GitHub Releases</h3>
-        <p>MSIX を直接ダウンロード</p>
-        <span class="placeholder-link">準備中</span>
-      </div>
-      <div class="try-card">
         <h3>📖 マニュアル</h3>
         <p>初回起動 → 取得 → 分析 → レポートの一本道</p>
         <a href="manual/getting-started.html">読む</a>
@@ -256,11 +251,6 @@
       <div class="try-card">
         <h3>🪟 Microsoft Store</h3>
         <p>Install the signed MSIX from the Store</p>
-        <span class="placeholder-link">Coming soon</span>
-      </div>
-      <div class="try-card">
-        <h3>💻 GitHub Releases</h3>
-        <p>Download the MSIX directly</p>
         <span class="placeholder-link">Coming soon</span>
       </div>
       <div class="try-card">
@@ -284,7 +274,7 @@
         <p>サインイン詳細 / ユーザー / アプリ / 条件付きアクセス / 適用ポリシー / 端末状態 / 許可 拒否理由 の 7 ブロック + 結論。</p>
       </div>
       <div class="feature-card">
-        <h3>HTML 監査レポート</h3>
+        <h3>HTML レポート</h3>
         <p>Summary・Assessment・3 軸集約表 (ユーザー / アプリ / ポリシー、上位 20 + 他) ・観点別 4 セクション・許可 拒否理由・制約欄。</p>
       </div>
       <div class="feature-card">
@@ -313,7 +303,7 @@
         <p>7 blocks + conclusion: Sign-in summary / User / App / Conditional Access / Applied policies / Device / Allow & Deny reasons.</p>
       </div>
       <div class="feature-card">
-        <h3>HTML audit report</h3>
+        <h3>HTML report</h3>
         <p>Summary / Assessment / 3-axis aggregation (user / app / policy, top 20 + others) / 4 aspect sections / Allow &amp; Deny reasons / Constraints.</p>
       </div>
       <div class="feature-card">
@@ -328,6 +318,52 @@
         <h3>Japanese / English UI</h3>
         <p>Full bilingual support across UI, HTML reports, detail pane, aggregations, and filters. Switch from Settings (restart required).</p>
       </div>
+    </div>
+  </div>
+
+  <!-- アプリの画面 (スクリーンショット) -->
+  <div class="section-ja visible">
+    <h2>アプリの画面</h2>
+    <p style="font-size:0.9rem;color:#475569;margin-bottom:14px;">日次運用で「どこから見れば早いか」をホーム画面に集約。詳細はワンクリックで掘り下げ、必要に応じて HTML レポートとして共有できます。</p>
+    <div class="screenshot-gallery" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 24px;">
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/jp/01-home.png" alt="ホームタブ" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">ホームタブ — 取得状況 / 確認すべき項目 / 異常検知をひと目で把握</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/jp/02-investigate.png" alt="調査タブ + 統一フィルタ" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">調査タブ — 統一フィルタで実務観点ごとに絞り込み</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/jp/03-detail-pane.png" alt="詳細スライドインパネル" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">詳細パネル — 1 行クリックで適用ポリシー・端末状態・拒否理由を一覧</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/jp/05-html-report.png" alt="HTML レポート" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">HTML レポート — 判定サマリーと観点別の代表ログを 1 ファイルにまとめて共有</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="section-en">
+    <h2>App screens</h2>
+    <p style="font-size:0.9rem;color:#475569;margin-bottom:14px;">The Home tab summarizes "where to start today". Drill down with one click, and share results as an HTML report when needed.</p>
+    <div class="screenshot-gallery" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 24px;">
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/en/01-home.png" alt="Home tab" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">Home — fetch status, what to review first, and anomaly hints at a glance</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/en/02-investigate.png" alt="Investigate tab + unified filter" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">Investigate — narrow down by aspect with the unified filter</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/en/03-detail-pane.png" alt="Detail slide-in pane" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">Detail pane — applied policies, device state, and allow/deny reasons in one click</figcaption>
+      </figure>
+      <figure style="margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;">
+        <img src="manual/screenshots/en/05-html-report.png" alt="HTML report" style="max-width:100%;height:auto;border-radius:4px;border:1px solid #cbd5e1;display:block;">
+        <figcaption style="font-size:0.82rem;color:#64748b;margin-top:6px;">HTML report — assessment summary and per-aspect samples in a single file</figcaption>
+      </figure>
     </div>
   </div>
 
@@ -371,7 +407,6 @@
   <div class="section-ja visible">
     <a href="manual/">マニュアル</a> ·
     <a href="manual/faq.html">FAQ</a> ·
-    <a href="download.html">ダウンロード</a> ·
     <a href="release-notes.html">リリースノート</a> ·
     <a href="privacy-policy.html">プライバシーポリシー</a> ·
     <a href="terms-of-use.html">利用規約</a> ·
@@ -381,7 +416,6 @@
   <div class="section-en">
     <a href="manual/">Manual</a> ·
     <a href="manual/faq.html">FAQ</a> ·
-    <a href="download.html">Download</a> ·
     <a href="release-notes.html">Release Notes</a> ·
     <a href="privacy-policy.html">Privacy Policy</a> ·
     <a href="terms-of-use.html">Terms of Use</a> ·

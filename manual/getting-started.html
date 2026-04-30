@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>はじめに | CA Log Viewer マニュアル — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML 監査レポート出力 の手順を、画面と用語にあわせて解説します。">
+<meta name="description" content="CA Log Viewer の初回起動からレポート出力までの一本道ガイド。初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML レポート出力 の手順を、画面と用語にあわせて解説します。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/manual/getting-started.html">
 <meta property="og:title" content="はじめに | CA Log Viewer マニュアル — SumikkoLab">
-<meta property="og:description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。">
+<meta property="og:description" content="CA Log Viewer の初回起動からレポート出力までの一本道ガイド。">
 <meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/manual/getting-started.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
@@ -60,7 +60,7 @@
 
   <div class="section-ja visible">
 
-    <p>CA Log Viewer を <strong>初回起動 → 取得 → 分析 → レポート</strong> の 4 ステップで使い始めるためのガイドです。Microsoft Graph 経由で Entra ID のサインインログを取得し、Conditional Access 関連項目を読み解いて HTML 監査レポートとして出力するまでを通します。</p>
+    <p>CA Log Viewer を <strong>初回起動 → 取得 → 分析 → レポート</strong> の 4 ステップで使い始めるためのガイドです。Microsoft Graph 経由で Entra ID のサインインログを取得し、Conditional Access 関連項目を読み解いて HTML レポートとして出力するまでを通します。</p>
 
     <div class="toc">
       <strong>目次</strong>
@@ -68,7 +68,7 @@
         <li><a href="#ja-step1">Step 1. 初回起動と同意</a></li>
         <li><a href="#ja-step2">Step 2. Entra アプリ登録 → サインインログ取得</a></li>
         <li><a href="#ja-step3">Step 3. 調査タブで分析</a></li>
-        <li><a href="#ja-step4">Step 4. HTML 監査レポート出力</a></li>
+        <li><a href="#ja-step4">Step 4. HTML レポート出力</a></li>
         <li><a href="#ja-tips">補足: デモモード / 言語切替 / CSV 出力</a></li>
       </ol>
     </div>
@@ -78,7 +78,7 @@
     <div class="step-box">
       <h3>1-1. インストール</h3>
       <ol>
-        <li>Microsoft Store からインストール (推奨)、もしくは GitHub Releases から MSIX をダウンロードしてインストール</li>
+        <li>Microsoft Store からインストール (<a href="https://apps.microsoft.com/detail/9NWX79NBG136">Microsoft Store で入手</a>)</li>
         <li>初回起動時は Windows 10 / 11 が必須。.NET 8 ランタイムは MSIX に同梱</li>
       </ol>
       <div class="screenshot">[スクリーンショット: Microsoft Store の製品ページ]</div>
@@ -191,7 +191,7 @@
       </ul>
     </div>
 
-    <h2 id="ja-step4">Step 4. HTML 監査レポート出力</h2>
+    <h2 id="ja-step4">Step 4. HTML レポート出力</h2>
 
     <div class="step-box">
       <h3>4-1. レポート出力</h3>
@@ -200,8 +200,8 @@
         <li>保存先を選択 → 出力完了後にブラウザで自動的に開きます</li>
       </ol>
       <figure class="screenshot">
-        <img src="screenshots/jp/05-html-report.png" alt="HTML 監査レポート: 判定サマリー + 観点別">
-        <figcaption>HTML 監査レポート: 判定サマリー (良い点 / 要確認点 / 次に確認すべきこと) + 観点別の代表ログ</figcaption>
+        <img src="screenshots/jp/05-html-report.png" alt="HTML レポート: 判定サマリー + 観点別">
+        <figcaption>HTML レポート: 判定サマリー (良い点 / 要確認点 / 次に確認すべきこと) + 観点別の代表ログ</figcaption>
       </figure>
     </div>
 
@@ -223,14 +223,14 @@
     <ul>
       <li>実テナントなしで操作感を試すための機能 (110 件 / 6 シナリオ)</li>
       <li>UPN は <code>*.example</code> ドメイン、IP は RFC 5737 で固定</li>
-      <li>Microsoft Store 配布版には含まれません (GitHub Releases ビルドのみ)</li>
+      <li>Microsoft Store 配布版には含まれません (社内検証ビルド限定)</li>
     </ul>
 
     <h3>言語切替</h3>
     <ul>
       <li>設定タブの「UI 言語」で 日本語 / English を切替</li>
       <li>切替は即時反映 (再起動不要)</li>
-      <li>HTML 監査レポートも UI 言語に追従</li>
+      <li>HTML レポートも UI 言語に追従</li>
     </ul>
 
     <h3>CSV 出力</h3>
@@ -243,7 +243,7 @@
 
   <div class="section-en">
 
-    <p>This guide walks through CA Log Viewer in four steps: <strong>first launch → fetch → analyze → report</strong>. You will fetch Entra ID sign-in logs via Microsoft Graph, read Conditional Access related entries, and export an HTML audit report.</p>
+    <p>This guide walks through CA Log Viewer in four steps: <strong>first launch → fetch → analyze → report</strong>. You will fetch Entra ID sign-in logs via Microsoft Graph, read Conditional Access related entries, and export an HTML report.</p>
 
     <div class="toc">
       <strong>Contents</strong>
@@ -251,7 +251,7 @@
         <li><a href="#en-step1">Step 1. First launch and consent</a></li>
         <li><a href="#en-step2">Step 2. Register Entra app → fetch sign-in logs</a></li>
         <li><a href="#en-step3">Step 3. Analyze in the Investigate tab</a></li>
-        <li><a href="#en-step4">Step 4. Export HTML audit report</a></li>
+        <li><a href="#en-step4">Step 4. Export HTML report</a></li>
         <li><a href="#en-tips">Notes: Demo mode / language switch / CSV export</a></li>
       </ol>
     </div>
@@ -261,7 +261,7 @@
     <div class="step-box">
       <h3>1-1. Install</h3>
       <ol>
-        <li>Install from the Microsoft Store (recommended), or download the MSIX from GitHub Releases</li>
+        <li>Install from the Microsoft Store (<a href="https://apps.microsoft.com/detail/9NWX79NBG136">Get it from Microsoft Store</a>)</li>
         <li>Windows 10 / 11 required. The .NET 8 runtime is bundled in the MSIX</li>
       </ol>
       <div class="screenshot">[Screenshot: Microsoft Store product page]</div>
@@ -374,7 +374,7 @@
       </ul>
     </div>
 
-    <h2 id="en-step4">Step 4. Export HTML audit report</h2>
+    <h2 id="en-step4">Step 4. Export HTML report</h2>
 
     <div class="step-box">
       <h3>4-1. Export</h3>
@@ -383,8 +383,8 @@
         <li>Choose a destination → opens automatically in the browser</li>
       </ol>
       <figure class="screenshot">
-        <img src="screenshots/en/05-html-report.png" alt="HTML audit report: assessment summary + aspect tables">
-        <figcaption>HTML audit report: assessment summary (Positive / Concerns / Next checks) and per-aspect tables</figcaption>
+        <img src="screenshots/en/05-html-report.png" alt="HTML report: assessment summary + aspect tables">
+        <figcaption>HTML report: assessment summary (Positive / Concerns / Next checks) and per-aspect tables</figcaption>
       </figure>
     </div>
 
@@ -406,14 +406,14 @@
     <ul>
       <li>Try the app without a real tenant (110 records / 6 scenarios)</li>
       <li>UPNs use <code>*.example</code> domains; IPs are fixed to RFC 5737</li>
-      <li>Excluded from Microsoft Store builds (GitHub Releases builds only)</li>
+      <li>Excluded from Microsoft Store builds (in-house verification builds only)</li>
     </ul>
 
     <h3>Language switch</h3>
     <ul>
       <li>Settings tab → "UI language" → switch between Japanese / English</li>
       <li>Applied immediately (no restart required)</li>
-      <li>The HTML audit report also follows the UI language</li>
+      <li>The HTML report also follows the UI language</li>
     </ul>
 
     <h3>CSV export</h3>
@@ -431,7 +431,6 @@
     <a href="../">トップ</a> ·
     <a href="index.html">マニュアル目次</a> ·
     <a href="faq.html">FAQ</a> ·
-    <a href="../download.html">ダウンロード</a> ·
     <a href="../release-notes.html">リリースノート</a> ·
     <a href="../privacy-policy.html">プライバシーポリシー</a> ·
     <a href="../terms-of-use.html">利用規約</a> ·
@@ -441,7 +440,6 @@
     <a href="../">Home</a> ·
     <a href="index.html">Manual Index</a> ·
     <a href="faq.html">FAQ</a> ·
-    <a href="../download.html">Download</a> ·
     <a href="../release-notes.html">Release Notes</a> ·
     <a href="../privacy-policy.html">Privacy Policy</a> ·
     <a href="../terms-of-use.html">Terms of Use</a> ·
