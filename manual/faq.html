@@ -67,7 +67,7 @@
         <li>長期間 (7 日以上) 放置して再起動した場合は、設定タブ → 「旧データの全削除」 → 取得ボタンで再取得すれば UPN 解決率 100% に戻ります。</li>
         <li>開発者モード (設定タブ → 開発者向け) を有効化すると、UPN 取得診断 (PII なし、件数のみ) で解決率を確認できます。</li>
       </ol>
-      <div class="info-box">この方針は Phase 10 (PII 保護) と Phase 13 (DPAPI 短期暗号化キャッシュ) で確定したものです。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</div>
+      <div class="info-box">本アプリの PII 保護方針として、UPN 平文を DB に保存せず、Windows DPAPI による短期暗号化キャッシュ経由で表示します。詳細は <a href="../privacy-policy.html">プライバシーポリシー</a> をご覧ください。</div>
     </div>
 
     <div class="qa">
@@ -136,7 +136,7 @@
         <li>If you've been away for 7+ days and restart, go to Settings → "Delete all legacy data" → press "Fetch" again to bring the UPN resolution rate back to 100%.</li>
         <li>Enable developer mode (Settings → Developer options) to see UPN resolution diagnostics (no PII, counts only).</li>
       </ol>
-      <div class="info-box">This policy was finalized in Phase 10 (PII protection) and Phase 13 (DPAPI short-term encrypted cache). See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</div>
+      <div class="info-box">As the app's PII protection policy, plain UPNs are not stored in the database; display goes through a short-term cache encrypted with Windows DPAPI. See the <a href="../privacy-policy.html">Privacy Policy</a> for details.</div>
     </div>
 
     <div class="qa">

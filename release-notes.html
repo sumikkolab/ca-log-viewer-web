@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>リリースノート | CA Log Viewer — SumikkoLab</title>
-<meta name="description" content="CA Log Viewer のリリースノート / 開発フェーズ履歴。Phase 1 (基盤) から Phase 18 (HTML 監査レポート 3 軸集約 + ja/en 完全対応) までの主要マイルストーンを掲載しています。">
+<meta name="description" content="CA Log Viewer のリリースノート。基盤・取得・分析・レポート・多言語対応 など、主要機能の追加履歴を時系列で掲載しています。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/release-notes.html">
 <meta property="og:title" content="リリースノート | CA Log Viewer — SumikkoLab">
-<meta property="og:description" content="CA Log Viewer の開発フェーズ履歴 (Phase 1〜18) と主要マイルストーン。">
+<meta property="og:description" content="CA Log Viewer の主要機能の追加履歴。">
 <meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/release-notes.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
@@ -33,8 +33,8 @@
   .release h3 { font-size: 1.02rem; color: #4338ca; margin-bottom: 4px; }
   .release .meta { font-size: 0.78rem; color: #64748b; margin-bottom: 6px; }
   .release.current { border-color: #6366f1; background: #eef2ff; }
-  .release.current h3::after { content: " ← 進行中"; color: #6366f1; font-weight: normal; font-size: 0.85rem; }
-  .release.current .section-en h3::after { content: " ← in progress"; }
+  .release.current h3::after { content: " ← 公開準備中"; color: #6366f1; font-weight: normal; font-size: 0.85rem; }
+  .release.current .section-en h3::after { content: " ← preparing for release"; }
   .note { background: #ecfeff; border-left: 4px solid #0891b2; padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 0.9rem; color: #155e75; }
   footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
   footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
@@ -55,75 +55,72 @@
 
   <div class="section-ja visible">
 
-    <p>CA Log Viewer の開発フェーズ履歴です。Microsoft Store 公開までの主要マイルストーンを掲載しています。</p>
+    <p>CA Log Viewer の主要機能の追加履歴です。Microsoft Store 公開までのマイルストーンを時系列でまとめています。</p>
 
-    <div class="note">本アプリは内部リリース運用 (Phase 単位) で開発しており、版数表記 (v1.0 など) は Microsoft Store 公開時に確定します。</div>
+    <div class="note">バージョン番号 (v1.0 など) は Microsoft Store 公開時に確定します。</div>
 
     <div class="release current">
-      <h3>Phase 19 — 公開・配布の外側固め</h3>
-      <div class="meta">2026-04-30 〜 進行中</div>
+      <h3>公開・配布準備</h3>
+      <div class="meta">2026-04-30 〜</div>
       <ul>
-        <li>製品ページ (<code>ca-log-viewer.sumikkolab.com</code>) を GitHub Pages + 独自ドメインで公開</li>
-        <li>マニュアル / FAQ / ダウンロード / リリースノート / プライバシーポリシー / 利用規約 / サポート の整備</li>
-        <li>初回起動時の同意画面 (利用規約 / プライバシー方針) を実装予定</li>
+        <li>製品ページ (<code>ca-log-viewer.sumikkolab.com</code>) を独自ドメインで公開</li>
+        <li>マニュアル / FAQ / ダウンロード / プライバシーポリシー / 利用規約 / サポート の整備</li>
+        <li>初回起動時の利用規約・免責事項・プライバシー方針への同意画面を実装</li>
         <li>Microsoft Store 提出物 (説明文 / スクリーンショット / プライバシーリンク) の整備</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 18 — HTML 監査レポート 3 軸集約 + ja/en UI 完全対応</h3>
-      <div class="meta">完了: 2026-04-30</div>
+      <h3>HTML 監査レポート 3 軸集約 + 日本語 / 英語 UI 完全対応</h3>
+      <div class="meta">2026-04-30</div>
       <ul>
         <li>HTML 監査レポートに 3 軸集約表 (ユーザー別 / アプリ別 / ポリシー別、上位 20 + その他) を追加</li>
-        <li>UI 残り日本語ハードコード箇所を resx 化 (約 310 キー)</li>
-        <li>デモデータ ja / en 分離 (UPN 表示名 / アプリ名 / ポリシー名 すべて UI 言語に追従)</li>
-        <li>i18n 機械検証 CI 組込 (ハードコード検出テスト)</li>
-        <li>テスト件数: 790 → 1030 に拡張</li>
+        <li>UI の日本語・英語 完全対応 (時刻表示 / フィルタ / 詳細パネル / レポート)</li>
+        <li>デモデータの日本語版 / 英語版を分離 (UI 言語に追従)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 17 — 異常検知 + 傾向タブ</h3>
-      <div class="meta">完了: 2026-04-28</div>
+      <h3>異常検知 + 傾向タブ</h3>
+      <div class="meta">2026-04-28</div>
       <ul>
-        <li>異常検知 (短時間多発失敗 / 地理的に離れた連続サインイン / レガシー認証急増)</li>
+        <li>異常検知 (短時間の連続失敗 / 地理的に離れた連続サインイン / レガシー認証急増)</li>
         <li>傾向タブ (アプリ別集計 / 時系列推移)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 16 — UI 多言語化基盤 (ja/en)</h3>
-      <div class="meta">完了: 2026-04-25</div>
+      <h3>UI 多言語化基盤 (日本語 / 英語)</h3>
+      <div class="meta">2026-04-25</div>
       <ul>
-        <li>resx ベースの多言語化基盤導入</li>
-        <li>LocalizedLabel パターン (DateRangeItem / TimeDisplayItem / FilterItem 等)</li>
+        <li>日本語 / 英語 / 自動 (OS の言語に合わせる) を切替可能な多言語化基盤を導入</li>
         <li>UI 言語切替の即時反映</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 13〜15 — DPAPI UPN キャッシュ / 詳細パネル / 統一フィルタ</h3>
-      <div class="meta">完了: 2026-04-22</div>
+      <h3>UPN 短期暗号化キャッシュ / 詳細パネル / 統一フィルタ</h3>
+      <div class="meta">2026-04-22</div>
       <ul>
-        <li>Phase 13: UPN を DPAPI で短期キャッシュ (TTL 7 日、Phase 10 PII 方針の運用補強)</li>
-        <li>Phase 14: 詳細スライドインパネル (7 ブロック + 結論 6 段階優先順位)</li>
-        <li>Phase 15: 統一フィルタ (期間 / ユーザー / CA 状態 / 判定 / デバイス / 特殊条件、複数選択 OR)</li>
+        <li>UPN を Windows DPAPI で短期暗号化キャッシュ (最大 7 日)、UPN 平文の DB 保存を回避</li>
+        <li>詳細スライドインパネル (7 ブロック + 結論を 6 段階優先順位で自動分類)</li>
+        <li>統一フィルタ (期間 / ユーザー / CA 状態 / 判定 / デバイス / 特殊条件、複数選択 OR)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 10〜12 — PII 方針 / CSV 出力 / HTML レポート (初版)</h3>
-      <div class="meta">完了: 2026-04-18</div>
+      <h3>個人情報保護方針 / CSV 出力 / HTML レポート (初版)</h3>
+      <div class="meta">2026-04-18</div>
       <ul>
-        <li>Phase 10: PII 方針確定 (UPN 平文を DB に保存しない、表示時のみ復号キャッシュ)</li>
-        <li>Phase 11: CSV 出力 (現在のフィルタ結果)</li>
-        <li>Phase 12: HTML レポート初版 (Summary / Assessment / 観点別表 / Allow & Deny reasons)</li>
+        <li>UPN 平文を DB に保存しない方針を確定 (表示時のみ復号キャッシュ)</li>
+        <li>CSV 出力 (現在のフィルタ結果)</li>
+        <li>HTML レポート初版 (Summary / Assessment / 観点別表 / 許可拒否理由)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 7〜9 — CA 評価結果 / 適用ポリシー / 端末準拠</h3>
-      <div class="meta">完了: 2026-04-12</div>
+      <h3>Conditional Access 評価結果 / 適用ポリシー / 端末準拠</h3>
+      <div class="meta">2026-04-12</div>
       <ul>
         <li>CA 評価結果の分類 (成功 / 失敗 / Not applied / Report-only)</li>
         <li>サインインごとの適用ポリシー一覧</li>
@@ -132,8 +129,8 @@
     </div>
 
     <div class="release">
-      <h3>Phase 4〜6 — Microsoft Graph 取得 / SQLite 永続化 / デモモード</h3>
-      <div class="meta">完了: 2026-04-08</div>
+      <h3>Microsoft Graph 取得 / SQLite 永続化 / デモモード</h3>
+      <div class="meta">2026-04-08</div>
       <ul>
         <li>MSAL 委任認証 + Microsoft Graph サインインログ取得</li>
         <li>SQLite ベースの永続化 (期間別取得 / 重複排除)</li>
@@ -142,11 +139,11 @@
     </div>
 
     <div class="release">
-      <h3>Phase 1〜3 — 基盤 / WPF 雛形 / 設定タブ</h3>
-      <div class="meta">完了: 2026-04-04</div>
+      <h3>基盤 / 画面構成 / 設定タブ</h3>
+      <div class="meta">2026-04-04</div>
       <ul>
         <li>.NET 8 WPF プロジェクト基盤</li>
-        <li>取得 / 調査 / 傾向 / 設定 タブ構成</li>
+        <li>取得 / 調査 / 傾向 / 設定 のタブ構成</li>
         <li>ClientId / TenantId 設定 + 安全な保存</li>
       </ul>
     </div>
@@ -155,36 +152,34 @@
 
   <div class="section-en">
 
-    <p>Development phase history of CA Log Viewer. Major milestones up to the Microsoft Store release are listed.</p>
+    <p>History of major features added to CA Log Viewer. Milestones leading up to the Microsoft Store release are listed in chronological order.</p>
 
-    <div class="note">This app is developed under an internal phase-based release scheme. Version numbers (e.g. v1.0) will be finalized at Microsoft Store release.</div>
+    <div class="note">Version numbers (e.g. v1.0) will be finalized at the Microsoft Store release.</div>
 
     <div class="release current">
-      <h3>Phase 19 — Public site, distribution, and submission prep</h3>
-      <div class="meta">2026-04-30 — in progress</div>
+      <h3>Public site, distribution, and submission prep</h3>
+      <div class="meta">2026-04-30 onwards</div>
       <ul>
-        <li>Product site (<code>ca-log-viewer.sumikkolab.com</code>) on GitHub Pages with custom domain</li>
-        <li>Manual / FAQ / Download / Release notes / Privacy / Terms / Support pages</li>
-        <li>First-launch consent screen (Terms / Privacy) — planned</li>
+        <li>Product site (<code>ca-log-viewer.sumikkolab.com</code>) published with a custom domain</li>
+        <li>Manual / FAQ / Download / Privacy / Terms / Support pages</li>
+        <li>First-launch consent screen for Terms of Use, Disclaimer, and Privacy Policy</li>
         <li>Microsoft Store assets (description / screenshots / privacy link)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 18 — HTML report 3-axis aggregation + full ja/en UI</h3>
-      <div class="meta">Completed: 2026-04-30</div>
+      <h3>HTML report 3-axis aggregation + full ja/en UI</h3>
+      <div class="meta">2026-04-30</div>
       <ul>
         <li>3-axis aggregation tables in the HTML audit report (by user / app / policy, top 20 + Others)</li>
-        <li>Remaining hardcoded Japanese strings in UI moved to resx (~310 keys)</li>
-        <li>Demo data separated for ja / en (UPN display name / app name / policy name)</li>
-        <li>i18n machine validation integrated into CI (hardcoded string detection)</li>
-        <li>Tests expanded 790 → 1030</li>
+        <li>Full Japanese / English UI (time display / filters / detail pane / report)</li>
+        <li>Demo data separated for Japanese / English (follows the UI language)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 17 — Anomaly detection + Trends tab</h3>
-      <div class="meta">Completed: 2026-04-28</div>
+      <h3>Anomaly detection + Trends tab</h3>
+      <div class="meta">2026-04-28</div>
       <ul>
         <li>Anomaly detection (short-burst failures / distant consecutive sign-ins / legacy auth surges)</li>
         <li>Trends tab (per-app aggregation / time-series trends)</li>
@@ -192,38 +187,37 @@
     </div>
 
     <div class="release">
-      <h3>Phase 16 — UI localization foundation (ja/en)</h3>
-      <div class="meta">Completed: 2026-04-25</div>
+      <h3>UI localization foundation (Japanese / English)</h3>
+      <div class="meta">2026-04-25</div>
       <ul>
-        <li>resx-based localization foundation</li>
-        <li>LocalizedLabel pattern (DateRangeItem / TimeDisplayItem / FilterItem, etc.)</li>
+        <li>Localization foundation supporting Japanese / English / Auto (follow OS language)</li>
         <li>Immediate UI language switching</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 13–15 — DPAPI UPN cache / Detail pane / Unified filter</h3>
-      <div class="meta">Completed: 2026-04-22</div>
+      <h3>Short-term encrypted UPN cache / Detail pane / Unified filter</h3>
+      <div class="meta">2026-04-22</div>
       <ul>
-        <li>Phase 13: UPN cached short-term via DPAPI (TTL 7 days; operational reinforcement of Phase 10 PII policy)</li>
-        <li>Phase 14: Slide-in detail pane (7 sections + 6-tier priority conclusion)</li>
-        <li>Phase 15: Unified filter (range / user / CA status / judgment / device / special, multi-select OR)</li>
+        <li>UPNs cached short-term encrypted with Windows DPAPI (up to 7 days), avoiding plain UPN storage in the DB</li>
+        <li>Slide-in detail pane (7 sections + automatic conclusion in 6-tier priority)</li>
+        <li>Unified filter (range / user / CA status / judgment / device / special, multi-select OR)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 10–12 — PII policy / CSV export / HTML report (initial)</h3>
-      <div class="meta">Completed: 2026-04-18</div>
+      <h3>Personal information protection policy / CSV export / HTML report (initial)</h3>
+      <div class="meta">2026-04-18</div>
       <ul>
-        <li>Phase 10: PII policy fixed (plain UPN not stored in DB; decrypted to cache only at display)</li>
-        <li>Phase 11: CSV export (current filter result)</li>
-        <li>Phase 12: HTML report (initial: Summary / Assessment / aspect tables / Allow &amp; Deny reasons)</li>
+        <li>Plain UPN not stored in the database (decrypted to cache only at display)</li>
+        <li>CSV export (current filter result)</li>
+        <li>HTML report initial version (Summary / Assessment / aspect tables / Allow &amp; Deny reasons)</li>
       </ul>
     </div>
 
     <div class="release">
-      <h3>Phase 7–9 — CA evaluation / Applied policies / Device compliance</h3>
-      <div class="meta">Completed: 2026-04-12</div>
+      <h3>Conditional Access evaluation / Applied policies / Device compliance</h3>
+      <div class="meta">2026-04-12</div>
       <ul>
         <li>CA evaluation classification (Success / Failure / Not applied / Report-only)</li>
         <li>Applied policy listing per sign-in</li>
@@ -232,8 +226,8 @@
     </div>
 
     <div class="release">
-      <h3>Phase 4–6 — Microsoft Graph fetch / SQLite persistence / Demo mode</h3>
-      <div class="meta">Completed: 2026-04-08</div>
+      <h3>Microsoft Graph fetch / SQLite persistence / Demo mode</h3>
+      <div class="meta">2026-04-08</div>
       <ul>
         <li>MSAL delegated auth + Microsoft Graph sign-in log fetch</li>
         <li>SQLite persistence (range-based fetch / dedup)</li>
@@ -242,8 +236,8 @@
     </div>
 
     <div class="release">
-      <h3>Phase 1–3 — Foundation / WPF scaffold / Settings tab</h3>
-      <div class="meta">Completed: 2026-04-04</div>
+      <h3>Foundation / screen layout / Settings tab</h3>
+      <div class="meta">2026-04-04</div>
       <ul>
         <li>.NET 8 WPF project foundation</li>
         <li>Fetch / Investigate / Trends / Settings tab layout</li>
