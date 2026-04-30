@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー | CA Log Viewer — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer のプライバシーポリシー。Microsoft Graph 経由で取得したサインインログをローカル端末で処理し、UPN 平文を DB に保存しない方針 (Phase 10 + Phase 13 DPAPI キャッシュ確定)。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/privacy-policy.html">
+<meta property="og:title" content="プライバシーポリシー | CA Log Viewer — SumikkoLab">
+<meta property="og:description" content="CA Log Viewer のプライバシーポリシー。ローカル処理のみ、UPN 平文を DB 非保存、外部送信なし。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/privacy-policy.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  ul { padding-left: 24px; margin: 8px 0 16px; }
+  li { font-size: 0.95rem; margin-bottom: 4px; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>プライバシーポリシー / Privacy Policy</h1>
+  <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+    <div class="placeholder">本ページは雛形です。Phase 19 Step 3 で正式な文書を起草します (Phase 18 確定方針 = DPAPI UPN キャッシュ / 例外境界 / Store ビルドからデモデータ除外 を反映)。</div>
+
+    <h2>取扱方針の概要</h2>
+    <ul>
+      <li>本アプリは Microsoft Graph API 経由でサインインログを取得し、<strong>ローカル端末上でのみ処理</strong>します。外部サーバーへの送信は行いません。</li>
+      <li>UPN (User Principal Name) の<strong>平文をデータベースに保存しません</strong> (Phase 10 PII 方針)。表示は短期暗号化キャッシュ (Windows DPAPI、TTL 7 日) 経由で行います (Phase 13 確定方針)。</li>
+      <li>取得したログは利用者の Windows ユーザープロファイル配下の SQLite DB に保存され、利用者の操作で全件削除可能です。</li>
+      <li>テスト用デモデータ (110 件 / 6 シナリオ) は <code>*.example</code> ドメイン + RFC 5737 IP のみを使用し、実テナント情報を含みません。Microsoft Store 配布版にはデモデータは含まれません。</li>
+    </ul>
+
+    <h2>取得する情報</h2>
+    <p>(Phase 19 Step 3 で詳細記載: 取得スコープ <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code> 等)</p>
+
+    <h2>外部送信</h2>
+    <p>Microsoft Graph 以外の外部エンドポイントには接続しません。</p>
+
+    <h2>連絡先</h2>
+    <p><a href="support.html">サポート</a> ページをご参照ください。</p>
+  </div>
+
+  <div class="section-en">
+    <div class="placeholder">This page is a scaffold. The official document will be drafted in Phase 19 Step 3 (reflecting Phase 18 confirmed policies: DPAPI UPN cache / exception boundary / demo data excluded from Store build).</div>
+
+    <h2>Summary of data handling</h2>
+    <ul>
+      <li>This app fetches sign-in logs via Microsoft Graph and processes them <strong>locally only</strong>. No external transmission.</li>
+      <li>Plain UPNs are <strong>not stored in the database</strong> (Phase 10 PII policy). Display is via a short-term encrypted cache (Windows DPAPI, TTL 7 days, Phase 13).</li>
+      <li>Fetched logs are stored in a SQLite DB under the user's Windows profile and can be fully deleted by the user.</li>
+      <li>Test demo data (110 records / 6 scenarios) uses only <code>*.example</code> domains + RFC 5737 IPs, contains no real tenant information, and is excluded from Microsoft Store builds.</li>
+    </ul>
+
+    <h2>Information collected</h2>
+    <p>(Details in Phase 19 Step 3: scopes <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>, etc.)</p>
+
+    <h2>External transmission</h2>
+    <p>The app connects only to Microsoft Graph endpoints.</p>
+
+    <h2>Contact</h2>
+    <p>Please see the <a href="support.html">Support</a> page.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="./">トップ</a> ·
+    <a href="manual/">マニュアル</a> ·
+    <a href="terms-of-use.html">利用規約</a> ·
+    <a href="support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="./">Home</a> ·
+    <a href="manual/">Manual</a> ·
+    <a href="terms-of-use.html">Terms of Use</a> ·
+    <a href="support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>

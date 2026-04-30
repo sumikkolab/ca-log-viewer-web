@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利用規約 | CA Log Viewer — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer の利用規約。本ソフトウェアの利用条件・免責事項・知的財産権について規定します。Microsoft Store 配布版および GitHub Releases 版に共通です。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/terms-of-use.html">
+<meta property="og:title" content="利用規約 | CA Log Viewer — SumikkoLab">
+<meta property="og:description" content="CA Log Viewer の利用規約。利用条件・免責事項・知的財産権を規定します。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/terms-of-use.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  ol { padding-left: 24px; margin: 8px 0 16px; }
+  li { font-size: 0.95rem; margin-bottom: 6px; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>利用規約 / Terms of Use</h1>
+  <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+    <div class="placeholder">本ページは雛形です。Phase 19 Step 3 で正式な文書を起草します。</div>
+
+    <h2>1. 適用</h2>
+    <p>(Phase 19 Step 3 で記述)</p>
+
+    <h2>2. 免責事項</h2>
+    <p>(Phase 19 Step 3 で記述)</p>
+
+    <h2>3. 禁止事項</h2>
+    <p>(Phase 19 Step 3 で記述)</p>
+
+    <h2>4. 知的財産権</h2>
+    <p>(Phase 19 Step 3 で記述)</p>
+
+    <h2>5. 準拠法・管轄</h2>
+    <p>(Phase 19 Step 3 で記述)</p>
+  </div>
+
+  <div class="section-en">
+    <div class="placeholder">This page is a scaffold. The official document will be drafted in Phase 19 Step 3.</div>
+
+    <h2>1. Scope</h2>
+    <p>(Will be drafted in Phase 19 Step 3)</p>
+
+    <h2>2. Disclaimer</h2>
+    <p>(Will be drafted in Phase 19 Step 3)</p>
+
+    <h2>3. Prohibited actions</h2>
+    <p>(Will be drafted in Phase 19 Step 3)</p>
+
+    <h2>4. Intellectual property</h2>
+    <p>(Will be drafted in Phase 19 Step 3)</p>
+
+    <h2>5. Governing law</h2>
+    <p>(Will be drafted in Phase 19 Step 3)</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="./">トップ</a> ·
+    <a href="manual/">マニュアル</a> ·
+    <a href="privacy-policy.html">プライバシーポリシー</a> ·
+    <a href="support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="./">Home</a> ·
+    <a href="manual/">Manual</a> ·
+    <a href="privacy-policy.html">Privacy Policy</a> ·
+    <a href="support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はじめに | CA Log Viewer マニュアル — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML 監査レポート出力 の手順を解説します。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/manual/getting-started.html">
+<meta property="og:title" content="はじめに | CA Log Viewer マニュアル — SumikkoLab">
+<meta property="og:description" content="CA Log Viewer の初回起動から監査レポート出力までの一本道ガイド。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/manual/getting-started.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  h3 { font-size: 1rem; margin: 20px 0 8px; color: #4338ca; }
+  ol { padding-left: 24px; margin: 8px 0 16px; }
+  ol > li { font-size: 0.95rem; margin-bottom: 8px; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+  .step-box { background: #eef2ff; border-left: 4px solid #6366f1; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>はじめに / Getting Started</h1>
+  <p><a href="index.html">← <span class="section-ja visible">マニュアル目次に戻る</span><span class="section-en">Back to Manual Index</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+    <div class="placeholder">本ページは雛形です。Phase 19 Step 2 で各 Step のスクリーンショット + 詳細手順を追加します。</div>
+
+    <h2>一本道: 初回起動 → 取得 → 分析 → レポート</h2>
+
+    <div class="step-box">
+      <h3>Step 1. 初回起動</h3>
+      <ol>
+        <li>Microsoft Store からインストール (または GitHub Releases から MSIX ダウンロード)</li>
+        <li>初回起動時に利用規約・プライバシー方針への同意 (Phase 19 Step 4 で実装予定)</li>
+        <li>言語選択 (日本語 / English) — 設定タブから後で変更可能</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 2. 取得 (Microsoft Graph 経由)</h3>
+      <ol>
+        <li>Entra アプリ登録 (Azure portal でアプリ作成、ClientId 取得)</li>
+        <li>必要な Graph 権限を同意: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code></li>
+        <li>アプリで「取得」ボタン → サインインログ + CA ポリシーを取得</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 3. 分析 (調査タブ)</h3>
+      <ol>
+        <li>統一フィルタ (期間 / ユーザー / CA 状態 / 判定 / デバイス / 特殊) で絞り込み</li>
+        <li>一覧から行を選択 → 詳細パネルで 7 ブロックを確認 (結論 / サインイン概要 / ユーザー / アプリ / 条件付きアクセス / 適用ポリシー / 端末 / 許可拒否理由)</li>
+        <li>傾向タブで異常検知結果 / アプリ別集計を確認</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 4. レポート (HTML 監査レポート出力)</h3>
+      <ol>
+        <li>調査タブ上部「Export HTML」ボタン → 現在のフィルタ結果を HTML レポートとして出力</li>
+        <li>ブラウザで自動オープン → Summary / Assessment / 集約表 (ユーザー別 / アプリ別 / ポリシー別) / 観点別 / Allow & Deny reasons を確認</li>
+        <li>外部共有時は UPN 含むため取り扱いに注意</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="section-en">
+    <div class="placeholder">This page is a scaffold. Each step's screenshots and details will be added in Phase 19 Step 2.</div>
+
+    <h2>Linear flow: First launch → Fetch → Analyze → Report</h2>
+
+    <div class="step-box">
+      <h3>Step 1. First launch</h3>
+      <ol>
+        <li>Install from Microsoft Store (or download MSIX from GitHub Releases)</li>
+        <li>Accept Terms / Privacy on first launch (planned for Phase 19 Step 4)</li>
+        <li>Choose language (Japanese / English) — switchable later from Settings</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 2. Fetch (via Microsoft Graph)</h3>
+      <ol>
+        <li>Register an Entra app (Azure portal, retrieve ClientId)</li>
+        <li>Grant required Graph permissions: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code></li>
+        <li>Click "Fetch" in the app → retrieves sign-in logs + CA policies</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 3. Analyze (Investigate tab)</h3>
+      <ol>
+        <li>Filter by unified filters (Time range / User / CA status / Judgment / Device / Special)</li>
+        <li>Select a row → review 7 blocks in the Detail Pane (Conclusion / Sign-in summary / User / App / Conditional Access / Applied policies / Device / Allow & Deny reasons)</li>
+        <li>Check anomaly detection / per-app aggregation in the Trends tab</li>
+      </ol>
+    </div>
+
+    <div class="step-box">
+      <h3>Step 4. Report (Export HTML audit report)</h3>
+      <ol>
+        <li>Click "Export HTML" at the top of the Investigate tab → exports the current filter result as an HTML report</li>
+        <li>Opens automatically in the browser → review Summary / Assessment / Aggregation (by user / app / policy) / aspect tables / Allow & Deny reasons</li>
+        <li>Be careful when sharing externally — the report includes UPNs</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="../">トップ</a> ·
+    <a href="index.html">マニュアル目次</a> ·
+    <a href="../privacy-policy.html">プライバシーポリシー</a> ·
+    <a href="../terms-of-use.html">利用規約</a> ·
+    <a href="../support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="../">Home</a> ·
+    <a href="index.html">Manual Index</a> ·
+    <a href="../privacy-policy.html">Privacy Policy</a> ·
+    <a href="../terms-of-use.html">Terms of Use</a> ·
+    <a href="../support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>

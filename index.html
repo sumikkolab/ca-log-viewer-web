@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CA Log Viewer | Conditional Access サインインログを現場で読めるアプリ — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer は Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML 監査レポートで可視化する Windows デスクトップアプリです。Free 提供、ローカル端末で動作、外部送信なし。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/">
+<meta property="og:title" content="CA Log Viewer | Conditional Access サインインログを現場で読めるアプリ — SumikkoLab">
+<meta property="og:description" content="Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を可視化する Windows デスクトップアプリ。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ca-log-viewer.sumikkolab.com/#organization",
+      "name": "Sumikko Lab",
+      "url": "https://sumikkolab.com/",
+      "email": "support@sumikkolab.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ca-log-viewer.sumikkolab.com/#website",
+      "url": "https://ca-log-viewer.sumikkolab.com/",
+      "name": "CA Log Viewer",
+      "inLanguage": ["ja", "en"],
+      "publisher": { "@id": "https://ca-log-viewer.sumikkolab.com/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ca-log-viewer.sumikkolab.com/#software",
+      "name": "CA Log Viewer",
+      "alternateName": "Conditional Access Log Viewer",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Identity & Access Management",
+      "operatingSystem": "Windows 10, Windows 11",
+      "url": "https://ca-log-viewer.sumikkolab.com/",
+      "description": "A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and helps administrators read Conditional Access related entries — CA evaluation result, applied policies, device compliance, with HTML audit reports including 3-axis aggregation (by user / by app / by policy). Runs locally; no external transmission.",
+      "inLanguage": ["ja", "en"],
+      "featureList": [
+        "Entra ID sign-in logs fetch via Microsoft Graph (delegated auth, AuditLog.Read.All)",
+        "Conditional Access evaluation result classification",
+        "Applied policy listing per sign-in",
+        "Device compliance status",
+        "Unified filter (range / user / CA status / judgment / device / special, multi-select OR)",
+        "Detail pane with 7 sections + conclusion",
+        "HTML audit report with Aggregation (by user / by app / by policy, top 20 + others)",
+        "CSV export",
+        "Demo mode (110 records / 6 scenarios, no real tenant)",
+        "ja / en UI"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY",
+        "availability": "https://schema.org/InStock"
+      },
+      "publisher": { "@id": "https://ca-log-viewer.sumikkolab.com/#organization" }
+    }
+  ]
+}
+</script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+
+  /* Hero */
+  .hero { background: linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%); color: #fff; padding: 60px 24px 48px; text-align: center; position: relative; }
+  .hero h1 { font-size: 2.2rem; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .hero .tagline { font-size: 1.15rem; color: #e0e7ff; margin-bottom: 12px; font-weight: 500; }
+  .hero .sub-tagline { font-size: 0.95rem; color: #c7d2fe; margin-bottom: 28px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .hero .badge { display: inline-block; background: #818cf8; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; margin: 0 4px 8px; }
+  .hero-buttons { margin-top: 24px; }
+  .hero-buttons a { display: inline-block; margin: 6px 8px; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 600; }
+  .hero-buttons .store-btn { background: #fff; color: #312e81; }
+  .hero-buttons .manual-btn { background: transparent; color: #e0e7ff; border: 1px solid #a5b4fc; }
+
+  /* Lang toggle */
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+
+  /* Container */
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+  h2 { font-size: 1.25rem; margin: 36px 0 12px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+
+  /* Sections (lang toggle) */
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+
+  /* Placeholder note (for Step 1 雛形、Step 2 で削除) */
+  .placeholder { background: #fef9c3; border: 1px dashed #ca8a04; border-radius: 6px; padding: 12px 16px; margin: 16px 0; color: #713f12; font-size: 0.85rem; }
+
+  /* Footer */
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>CA Log Viewer</h1>
+  <div class="section-ja visible">
+    <p class="tagline">Conditional Access のサインインログを現場で読める</p>
+    <p class="sub-tagline">Microsoft Entra ID のサインインログから Conditional Access 関連を抽出し、CA 評価結果・適用ポリシー・端末準拠状態を画面と HTML 監査レポートで可視化する Windows デスクトップアプリ。</p>
+    <span class="badge">Windows 10 / 11</span>
+    <span class="badge">.NET 8</span>
+    <span class="badge">Free</span>
+    <span class="badge">日本語 / English</span>
+  </div>
+  <div class="section-en">
+    <p class="tagline">Read Conditional Access sign-in logs in context</p>
+    <p class="sub-tagline">A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and visualizes Conditional Access related entries — CA evaluation result, applied policies, device compliance — on screen and in HTML audit reports.</p>
+    <span class="badge">Windows 10 / 11</span>
+    <span class="badge">.NET 8</span>
+    <span class="badge">Free</span>
+    <span class="badge">日本語 / English</span>
+  </div>
+  <div class="hero-buttons">
+    <a class="manual-btn" href="manual/">📖 <span class="section-ja visible">マニュアル</span><span class="section-en">Manual</span></a>
+    <!-- Microsoft Store URL は Phase 19 Step 5 提出後に確定 -->
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+    <div class="placeholder">本ページは雛形です。Phase 19 Step 2 でコンテンツ (何ができるか 3 行 / どんな人向け 3 パターン / すぐ試す) を充実させます。</div>
+
+    <h2>何ができるか</h2>
+    <p>(Phase 19 Step 2 で 3 行で要約)</p>
+
+    <h2>どんな人向けか</h2>
+    <p>(Phase 19 Step 2 で 3 パターンを記述)</p>
+
+    <h2>すぐ試す</h2>
+    <p>(Phase 19 Step 2 で Download / GitHub / Store の導線を記述)</p>
+  </div>
+
+  <div class="section-en">
+    <div class="placeholder">This page is a scaffold. Content (what it does in 3 lines / 3 personas / try-it-now links) will be added in Phase 19 Step 2.</div>
+
+    <h2>What it does</h2>
+    <p>(Will be summarized in 3 lines in Phase 19 Step 2)</p>
+
+    <h2>Who it's for</h2>
+    <p>(3 personas will be described in Phase 19 Step 2)</p>
+
+    <h2>Try it now</h2>
+    <p>(Download / GitHub / Store links will be added in Phase 19 Step 2)</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="manual/">マニュアル</a> ·
+    <a href="privacy-policy.html">プライバシーポリシー</a> ·
+    <a href="terms-of-use.html">利用規約</a> ·
+    <a href="support.html">サポート</a>
+    <p style="margin-top:12px;">&copy; 2026 Sumikko Lab</p>
+  </div>
+  <div class="section-en">
+    <a href="manual/">Manual</a> ·
+    <a href="privacy-policy.html">Privacy Policy</a> ·
+    <a href="terms-of-use.html">Terms of Use</a> ·
+    <a href="support.html">Support</a>
+    <p style="margin-top:12px;">&copy; 2026 Sumikko Lab</p>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  // 永続化された言語設定を復元 (なければ ja)
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>
