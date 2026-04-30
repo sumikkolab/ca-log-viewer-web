@@ -60,7 +60,7 @@
 
   <div class="section-ja visible">
 
-    <p>CA Log Viewer を <strong>初回起動 → 取得 → 分析 → レポート</strong> の 4 ステップで使い始めるためのガイドです。Microsoft Graph 経由で Entra ID のサインインログを取得し、Conditional Access 関連項目を読み解いて HTML レポートとして出力するまでを通します。</p>
+    <p>CA Log Viewer を <strong>初回起動 → 取得 → 分析 → レポート</strong> の 4 ステップで使い始めるためのガイドです。Microsoft Graph 経由で Entra ID のサインインログを取得し、条件付きアクセス関連項目を読み解いて HTML レポートとして出力するまでを通します。</p>
 
     <div class="toc">
       <strong>目次</strong>
@@ -153,8 +153,8 @@
       <ul>
         <li><strong>期間</strong>: 直近 24 時間 / 7 日 / 30 日 / カスタム範囲</li>
         <li><strong>ユーザー</strong>: UPN / 表示名で絞り込み (部分一致)</li>
-        <li><strong>CA 状態</strong>: 成功 / 失敗 / Not applied / Report-only</li>
-        <li><strong>判定</strong>: Allow / Deny / Interrupted / Unknown</li>
+        <li><strong>CA 状態</strong>: 成功 / 失敗 / 未適用 / レポートモード</li>
+        <li><strong>判定</strong>: 許可 / 拒否 / 中断 / 不明</li>
         <li><strong>デバイス</strong>: 準拠 / 非準拠 / Hybrid Joined / Unknown</li>
         <li><strong>特殊条件</strong>: リスクサインイン / レガシー認証 / ゲストユーザー など</li>
       </ul>
@@ -168,7 +168,7 @@
       <h3>3-2. 詳細パネルで 7 ブロック + 結論を確認</h3>
       <p>一覧から行を選択すると右側に詳細スライドインパネルが開きます。</p>
       <ol>
-        <li><strong>結論</strong>: 6 段階優先順位 (Block by policy / MFA required but skipped / Risk-based block / Compliant device required / Suspicious legacy auth / Allow) で自動判定</li>
+        <li><strong>結論</strong>: 6 段階優先順位 (ポリシーによる拒否 / MFA 必須なのに省略 / リスクベース拒否 / 準拠端末必須 / 不審なレガシー認証 / 許可) で自動判定</li>
         <li><strong>サインイン概要</strong>: 日時 / IP / 場所 / クライアントアプリ / 認証要件</li>
         <li><strong>ユーザー</strong>: UPN / 表示名 / リスクレベル / ユーザータイプ</li>
         <li><strong>アプリ</strong>: アプリ名 / アプリ ID / リソース</li>
@@ -176,7 +176,7 @@
         <li><strong>適用ポリシー一覧</strong>: ポリシー名 / 結果 / 必要なコントロール (MFA / 準拠端末 など)</li>
         <li><strong>端末準拠状態</strong>: 端末 ID / OS / 準拠状態 / 管理状態</li>
       </ol>
-      <p>最下部に「許可拒否理由 (Allow & Deny reasons)」をまとめて表示します。</p>
+      <p>最下部に「許可・拒否理由」をまとめて表示します。</p>
       <figure class="screenshot">
         <img src="screenshots/jp/03-detail-pane.png" alt="詳細スライドインパネル: 7 ブロック構成">
         <figcaption>1 行を選択すると右側にスライドインパネルが開き、結論と 7 ブロックを表示</figcaption>
@@ -187,7 +187,7 @@
       <h3>3-3. 傾向タブで異常検知 / 集計を確認</h3>
       <ul>
         <li>異常検知: 短時間多発失敗 / 地理的に離れた連続サインイン / レガシー認証急増 などのアラートを表示</li>
-        <li>アプリ別集計: アプリ単位のサインイン件数 / Allow / Deny 比率</li>
+        <li>アプリ別集計: アプリ単位のサインイン件数 / 許可 / 拒否 比率</li>
       </ul>
     </div>
 
@@ -208,11 +208,11 @@
     <div class="step-box">
       <h3>4-2. レポート内容</h3>
       <ul>
-        <li><strong>Summary</strong>: 期間 / 総件数 / Allow / Deny 件数 / 主要 CA 状態の比率</li>
-        <li><strong>Assessment</strong>: 結論 6 段階の件数分布</li>
+        <li><strong>サマリー</strong>: 期間 / 総件数 / 許可 / 拒否 件数 / 主要 CA 状態の比率</li>
+        <li><strong>判定サマリー</strong>: 結論 6 段階の件数分布</li>
         <li><strong>3 軸集約表</strong>: ユーザー別 / アプリ別 / ポリシー別 (それぞれ上位 20 + 「その他」集約)</li>
         <li><strong>観点別表</strong>: CA 状態 / 判定 / デバイス / 特殊条件</li>
-        <li><strong>Allow & Deny reasons</strong>: 個別サインインの許可拒否理由を一覧化</li>
+        <li><strong>許可・拒否理由</strong>: 個別サインインの許可・拒否理由を一覧化</li>
       </ul>
       <div class="warn">レポートには UPN / IP / アプリ名が含まれます。外部共有時は取り扱い (PII) に注意してください。</div>
     </div>

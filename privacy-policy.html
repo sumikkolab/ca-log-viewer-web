@@ -65,7 +65,7 @@
     <p>本アプリは、利用者が許諾した Entra ID テナントから以下の情報を Microsoft Graph 経由で取得します。取得は委任認証 (利用者本人としてのアクセス) によって行います。</p>
     <ul>
       <li><strong>サインインログ</strong>: <code>AuditLog.Read.All</code> スコープ。日時 / IP アドレス / 場所 / クライアントアプリ / 認証要件 / 結果 / リスク情報 など。</li>
-      <li><strong>Conditional Access ポリシー定義</strong>: <code>Policy.Read.ConditionalAccess</code> スコープ。ポリシー名 / 条件 / 制御 / 状態など。</li>
+      <li><strong>条件付きアクセスポリシー定義</strong>: <code>Policy.Read.ConditionalAccess</code> スコープ。ポリシー名 / 条件 / 制御 / 状態など。</li>
       <li><strong>ユーザー基本情報</strong>: <code>User.Read.All</code> スコープ。UPN / 表示名 / ユーザータイプなど。</li>
     </ul>
     <p>これらは利用者が意図して「取得」操作を行ったときにのみ取得されます。本アプリが自動的にバックグラウンドで通信することはありません。</p>
