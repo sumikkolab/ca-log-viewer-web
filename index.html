@@ -128,6 +128,33 @@
   .feature-card h3 { font-size: 0.95rem; margin: 0 0 6px; color: #312e81; }
   .feature-card p { font-size: 0.85rem; margin: 0; color: #475569; }
 
+  /* Hero 補助文 */
+  .hero .hero-subnote { font-size: 0.95rem; color: #fde68a; margin: -8px auto 20px; max-width: 680px; font-weight: 600; }
+
+  /* こんなときに役立ちます */
+  .use-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 24px; }
+  @media (max-width: 700px) { .use-cases { grid-template-columns: 1fr; } }
+  .use-case-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; }
+  .use-case-card .scene { font-size: 0.92rem; color: #312e81; font-weight: 600; margin: 0 0 6px; }
+  .use-case-card .effect { font-size: 0.88rem; color: #475569; margin: 0; }
+  .use-case-card .effect::before { content: "→ "; color: #4338ca; font-weight: 700; }
+
+  /* おすすめの使い方 */
+  .how-to-use { background: #eef2ff; border-radius: 8px; padding: 18px 22px; margin: 16px 0 24px; }
+  .how-to-use ol { padding-left: 0; counter-reset: step; list-style: none; margin: 0; }
+  .how-to-use ol > li { padding: 10px 0 10px 44px; position: relative; counter-increment: step; border-bottom: 1px dashed #c7d2fe; }
+  .how-to-use ol > li:last-child { border-bottom: 0; }
+  .how-to-use ol > li::before { content: counter(step); position: absolute; left: 0; top: 12px; width: 28px; height: 28px; background: #4338ca; color: #fff; border-radius: 50%; text-align: center; line-height: 28px; font-size: 0.85rem; font-weight: 700; }
+  .how-to-use .step-title { font-size: 0.95rem; color: #312e81; font-weight: 600; margin: 0 0 4px; }
+  .how-to-use .step-desc { font-size: 0.88rem; color: #475569; margin: 0; }
+
+  /* このツールでできないこと */
+  .limitations { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 24px 0; }
+  .limitations h2 { color: #92400e; border-left-color: #f59e0b; }
+  .limitations ul { margin: 8px 0 0; }
+  .limitations li { color: #78350f; font-size: 0.92rem; }
+  .limitations strong { color: #78350f; }
+
   /* Privacy callout */
   .privacy-note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin: 24px 0; }
   .privacy-note h3 { color: #166534; margin: 0 0 6px; font-size: 0.95rem; }
@@ -149,7 +176,8 @@
   <h1>CA Log Viewer</h1>
   <div class="section-ja visible">
     <p class="tagline">条件付きアクセスのサインインログを現場で読める</p>
-    <p class="sub-tagline">Microsoft Entra ID のサインインログから条件付きアクセス関連を抽出し、評価結果・適用ポリシー・端末準拠状態を画面と HTML レポートで可視化する Windows デスクトップアプリ。</p>
+    <p class="hero-subnote">「設定したはず」を、実際のサインインログで確認できます。</p>
+    <p class="sub-tagline">Microsoft Entra ID のサインインログで見えづらい情報 — 適用ポリシー・端末状態・許可拒否理由 — を 1 画面にまとめて、設定漏れ・レポートモードの影響・未適用サインインを確認できる Windows デスクトップアプリ。</p>
     <span class="badge">Windows 10 / 11</span>
     <span class="badge">.NET 8</span>
     <span class="badge">Free</span>
@@ -157,7 +185,8 @@
   </div>
   <div class="section-en">
     <p class="tagline">Read Conditional Access sign-in logs in context</p>
-    <p class="sub-tagline">A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and visualizes Conditional Access related entries — CA evaluation result, applied policies, device compliance — on screen and in HTML reports.</p>
+    <p class="hero-subnote">See whether what you "set up" is actually applied — by reading real sign-in logs.</p>
+    <p class="sub-tagline">A Windows desktop app that surfaces what Entra ID sign-in logs hide: applied policies, device state, and allow/deny reasons — together in one view, so you can spot setup gaps, the impact of report-only policies, and sign-ins that were never matched.</p>
     <span class="badge">Windows 10 / 11</span>
     <span class="badge">.NET 8</span>
     <span class="badge">Free</span>
@@ -190,6 +219,50 @@
         <li><strong>Exports an HTML report.</strong> Summary, Assessment, and 3-axis aggregation (by user / by app / by policy) in one HTML file — ready to share with managers, auditors, and operations.</li>
         <li><strong>Local-only operation, no external transmission.</strong> Connects only to Microsoft Graph. Plain UPNs are not stored in the database.</li>
       </ol>
+    </div>
+  </div>
+
+  <!-- こんなときに役立ちます -->
+  <div class="section-ja visible">
+    <h2>こんなときに役立ちます</h2>
+    <div class="use-cases">
+      <div class="use-case-card">
+        <p class="scene">条件付きアクセスの設定が正しく適用されているか確認したい</p>
+        <p class="effect">実際のサインインログから、想定どおりに評価されたか・抜けがないかを観点別に絞り込んで確認できます。</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">レポートモードの影響範囲を確認したい</p>
+        <p class="effect">本番化する前に、どの利用者・アプリ・サインインに当たっているかを実ログで確認できます。</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">設定漏れの利用者やリソースを見つけたい</p>
+        <p class="effect">ポリシー未適用のサインインを抽出し、漏れているユーザー・アプリ・端末状態を特定できます。</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">Entra ID のログでは見づらい情報をまとめて確認したい</p>
+        <p class="effect">詳細ペインを 1 件ずつ開かなくても、適用ポリシー・端末状態・許可拒否理由を一覧で確認できます。</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-en">
+    <h2>When this helps</h2>
+    <div class="use-cases">
+      <div class="use-case-card">
+        <p class="scene">You want to confirm Conditional Access policies are actually applied as intended</p>
+        <p class="effect">Filter real sign-in logs by aspect to see whether each policy evaluated as expected — and where there are gaps.</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">You want to see the impact of report-only policies</p>
+        <p class="effect">Before promoting to production, check exactly which users, apps, and sign-ins are affected.</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">You want to find users or resources that slipped through</p>
+        <p class="effect">Pull up sign-ins where no policy was applied and identify the missed users, apps, and device states.</p>
+      </div>
+      <div class="use-case-card">
+        <p class="scene">You want to see information that's hard to read in Entra ID sign-in logs</p>
+        <p class="effect">Without opening the detail pane row by row, see applied policies, device state, and allow/deny reasons in a single list.</p>
+      </div>
     </div>
   </div>
 
@@ -226,6 +299,54 @@
         <h3>🔍 Security operations</h3>
         <p>You browse the Entra portal Sign-in Logs daily, and want a focused operational report covering only Conditional Access — built on the spot.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- おすすめの使い方 -->
+  <div class="section-ja visible">
+    <h2>おすすめの使い方</h2>
+    <div class="how-to-use">
+      <ol>
+        <li>
+          <p class="step-title">ホームで「今日見るべきもの」を確認</p>
+          <p class="step-desc">異常検知バナーと、よく使う調査ボタン (CA 未適用 / レポートモード / 非準拠で許可 / ゲスト / 失敗ログ) で、その日の対象を絞り込みます。</p>
+        </li>
+        <li>
+          <p class="step-title">非準拠・未適用・レポートモードを順に確認</p>
+          <p class="step-desc">調査タブに切り替え、観点ごとにサインインを抽出。「設定漏れ」「想定外の許可」「これから本番化する範囲」を確認できます。</p>
+        </li>
+        <li>
+          <p class="step-title">気になるサインインの詳細パネルで理由を確認</p>
+          <p class="step-desc">1 行クリックで、どのポリシーが・なぜ適用または未適用になったか、端末状態と許可拒否理由を含めて 1 画面で確認できます。</p>
+        </li>
+        <li>
+          <p class="step-title">必要に応じて HTML レポートを出力</p>
+          <p class="step-desc">担当上長・監査・運用報告に渡せる形に、判定サマリーと観点別の代表ログをまとめてその場で出力できます。</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="section-en">
+    <h2>Recommended workflow</h2>
+    <div class="how-to-use">
+      <ol>
+        <li>
+          <p class="step-title">Open Home to see "what to check today"</p>
+          <p class="step-desc">Use the anomaly banner and the quick-investigation buttons (No policy match / Report-only / Non-compliant allowed / Guests / Failed sign-ins) to focus on today's targets.</p>
+        </li>
+        <li>
+          <p class="step-title">Review Non-compliant / Not applied / Report-only in sequence</p>
+          <p class="step-desc">Switch to the Investigate tab and pull sign-ins by each aspect — to spot setup gaps, unintended allows, and the upcoming production scope.</p>
+        </li>
+        <li>
+          <p class="step-title">Open the detail pane on suspicious sign-ins</p>
+          <p class="step-desc">Click a row to see which policy applied (or didn't) and why — together with device state and allow/deny reasons in a single view.</p>
+        </li>
+        <li>
+          <p class="step-title">Export an HTML report when needed</p>
+          <p class="step-desc">Hand a single file containing the assessment summary and per-aspect samples to your manager, auditor, or operations team.</p>
+        </li>
+      </ol>
     </div>
   </div>
 
@@ -367,6 +488,28 @@
     </div>
   </div>
 
+  <!-- このツールでできないこと -->
+  <div class="section-ja visible">
+    <div class="limitations">
+      <h2>このツールでできないこと</h2>
+      <ul>
+        <li><strong>設定の変更はできません</strong> — 条件付きアクセスポリシーやユーザー設定の編集は行いません。設定変更は Microsoft Entra 管理センターから行ってください。</li>
+        <li><strong>アクセス制御は行いません</strong> — 本ツールはサインインログの可視化と分析のみを行い、アクセスの許可・拒否そのものに介入しません。</li>
+        <li><strong>Microsoft Graph 権限が不足している場合は結果が不完全になります</strong> — UPN・ポリシー名・ユーザー種別の解決には所定の 3 つの権限が必要です。詳細は <a href="manual/getting-started.html">はじめに</a> をご確認ください。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section-en">
+    <div class="limitations">
+      <h2>What this tool does not do</h2>
+      <ul>
+        <li><strong>No configuration changes</strong> — The app does not edit Conditional Access policies or user settings. Make changes in the Microsoft Entra admin center.</li>
+        <li><strong>No access control</strong> — The app only visualizes and analyzes sign-in logs; it does not intervene with allow/deny decisions.</li>
+        <li><strong>Results may be incomplete without sufficient Microsoft Graph permissions</strong> — Resolving UPN, policy names, and user types requires three permissions. See <a href="manual/getting-started.html">Getting Started</a> for details.</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Privacy callout -->
   <div class="section-ja visible">
     <div class="privacy-note">
@@ -381,24 +524,14 @@
     </div>
   </div>
 
-  <!-- 必要な Graph 権限 -->
+  <!-- 必要な Graph 権限 (簡潔、詳細は Manual へ) -->
   <div class="section-ja visible">
     <h2>必要な Microsoft Graph 権限</h2>
-    <ul>
-      <li><code>AuditLog.Read.All</code> — サインインログ取得</li>
-      <li><code>Policy.Read.ConditionalAccess</code> — CA ポリシー取得</li>
-      <li><code>User.Read.All</code> — ユーザー種別 (Member / Guest) 解決</li>
-    </ul>
-    <p>委任認証 (Embedded WebView2 経由) で実行され、トークンは MSAL 既定のメモリ内キャッシュのみに保持されます。</p>
+    <p>本アプリは委任認証で動作し、3 つの読み取り権限のみを使用します: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>。設定手順とトラブルシューティングは <a href="manual/getting-started.html">はじめに</a> をご覧ください。</p>
   </div>
   <div class="section-en">
     <h2>Required Microsoft Graph permissions</h2>
-    <ul>
-      <li><code>AuditLog.Read.All</code> — fetch sign-in logs</li>
-      <li><code>Policy.Read.ConditionalAccess</code> — fetch CA policies</li>
-      <li><code>User.Read.All</code> — resolve user type (Member / Guest)</li>
-    </ul>
-    <p>Runs with delegated authentication (via embedded WebView2). Tokens are kept only in MSAL's default in-memory cache.</p>
+    <p>The app uses delegated authentication and three read-only scopes: <code>AuditLog.Read.All</code> / <code>Policy.Read.ConditionalAccess</code> / <code>User.Read.All</code>. See <a href="manual/getting-started.html">Getting Started</a> for setup steps and troubleshooting.</p>
   </div>
 
 </main>
