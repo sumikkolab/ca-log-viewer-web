@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー | CA Log Viewer — SumikkoLab</title>
+<meta name="description" content="CA Log Viewer のプライバシーポリシー。Microsoft Graph 経由で取得したサインインログをローカル端末で処理し、UPN 平文を DB に保存しない方針および外部送信を行わない方針を定めます。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/privacy-policy.html">
+<meta property="og:title" content="プライバシーポリシー | CA Log Viewer — SumikkoLab">
+<meta property="og:description" content="CA Log Viewer のプライバシーポリシー。ローカル処理のみ、UPN 平文を DB 非保存、外部送信なし。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/privacy-policy.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — SumikkoLab">
+<meta property="og:image" content="https://ca-log-viewer.sumikkolab.com/manual/screenshots/jp/01-home.png">
+<meta property="og:image:width" content="1686">
+<meta property="og:image:height" content="940">
+<meta property="og:image:alt" content="CA Log Viewer のホーム画面">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="プライバシーポリシー | CA Log Viewer — SumikkoLab">
+<meta name="twitter:description" content="CA Log Viewer のプライバシーポリシー。ローカル処理のみ、UPN 平文を DB 非保存、外部送信なし。">
+<meta name="twitter:image" content="https://ca-log-viewer.sumikkolab.com/manual/screenshots/jp/01-home.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ul, ol { padding-left: 24px; margin: 8px 0 14px; }
+  li { font-size: 0.95rem; margin-bottom: 6px; }
+  code { background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-size: 0.88rem; color: #312e81; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .meta-row { font-size: 0.82rem; color: #64748b; margin-top: 4px; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1><span class="section-ja visible">プライバシーポリシー</span><span class="section-en">Privacy Policy</span></h1>
+  <p><a href="./">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+
+    <p class="meta-row">最終更新: 2026-04-30 / 制定者: Sumikko Lab</p>
+
+    <p>Sumikko Lab (以下「当方」) は、Windows デスクトップアプリケーション「CA Log Viewer」(以下「本アプリ」) の利用に伴って取り扱う情報について、本プライバシーポリシー (以下「本ポリシー」) を定めます。</p>
+
+    <h2>1. 基本方針</h2>
+    <ul>
+      <li><strong>ローカル処理のみ</strong>: 本アプリは利用者の Windows 端末上で動作し、Microsoft Graph 以外のいかなる外部サーバーにも情報を送信しません。</li>
+      <li><strong>当方サーバーは存在しません</strong>: 本アプリの利用に関して、当方が運営するサーバーへ情報が送られることはありません。</li>
+      <li><strong>テレメトリ・解析ツール非搭載</strong>: 利用統計の収集や、第三者の解析サービスへの送信は行いません。</li>
+      <li><strong>UPN (User Principal Name) の平文を DB に保存しません</strong>: 表示時のみローカル暗号化された短期キャッシュを経由し、再起動・キャッシュ失効後は再取得します。</li>
+    </ul>
+
+    <h2>2. 取得する情報と取得経路</h2>
+    <p>本アプリは、利用者が許諾した Entra ID テナントから以下の情報を Microsoft Graph 経由で取得します。取得は委任認証 (利用者本人としてのアクセス) によって行います。</p>
+    <ul>
+      <li><strong>サインインログ</strong>: <code>AuditLog.Read.All</code> スコープ。日時 / IP アドレス / 場所 / クライアントアプリ / 認証要件 / 結果 / リスク情報 など。</li>
+      <li><strong>条件付きアクセスポリシー定義</strong>: <code>Policy.Read.ConditionalAccess</code> スコープ。ポリシー名 / 条件 / 制御 / 状態など。</li>
+      <li><strong>ユーザー基本情報</strong>: <code>User.Read.All</code> スコープ。UPN / 表示名 / ユーザータイプなど。</li>
+    </ul>
+    <p>これらは利用者が意図して「取得」操作を行ったときにのみ取得されます。本アプリが自動的にバックグラウンドで通信することはありません。</p>
+
+    <h2>3. 情報の保存場所と保存期間</h2>
+    <ul>
+      <li>取得したログ・ポリシー定義は、利用者の Windows ユーザープロファイル配下のローカル SQLite データベースに保存されます。</li>
+      <li>UPN の表示用キャッシュは、ローカル暗号化されて保存され、一定期間経過後に自動失効します。</li>
+      <li>利用者は本アプリの設定操作によって、取得済みのログ・キャッシュをいつでも削除できます。</li>
+      <li>本アプリのアンインストールに伴って、当該ローカルデータも削除されます。</li>
+    </ul>
+
+    <h2>4. 認証情報の取り扱い</h2>
+    <ul>
+      <li>認証は MSAL (Microsoft Authentication Library) による委任認証のみを使用します。クライアントシークレットや証明書を用いるアプリケーション認証は使用しません。</li>
+      <li>アクセストークンは MSAL 既定のメモリ内キャッシュに保持され、永続化されません。</li>
+      <li>パスワードや MFA 用の二要素情報を本アプリが受け取ることはありません。これらは Microsoft の認証画面で利用者と Microsoft の間で完結します。</li>
+    </ul>
+
+    <h2>5. 第三者への提供</h2>
+    <p>本アプリは Microsoft Graph 以外の外部エンドポイントへ情報を送信しません。当方が利用者の情報を第三者に提供することもありません。</p>
+
+    <h2>6. デモモード</h2>
+    <ul>
+      <li>動作確認用のデモモードは、実テナントに接続せず、サンプルデータ (110 件 / 6 シナリオ) のみを使用します。</li>
+      <li>デモデータは <code>*.example</code> ドメインおよび RFC 5737 で定義されたドキュメンテーション用 IP アドレスのみで構成され、実在の利用者情報を含みません。</li>
+      <li>Microsoft Store 配布版にはデモモードは含まれません。</li>
+    </ul>
+
+    <h2>7. 利用者の権利</h2>
+    <ul>
+      <li>取得済みのデータの全件削除 (本アプリの設定から実行可能)。</li>
+      <li>同意状態のリセット (本アプリの設定から実行可能)。</li>
+      <li>本アプリのアンインストールによるローカルデータの完全削除。</li>
+    </ul>
+
+    <h2>8. お問い合わせ</h2>
+    <p>本ポリシーに関するお問い合わせは、<a href="support.html">サポート</a> ページに記載の連絡先までお願いします。</p>
+
+    <h2>9. 改定</h2>
+    <p>本ポリシーの内容は、必要に応じて変更されることがあります。重要な変更がある場合は本ページ上で告知します。</p>
+
+  </div>
+
+  <div class="section-en">
+
+    <p class="meta-row">Last updated: 2026-04-30 / Issued by: Sumikko Lab</p>
+
+    <p>Sumikko Lab ("we") sets out this Privacy Policy ("Policy") regarding information handled in connection with use of the Windows desktop application "CA Log Viewer" ("the App").</p>
+
+    <h2>1. Basic principles</h2>
+    <ul>
+      <li><strong>Local-only processing</strong>: The App runs on the user's Windows device and does not transmit information to any external server other than Microsoft Graph.</li>
+      <li><strong>No server operated by us</strong>: We do not operate any server that receives information related to use of the App.</li>
+      <li><strong>No telemetry or analytics</strong>: The App does not collect usage statistics nor send data to any third-party analytics service.</li>
+      <li><strong>UPNs (User Principal Names) are not stored in plain text in the database</strong>: Display goes through a locally-encrypted short-term cache. After expiration the UPN is re-fetched.</li>
+    </ul>
+
+    <h2>2. Information collected and access path</h2>
+    <p>The App fetches the following information via Microsoft Graph from the Entra ID tenant authorized by the user, using delegated authentication (access as the signed-in user).</p>
+    <ul>
+      <li><strong>Sign-in logs</strong>: <code>AuditLog.Read.All</code> scope. Time / IP address / location / client app / authentication requirements / result / risk info, etc.</li>
+      <li><strong>Conditional Access policy definitions</strong>: <code>Policy.Read.ConditionalAccess</code> scope. Policy name / conditions / controls / state, etc.</li>
+      <li><strong>Basic user information</strong>: <code>User.Read.All</code> scope. UPN / display name / user type, etc.</li>
+    </ul>
+    <p>Fetching occurs only when the user explicitly initiates a "Fetch" action. The App does not communicate in the background automatically.</p>
+
+    <h2>3. Storage location and retention</h2>
+    <ul>
+      <li>Fetched logs and policy definitions are stored in a local SQLite database under the user's Windows profile.</li>
+      <li>The display cache for UPN is stored locally encrypted and expires automatically after a set period.</li>
+      <li>Users can delete fetched logs and caches at any time via the App's settings.</li>
+      <li>Local data is removed when the App is uninstalled.</li>
+    </ul>
+
+    <h2>4. Handling of authentication information</h2>
+    <ul>
+      <li>Authentication uses delegated authentication via MSAL (Microsoft Authentication Library) only. Application authentication using client secrets or certificates is not used.</li>
+      <li>Access tokens are kept in MSAL's default in-memory cache and are not persisted.</li>
+      <li>The App never receives passwords or MFA second factors. These are exchanged between the user and Microsoft on Microsoft's authentication pages.</li>
+    </ul>
+
+    <h2>5. Third-party disclosure</h2>
+    <p>The App does not transmit information to external endpoints other than Microsoft Graph. We do not disclose user information to any third party.</p>
+
+    <h2>6. Demo mode</h2>
+    <ul>
+      <li>The optional demo mode does not connect to a real tenant. It uses only sample data (110 records / 6 scenarios).</li>
+      <li>Demo data uses only <code>*.example</code> domains and IP addresses defined in RFC 5737 for documentation purposes; it contains no real user information.</li>
+      <li>Microsoft Store builds do not include demo mode.</li>
+    </ul>
+
+    <h2>7. User rights</h2>
+    <ul>
+      <li>Delete all fetched data (available from the App's settings).</li>
+      <li>Reset consent state (available from the App's settings).</li>
+      <li>Fully remove local data by uninstalling the App.</li>
+    </ul>
+
+    <h2>8. Contact</h2>
+    <p>For questions regarding this Policy, please use the contact listed on the <a href="support.html">Support</a> page.</p>
+
+    <h2>9. Revisions</h2>
+    <p>This Policy may be revised as necessary. Material changes will be announced on this page.</p>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="./">トップ</a> ·
+    <a href="manual/">マニュアル</a> ·
+    <a href="manual/faq.html">FAQ</a> ·
+    <a href="release-notes.html">リリースノート</a> ·
+    <a href="terms-of-use.html">利用規約</a> ·
+    <a href="support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="./">Home</a> ·
+    <a href="manual/">Manual</a> ·
+    <a href="manual/faq.html">FAQ</a> ·
+    <a href="release-notes.html">Release Notes</a> ·
+    <a href="terms-of-use.html">Terms of Use</a> ·
+    <a href="support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>

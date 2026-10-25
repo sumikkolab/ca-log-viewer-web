@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マニュアル | CA Log Viewer — Sumikko Lab</title>
+<meta name="description" content="CA Log Viewer のマニュアル目次。初回起動 → 取得 → 分析 → レポート の一本道で操作手順を解説します。FAQ / リリースノート へのリンクも掲載しています。">
+<link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/manual/">
+<meta property="og:title" content="マニュアル | CA Log Viewer — Sumikko Lab">
+<meta property="og:description" content="CA Log Viewer のマニュアル目次。初回起動 → 取得 → 分析 → レポート の一本道で操作手順を解説します。">
+<meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/manual/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="CA Log Viewer — Sumikko Lab">
+<meta property="og:image" content="https://ca-log-viewer.sumikkolab.com/manual/screenshots/jp/01-home.png">
+<meta property="og:image:width" content="1686">
+<meta property="og:image:height" content="940">
+<meta property="og:image:alt" content="CA Log Viewer のホーム画面">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="マニュアル | CA Log Viewer — Sumikko Lab">
+<meta name="twitter:description" content="CA Log Viewer のマニュアル目次。初回起動 → 取得 → 分析 → レポート の一本道で操作手順を解説します。">
+<meta name="twitter:image" content="https://ca-log-viewer.sumikkolab.com/manual/screenshots/jp/01-home.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Yu Gothic UI', sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+  header { background: #312e81; color: #fff; padding: 24px; text-align: center; position: relative; }
+  header h1 { font-size: 1.6rem; }
+  header a { color: #c7d2fe; text-decoration: none; font-size: 0.85rem; }
+  .lang-toggle-hero { position: absolute; top: 12px; right: 24px; }
+  .lang-toggle-hero button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+  .lang-toggle-hero button.active { background: rgba(255,255,255,0.3); }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 1.15rem; margin: 28px 0 12px; color: #312e81; border-left: 3px solid #6366f1; padding-left: 10px; }
+  p { font-size: 0.95rem; margin: 8px 0; }
+  ul { padding-left: 20px; margin: 8px 0 16px; }
+  li { font-size: 0.95rem; margin-bottom: 6px; }
+  li a { color: #4338ca; }
+  .section-ja, .section-en { display: none; }
+  .section-ja.visible, .section-en.visible { display: block; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 12px 0; }
+  .card h3 { font-size: 1rem; color: #4338ca; margin-bottom: 4px; }
+  .card p { font-size: 0.88rem; color: #475569; margin: 4px 0 6px; }
+  .card a { color: #4338ca; text-decoration: none; font-size: 0.9rem; }
+  .card a:hover { text-decoration: underline; }
+  footer { background: #1e1b4b; color: #c7d2fe; padding: 24px; text-align: center; font-size: 0.85rem; margin-top: 40px; }
+  footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle-hero">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <h1>CA Log Viewer Manual</h1>
+  <p><a href="../">← <span class="section-ja visible">トップに戻る</span><span class="section-en">Back to Home</span></a></p>
+</header>
+
+<main class="container">
+
+  <div class="section-ja visible">
+
+    <p>CA Log Viewer の使い方を 1 ページずつ確認できます。初めての方は <a href="getting-started.html">はじめに</a> から順にお読みください。</p>
+
+    <h2>マニュアル目次</h2>
+
+    <div class="card">
+      <h3>はじめに (一本道ガイド)</h3>
+      <p>初回起動 → Entra アプリ登録 → サインインログ取得 → 調査タブで分析 → HTML レポート出力 までを 4 Step で解説。</p>
+      <a href="getting-started.html">→ はじめに を読む</a>
+    </div>
+
+    <div class="card">
+      <h3>FAQ (よくある質問)</h3>
+      <p>UPN が空になる原因 / ポリシー未適用が多い理由 / Microsoft Graph 権限不足時の挙動 など、運用で頻出する質問への回答。</p>
+      <a href="faq.html">→ FAQ を読む</a>
+    </div>
+
+    <h2>関連ページ</h2>
+    <ul>
+      <li><a href="https://apps.microsoft.com/detail/9NWX79NBG136">Microsoft Store で入手</a></li>
+      <li><a href="../release-notes.html">リリースノート</a> — 主要機能の追加履歴</li>
+      <li><a href="../privacy-policy.html">プライバシーポリシー</a></li>
+      <li><a href="../terms-of-use.html">利用規約</a></li>
+      <li><a href="../support.html">サポート</a></li>
+    </ul>
+
+  </div>
+
+  <div class="section-en">
+
+    <p>Read CA Log Viewer's documentation page by page. New users should start with <a href="getting-started.html">Getting Started</a>.</p>
+
+    <h2>Manual Index</h2>
+
+    <div class="card">
+      <h3>Getting Started (linear flow)</h3>
+      <p>First launch → Entra app registration → fetch sign-in logs → analyze in Investigate tab → export HTML report, in 4 steps.</p>
+      <a href="getting-started.html">→ Read Getting Started</a>
+    </div>
+
+    <div class="card">
+      <h3>FAQ</h3>
+      <p>Why UPN is sometimes empty / why "policy not applied" appears often / what happens without Graph permissions, etc.</p>
+      <a href="faq.html">→ Read FAQ</a>
+    </div>
+
+    <h2>Related</h2>
+    <ul>
+      <li><a href="https://apps.microsoft.com/detail/9NWX79NBG136">Get it from Microsoft Store</a></li>
+      <li><a href="../release-notes.html">Release Notes</a> — history of major features added</li>
+      <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="../terms-of-use.html">Terms of Use</a></li>
+      <li><a href="../support.html">Support</a></li>
+    </ul>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="section-ja visible">
+    <a href="../">トップ</a> ·
+    <a href="getting-started.html">はじめに</a> ·
+    <a href="faq.html">FAQ</a> ·
+    <a href="../release-notes.html">リリースノート</a> ·
+    <a href="../privacy-policy.html">プライバシーポリシー</a> ·
+    <a href="../terms-of-use.html">利用規約</a> ·
+    <a href="../support.html">サポート</a>
+  </div>
+  <div class="section-en">
+    <a href="../">Home</a> ·
+    <a href="getting-started.html">Getting Started</a> ·
+    <a href="faq.html">FAQ</a> ·
+    <a href="../release-notes.html">Release Notes</a> ·
+    <a href="../privacy-policy.html">Privacy Policy</a> ·
+    <a href="../terms-of-use.html">Terms of Use</a> ·
+    <a href="../support.html">Support</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
+    document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'en') setLang('en');
+  } catch (e) {}
+</script>
+
+</body>
+</html>
