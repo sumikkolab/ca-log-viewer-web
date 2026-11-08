@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CA Log Viewer | 条件付きアクセスのサインインログを現場で読めるアプリ — Sumikko Lab</title>
-<meta name="description" content="CA Log Viewer は Microsoft Entra ID のサインインログから条件付きアクセス関連を抽出し、評価結果・適用ポリシー・端末準拠状態を画面と HTML レポートで可視化する Windows デスクトップアプリです。Free 提供、ローカル端末で動作、外部送信なし。">
+<title>条件付きアクセスが想定どおり効いているか、サインインログで確認 | CA Log Viewer</title>
+<meta name="description" content="設定した条件付きアクセスが想定どおり評価されたか、レポートモードの影響範囲、未適用のサインイン、拒否理由が、Entra ID のサインインログでは 1 件ずつ開かないと分からず困っていませんか。CA Log Viewer は評価結果・適用ポリシー・端末状態・許可拒否理由を 1 画面にまとめ、HTML レポートで共有できる Windows アプリです(読み取り専用、ローカル端末で動作、Microsoft Graph 以外への外部送信なし)。">
 <link rel="canonical" href="https://ca-log-viewer.sumikkolab.com/">
-<meta property="og:title" content="CA Log Viewer | 条件付きアクセスのサインインログを現場で読めるアプリ — Sumikko Lab">
-<meta property="og:description" content="Microsoft Entra ID のサインインログから条件付きアクセス関連を抽出し、評価結果・適用ポリシー・端末準拠状態を可視化する Windows デスクトップアプリ。">
+<meta property="og:title" content="条件付きアクセスが想定どおり効いているか、サインインログで確認 | CA Log Viewer">
+<meta property="og:description" content="条件付きアクセスが想定どおり評価されたか、レポートモードの影響範囲、未適用のサインイン、拒否理由をサインインログで確認。読み取り専用・ローカル端末で動作する Windows アプリ。">
 <meta property="og:url" content="https://ca-log-viewer.sumikkolab.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
@@ -17,8 +17,8 @@
 <meta property="og:image:height" content="940">
 <meta property="og:image:alt" content="CA Log Viewer のホーム画面">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CA Log Viewer | 条件付きアクセスのサインインログを現場で読めるアプリ — Sumikko Lab">
-<meta name="twitter:description" content="Microsoft Entra ID のサインインログから条件付きアクセス関連を抽出し、評価結果・適用ポリシー・端末準拠状態を可視化する Windows デスクトップアプリ。">
+<meta name="twitter:title" content="条件付きアクセスが想定どおり効いているか、サインインログで確認 | CA Log Viewer">
+<meta name="twitter:description" content="条件付きアクセスが想定どおり評価されたか、レポートモードの影響範囲、未適用のサインイン、拒否理由をサインインログで確認。読み取り専用・ローカル端末で動作する Windows アプリ。">
 <meta name="twitter:image" content="https://ca-log-viewer.sumikkolab.com/manual/screenshots/jp/01-home.png">
 <script type="application/ld+json">
 {
@@ -50,16 +50,17 @@
       "applicationSubCategory": "Identity & Access Management",
       "operatingSystem": "Windows 10, Windows 11",
       "url": "https://ca-log-viewer.sumikkolab.com/",
-      "description": "A Windows desktop app that fetches Entra ID sign-in logs via Microsoft Graph and helps administrators read Conditional Access related entries — CA evaluation result, applied policies, device compliance, with HTML reports including 3-axis aggregation (by user / by app / by policy). Runs locally; no external transmission.",
+      "description": "A read-only Windows desktop app that lets administrators check, from real Entra ID sign-in logs, whether Conditional Access policies were evaluated as intended, what report-only policies would affect, and which sign-ins no policy applied to. It brings evaluation results, applied policies, device state and allow/deny reasons into one view and exports an HTML report; it runs locally with no external transmission beyond Microsoft Graph.",
       "inLanguage": ["ja", "en"],
       "featureList": [
-        "Entra ID sign-in logs fetch via Microsoft Graph (delegated auth, AuditLog.Read.All)",
-        "Conditional Access evaluation result classification",
-        "Applied policy listing per sign-in",
-        "Device compliance status",
-        "Unified filter (range / user / CA status / judgment / device / special, multi-select OR)",
-        "Detail pane with 7 sections + conclusion",
-        "HTML report with Aggregation (by user / by app / by policy, top 20 + others)",
+        "Check whether Conditional Access was evaluated as intended: evaluation results classified as success / failure / not applied / report-only",
+        "Check the impact of report-only policies before enforcing them",
+        "Find sign-ins where no policy applied, and see where they cluster with 3-axis aggregation (by user / by app / by policy)",
+        "See applied policies, device state and allow/deny reasons for a sign-in in one detail pane, with an automatic conclusion",
+        "Find allowed sign-ins from non-compliant devices with the unified filter (multi-select OR)",
+        "Filter guest, legacy-authentication and risky sign-ins only",
+        "Keep Conditional Access evidence as an HTML report to share with managers and auditors",
+        "Read-only: fetches sign-in logs via Microsoft Graph (delegated auth, three read permissions) and never changes policies",
         "CSV export",
         "ja / en UI"
       ],
@@ -197,7 +198,7 @@
     <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <h1>CA Log Viewer</h1>
+  <h1>CA Log Viewer<span class="section-ja visible" style="font-size:1.1rem;font-weight:600;color:#e0e7ff;margin-top:6px;">条件付きアクセスが想定どおり効いているか、サインインログで確認</span><span class="section-en" style="font-size:1.1rem;font-weight:600;color:#e0e7ff;margin-top:6px;">Verify Conditional Access is working as intended, from sign-in logs</span></h1>
   <div class="section-ja visible">
     <p class="tagline">条件付きアクセスのサインインログを現場で読める</p>
     <p class="hero-subnote">「設定したはず」を、実際のサインインログで確認できます。</p>
@@ -290,6 +291,84 @@
         <p class="effect">Without opening the detail pane row by row, see applied policies, device state, and allow/deny reasons in a single list.</p>
       </div>
     </div>
+  </div>
+
+  <!-- こんな課題を解決します -->
+  <div class="section-ja visible">
+    <h2>こんな課題を解決します</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>設定した条件付きアクセスが想定どおり評価されたかを確かめるには</h3>
+        <p>調査タブで、サインインを CA 状態(成功 / 失敗 / 未適用 / レポートモード)ごとに分類して確認します。統一フィルタで期間・ユーザー・判定・端末を組み合わせれば、「設定したはず」のポリシーが実際のサインインでどう評価されたかを実ログで確かめられます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>レポートモードのポリシーを有効化する前に、影響する利用者やアプリを知るには</h3>
+        <p>CA 状態を「レポートモード」で絞り込むと、レポートモードの判定になったサインインがどの利用者・アプリに当たっているかを実ログで確認できます。本番化する前の影響範囲の把握に使えます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>ポリシーが適用されなかったサインインを探すには</h3>
+        <p>CA 状態を「未適用」で絞り込み、3 軸集約表(ユーザー別 / アプリ別 / ポリシー別)で偏りを見ると、漏れている利用者・アプリ・端末状態の見当がつきます。未適用には対象範囲外や除外条件など正常な理由もあるため、詳細パネルの適用ポリシーで確かめます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>適用ポリシー・端末状態・拒否や MFA 省略の理由を、まとめて知りたいときは</h3>
+        <p>サインインの行を選ぶと、詳細パネルに適用ポリシー・端末の準拠状態・許可拒否理由が 1 画面で表示されます。「結論」では、ポリシーによる拒否や MFA 必須なのに省略されたケースなどを自動で判定します。</p>
+      </div>
+      <div class="feature-card">
+        <h3>準拠していない端末からのアクセスが許可された事例を探すには</h3>
+        <p>端末を「非準拠」、判定を「許可」で絞り込むと、非準拠の端末から許可されたサインインを洗い出せます。ホーム画面の「非準拠で許可」ボタンからも調査タブに移れます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>条件付きアクセスの評価結果を、上長や監査に渡せる形で残すには</h3>
+        <p>調査タブの「Export HTML」で、現在のフィルタ結果をサマリー・判定サマリー・3 軸集約表・許可拒否理由を含む HTML レポートとして出力できます。レポートには UPN・IP・アプリ名が含まれるため、外部共有時は取り扱いにご注意ください。</p>
+      </div>
+      <div class="feature-card">
+        <h3>ユーザー別・アプリ別・ポリシー別のどこに偏りがあるかを見るには</h3>
+        <p>HTML レポートの 3 軸集約表で、サインイン結果をユーザー別・アプリ別・ポリシー別に集計して確認できます(それぞれ上位 20 件と「その他」)。</p>
+      </div>
+      <div class="feature-card">
+        <h3>ゲスト・レガシー認証・リスクサインインだけの結果を確認したいときは</h3>
+        <p>統一フィルタの特殊条件で、リスクサインイン・レガシー認証・ゲストユーザーなどに絞り込めます。ほかの条件と組み合わせて、その範囲だけの評価結果を確認できます。</p>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:#475569;">いずれもサインインログの読み取りと分析のみで、設定変更やアクセス制御は行いません。Microsoft Graph の 3 つの権限が不足すると、結果が不完全になります。</p>
+  </div>
+  <div class="section-en">
+    <h2>Problems this solves</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>How do I check that my Conditional Access policies were evaluated as intended?</h3>
+        <p>In the Investigate tab, sign-ins are classified by CA status: success, failure, not applied, or report-only. Combine the unified filter (range, user, judgment, device) to see how the policies you "set up" were actually evaluated in real sign-in logs.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Who and what will a report-only policy affect before I turn it on?</h3>
+        <p>Filter by the report-only CA status to see which users and apps the report-only judgments hit in real sign-in logs, so you can gauge the impact before moving the policy to production.</p>
+      </div>
+      <div class="feature-card">
+        <h3>How do I find sign-ins where no Conditional Access policy applied?</h3>
+        <p>Filter by the not-applied CA status, then use the 3-axis aggregation (by user / by app / by policy) to see where they cluster and which users, apps, and device states slipped through. Not-applied can also have normal causes, such as out-of-scope targets or exclusions, so confirm in the applied policies section of the detail pane.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Where can I see applied policies, device state, and the reason a sign-in was denied or skipped MFA?</h3>
+        <p>Select a sign-in row and the detail pane shows the applied policies, device compliance, and allow/deny reasons in one view. The "conclusion" automatically flags cases such as a denial by policy or MFA required but skipped.</p>
+      </div>
+      <div class="feature-card">
+        <h3>How do I find sign-ins allowed from non-compliant devices?</h3>
+        <p>Filter by non-compliant device and an allowed judgment to list sign-ins that were allowed from non-compliant devices. The "Non-compliant allowed" button on Home takes you to the same view.</p>
+      </div>
+      <div class="feature-card">
+        <h3>How do I keep Conditional Access evaluation results as evidence for managers or auditors?</h3>
+        <p>Use "Export HTML" in the Investigate tab to save the current filter result as an HTML report with the summary, judgment summary, 3-axis aggregation, and allow/deny reasons. Reports include UPNs, IPs, and app names, so handle them carefully when sharing outside your organization.</p>
+      </div>
+      <div class="feature-card">
+        <h3>How do I see whether results skew toward certain users, apps, or policies?</h3>
+        <p>The 3-axis aggregation in the HTML report summarizes sign-in results by user, by app, and by policy (top 20 and others for each).</p>
+      </div>
+      <div class="feature-card">
+        <h3>Can I look at guest, legacy-authentication, or risky sign-ins only?</h3>
+        <p>Yes. The special conditions in the unified filter narrow results to risky sign-ins, legacy authentication, guest users, and more. Combine them with other conditions to review evaluation results for just that group.</p>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:#475569;">All of this is read-only analysis of sign-in logs; the app does not change settings or control access. If the three Microsoft Graph permissions are missing, results will be incomplete.</p>
   </div>
 
   <!-- どんな人向けか 3 パターン -->
@@ -617,12 +696,32 @@
     });
   })();
 
+  var META = {
+    ja: {
+      title: '条件付きアクセスが想定どおり効いているか、サインインログで確認 | CA Log Viewer',
+      description: '設定した条件付きアクセスが想定どおり評価されたか、レポートモードの影響範囲、未適用のサインイン、拒否理由が、Entra ID のサインインログでは 1 件ずつ開かないと分からず困っていませんか。CA Log Viewer は評価結果・適用ポリシー・端末状態・許可拒否理由を 1 画面にまとめ、HTML レポートで共有できる Windows アプリです(読み取り専用、ローカル端末で動作、Microsoft Graph 以外への外部送信なし)。',
+      short: '条件付きアクセスが想定どおり評価されたか、レポートモードの影響範囲、未適用のサインイン、拒否理由をサインインログで確認。読み取り専用・ローカル端末で動作する Windows アプリ。'
+    },
+    en: {
+      title: 'Verify Conditional Access is working as intended, from sign-in logs | CA Log Viewer',
+      description: 'Not sure whether your Conditional Access policies were evaluated as intended, what a report-only policy would affect, or which sign-ins no policy applied to? In Entra ID sign-in logs you have to open entries one by one to see applied policies, device state, and deny reasons. CA Log Viewer brings them together in one view and exports an HTML report; it is a read-only Windows app that runs locally, with no external transmission beyond Microsoft Graph.',
+      short: 'Check whether Conditional Access was evaluated as intended, the impact of report-only policies, sign-ins no policy applied to, and deny reasons. A read-only Windows app that runs locally.'
+    }
+  };
+
   function setLang(lang) {
     document.querySelectorAll('.section-ja').forEach(el => el.classList.toggle('visible', lang === 'ja'));
     document.querySelectorAll('.section-en').forEach(el => el.classList.toggle('visible', lang === 'en'));
     document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.documentElement.lang = lang;
+    var m = META[lang];
+    document.title = m.title;
+    document.querySelector('meta[name="description"]').setAttribute('content', m.description);
+    document.querySelector('meta[property="og:title"]').setAttribute('content', m.title);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', m.short);
+    document.querySelector('meta[name="twitter:title"]').setAttribute('content', m.title);
+    document.querySelector('meta[name="twitter:description"]').setAttribute('content', m.short);
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
   try {
